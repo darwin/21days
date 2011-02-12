@@ -1,0 +1,121 @@
+<!doctype html>  
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
+<!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame - Remove this if you use the .htaccess -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>21 days</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!--  Mobile viewport optimized: j.mp/bplateviewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+
+    <!-- CSS : implied media="all" -->
+    <link rel="stylesheet" href="css/style.css?v=2">
+
+    <!-- Uncomment if you are specifically targeting less enabled mobile browsers
+    <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
+
+    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+    <script src="js/libs/modernizr-1.6.min.js"></script>
+
+</head>
+
+<body lang="en" >
+
+    <div id="dayapp"> 
+        <div class="title"> 
+            <h1>21 Days</h1> 
+        </div> 
+ 
+        <div class="content"> 
+ 
+            <div id="create-day"> 
+                <input id="new-day" placeholder="I want to ..." type="text" /> 
+                <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span> 
+            </div> 
+ 
+            <div id="days"> 
+                <ul id="day-list"></ul> 
+            </div> 
+ 
+            <div id="day-stats"></div> 
+ 
+        </div> 
+ 
+    </div> 
+ 
+    <!-- Templates --> 
+ 
+    <script type="text/template" id="item-template"> 
+        <div class="day <%= done ? 'done' : '' %>">
+            <div class="display">
+                <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                <div class="day-content"></div>
+                <span class="day-destroy"></span>
+            </div>
+            <div class="edit">
+                <input class="day-input" type="text" value="" />
+            </div>
+        </div>
+    </script> 
+ 
+    <script type="text/template" id="stats-template"> 
+        <% if (total) { %>
+            <span class="day-count">
+                <span class="number"><%= remaining %></span>
+                <span class="word"><%= remaining == 1 ? 'item' : 'items' %></span> left.
+            </span>
+        <% } %>
+        <% if (done) { %>
+            <span class="day-clear">
+                <a href="#">
+                Clear <span class="number-done"><%= done %></span>
+                completed <span class="word-done"><%= done == 1 ? 'item' : 'items' %></span>
+                </a>
+            </span>
+        <% } %>
+    </script>
+
+    <!-- JavaScript at the bottom for fast page loading -->
+
+    <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.js"></script>
+    <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.0.js"%3E%3C/script%3E'))</script>
+  
+    <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/underscore.js"></script>
+    <script src="js/backbone.js"></script>
+    <script src="js/ls.js"></script>
+    <script src="js/app.js"></script>
+    <!-- end concatenated and minified scripts-->
+  
+  
+    <!--[if lt IE 7 ]>
+        <script src="js/libs/dd_belatedpng.js"></script>
+        <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
+    <![endif]-->
+
+
+    <!-- mathiasbynens.be/notes/async-analytics-snippet Change UA-XXXXX-X to be your site's ID -->
+    <script>
+        // var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+        // (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
+        // g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+        // s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+  
+</body>
+</html>

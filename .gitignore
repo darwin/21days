@@ -1,3 +1,9 @@
+.livereload
 .dropbox
 .DS_Store
 Icon?
+web/.classpath
+web/.project
+web/.settings/
+web/eclipse/
+web/tmp/

@@ -1,0 +1,134 @@
+require 'rake'
+
+################################################################################################
+# constants
+
+ROOT_DIR = File.expand_path('.')
+
+################################################################################################
+# dependencies
+
+begin
+    require 'colored'
+rescue LoadError
+    raise 'You must "gem install colored" to use terminal colors'
+end
+
+################################################################################################
+# helpers
+
+def die(msg, status=1)
+    puts "Error[#{status||$?}]: #{msg}".red
+    exit status||$?
+end
+
+def sys(cmd)
+    puts "> #{cmd}".yellow
+    system(cmd)
+end
+
+################################################################################################
+# routines
+
+def bake(html, out)
+    path = File.expand_path(html)
+    puts "Patching "+path.blue
+    
+    lines = []
+    output = []
+    first = true
+    File.open(path, "r") do |f|
+        f.each do |line|
+            next if line =~ /^\s*<\!--.*-->\s*$/
+            if line =~ /<script.*?src="(.*?)".*?>/ then
+                if first then
+                    lines << $`+'<script type="text/javascript" src="'+out+'">'+$'
+                    first = false
+                end
+                output << File.readlines($1)
+            else
+                l = line.rstrip
+                lines << l + "\n" if l.size>0
+            end
+        end
+    end
+    File.open(path, "w") do |f|
+        f << lines.join
+    end
+    File.open(out, "w") do |f|
+        f << output.join
+    end
+end
+
+def copyright(file)
+    lines = File.readlines(file)
+    File.open(file, "w") do |f|
+        f << "/* SixthSense - (c) 2011, Antonin Hildebrand (antonin@hildebrand.cz)\n"
+        f << " *                        http://sixthsense.binaryage.com\n"
+        f << " *\n"
+        f << " * 3rd party software used:\n"
+        f << " *   jQuery   - (c) 2011, John Resig, http://jquery.com\n"
+        f << " *   THREE.js - (c) 2011, by mr.doob, http://mrdoob.com\n"
+        f << " *   O3D.js   - (c) 2009, Google Inc.\n"
+        f << " *   md5.js   - (c) 2009, Paul Johnston, http://pajhome.org.uk/crypt/md5\n" 
+        f << " */\n"
+        
+        f << lines
+    end
+end
+
+################################################################################################
+# tasks
+
+desc "regenerate shots"
+task :gen do
+    sys("rm -rf viewer/shots")
+    sys("mkdir -p viewer/shots")
+
+    shots = IO.readlines('shots.txt')
+    Dir.chdir('viewer/shots') do
+        shots.each do |shot|
+            shot.strip!
+            puts shot.blue
+            sys("webkit2png -Fm \"#{shot}\" --delay=4")
+        end
+    end
+end
+
+desc "resave shots"
+task :opti do
+    Dir.glob('viewer/shots/*.png') do |shot|
+        shot.strip!
+        puts shot.blue
+        `optipng #{shot}`
+    end
+end
+
+desc "build viewer"
+task :build do
+    sys("rm -rf build")
+    sys("mkdir -p build")
+    sys("cp -r landing build/landing")
+    sys("cp -r public build/public")
+    sys("cp -r viewer build/viewer")
+    Dir.chdir('build/viewer') do
+        bake('index.html', 'sixthsense.js')
+        sys("uglifyjs -v --overwrite --max-line-len 300 --no-copyright --mangle-toplevel --unsafe sixthsense.js")
+        # sys("uglifyjs -v --overwrite --max-line-len 300 -nm -b sixthsense.js")
+        copyright('sixthsense.js')
+    end
+end
+
+desc "start server"
+task :serve => :build do
+    sys("sudo killall node")
+    sys("sudo node server.js &")
+end
+
+desc "start debug server"
+task :debug do
+    sys("sudo killall node")
+    sys("sudo node server.js --prefix=. &")
+end
+
+task :default => :serve
