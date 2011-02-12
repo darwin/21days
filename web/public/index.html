@@ -67,6 +67,13 @@
                       }));
                       
                       $avatar.show();
+                      
+                      App.user.set({
+                          'facebook': response,
+                          'id': response.id
+                      });
+                      App.user.save();
+                      App.user.fetch();
                   });                  
               } else {
                   // no user session available, someone you dont know
@@ -96,10 +103,10 @@
     <div id="dayapp">
         <div class="title">
             <h1>my 21 days</h1>
-        </div> 
- 
+        </div>
+
         <div class="content">
- 
+
             <div id="create-routine">
                 <div class="routine-input-wrapper">
                     <input id="new-routine" placeholder="I want to do something..." type="text" />
@@ -130,13 +137,28 @@
     <script type="text/template" id="routine-template">
         <div class="routine <%= done ? 'done' : '' %>">
             <div class="display">
-                <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-                <div class="routine-name"></div>
-                <div class="routine-checklist"></div>
+                <div class="routine-fixed">
+                    <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                    <div class="routine-name"></div>
+                </div>
+                <div class="routine-weeks">
+                </div>
             </div>
             <div class="edit">
                 <input class="routine-input" type="text" value="" />
             </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="week-template">
+        <div class="week">
+            
+        </div>
+    </script>
+ 
+    <script type="text/template" id="day-template">
+        <div class="day">
+            
         </div>
     </script>
  

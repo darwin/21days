@@ -206,7 +206,7 @@ body {
 }
 
 #create-routine {
-    width: 770px;
+    width: 700px;
     margin: auto;
     position: relative;
 }
@@ -247,9 +247,6 @@ body {
     height: 47px;
 }
 
-
-
-
 #routines {
     clear: both;
     margin-top: 30px;
@@ -258,10 +255,10 @@ body {
 #routine-list {
 }
 #routine-list li {
-    padding: 12px 20px 11px 0;
+    padding: 0;
     position: relative;
     font-size: 14px;
-    line-height: 1.1em;
+    line-height: 30px;
     border-bottom: 1px solid #cccccc;
 }
 #routine-list li:after {
@@ -301,8 +298,8 @@ body {
 
 .routine .check {
     position: relative;
-    top: 3px;
-    margin: 0 4px 0 0px;
+    top: 10px;
+    margin: 0 4px 0 4px;
     float: left;
     display: none;
 }
@@ -314,6 +311,18 @@ body {
 #routine-list .done .routine-name {
     text-decoration: line-through;
     color: #777777;
+}
+
+#routine-list .routine-fixed {
+    background-color: #ffaaaa;
+    width: 300px;
+    float: left;
+}
+
+#routine-list .routine-weeks {
+    background-color: #ddffdd;
+    float: left;
+    width: 630px;
 }
 
 #stats {
