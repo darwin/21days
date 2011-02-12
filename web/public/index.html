@@ -100,16 +100,16 @@
  
         <div class="content">
  
-            <div id="create-day">
-                <input id="new-day" placeholder="I want to ..." type="text" />
+            <div id="create-routine">
+                <input id="new-routine" placeholder="I want to ..." type="text" />
                 <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span>
             </div>
  
-            <div id="days">
-                <ul id="day-list"></ul>
+            <div id="routines">
+                <ul id="routine-list"></ul>
             </div>
  
-            <div id="day-stats"></div>
+            <div id="stats"></div>
  
         </div>
  
@@ -117,15 +117,15 @@
  
     <!-- Templates --> 
  
-    <script type="text/template" id="item-template">
-        <div class="day <%= done ? 'done' : '' %>">
+    <script type="text/template" id="routine-template">
+        <div class="routine <%= done ? 'done' : '' %>">
             <div class="display">
                 <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-                <div class="day-content"></div>
-                <span class="day-destroy"></span>
+                <div class="routine-content"></div>
+                <span class="routine-destroy"></span>
             </div>
             <div class="edit">
-                <input class="day-input" type="text" value="" />
+                <input class="routine-input" type="text" value="" />
             </div>
         </div>
     </script> 
@@ -149,8 +149,8 @@
 
     <script type="text/template" id="avatar-template">
         <div class="avatar">
-            <div class="avatar-name"><%= name %></div>
             <img src="<%= image %>"></img>
+            <div class="avatar-name"><%= name %></div>
         </div>
     </script>
 

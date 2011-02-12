@@ -1,15 +1,10 @@
 // Load the application once the DOM is ready, using `jQuery.ready`:
 $(function() {
 
-    // Day Model
-    // ----------
-    // Our basic **Day** model has `content`, `order`, and `done` attributes.
-    window.Day = Backbone.Model.extend({
+    window.Routine = Backbone.Model.extend({
 
-        // If you don't provide a day, one will be provided for you.
-        EMPTY: "empty day...",
+        EMPTY: "empty routine...",
 
-        // Ensure that each day created has `content`.
         initialize: function() {
             if (!this.get("content")) {
                 this.set({
@@ -18,14 +13,12 @@ $(function() {
             }
         },
 
-        // Toggle the `done` state of this day item.
         toggle: function() {
             this.save({
                 done: !this.get("done")
             });
         },
 
-        // Remove this Day from *localStorage* and delete its view.
         clear: function() {
             this.destroy();
             this.view.remove();
@@ -33,26 +26,19 @@ $(function() {
 
     });
 
-    // Day Collection
-    // ---------------
-    // The collection of days is backed by *localStorage* instead of a remote
-    // server.
-    window.DayList = Backbone.Collection.extend({
+    window.RoutineList = Backbone.Collection.extend({
 
         // Reference to this collection's model.
-        model: Day,
+        model: Routine,
 
-        // Save all of the day items under the `"days"` namespace.
-        localStorage: new Store("days"),
+        localStorage: new Store("routines"),
 
-        // Filter down the list of all day items that are finished.
         done: function() {
-            return this.filter(function(day) {
-                return day.get('done');
+            return this.filter(function(routine) {
+                return routine.get('done');
             });
         },
 
-        // Filter down the list to only day items that are still not finished.
         remaining: function() {
             return this.without.apply(this, this.done());
         },
@@ -65,56 +51,46 @@ $(function() {
         },
 
         // Days are sorted by their original insertion order.
-        comparator: function(day) {
-            return day.get('order');
+        comparator: function(routine) {
+            return routine.get('order');
         }
 
     });
 
-    // Create our global collection of **Days**.
-    window.Days = new DayList;
+    window.Routines = new RoutineList;
 
-    // Day Item View
-    // --------------
-    // The DOM element for a day item...
-    window.DayView = Backbone.View.extend({
+    window.RoutineView = Backbone.View.extend({
 
         //... is a list tag.
         tagName: "li",
 
         // Cache the template function for a single item.
-        template: _.template($('#item-template').html()),
+        template: _.template($('#routine-template').html()),
 
         // The DOM events specific to an item.
         events: {
             "click .check": "toggleDone",
-            "dblclick div.day-content": "edit",
-            "click span.day-destroy": "clear",
-            "keypress .day-input": "updateOnEnter"
+            "dblclick div.routine-content": "edit",
+            "click span.routine-destroy": "clear",
+            "keypress .routine-input": "updateOnEnter"
         },
 
-        // The DayView listens for changes to its model, re-rendering. Since there's
-        // a one-to-one correspondence between a **Day** and a **DayView** in this
-        // app, we set a direct reference on the model for convenience.
         initialize: function() {
             _.bindAll(this, 'render', 'close');
             this.model.bind('change', this.render);
             this.model.view = this;
         },
 
-        // Re-render the contents of the day item.
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.setContent();
             return this;
         },
 
-        // To avoid XSS (not that it would be harmful in this particular app),
-        // we use `jQuery.text` to set the contents of the day item.
         setContent: function() {
             var content = this.model.get('content');
-            this.$('.day-content').text(content);
-            this.input = this.$('.day-input');
+            this.$('.routine-content').text(content);
+            this.input = this.$('.routine-input');
             this.input.bind('blur', this.close);
             this.input.val(content);
         },
@@ -130,7 +106,6 @@ $(function() {
             this.input.focus();
         },
 
-        // Close the `"editing"` mode, saving changes to the day.
         close: function() {
             this.model.save({
                 content: this.input.val()
@@ -169,9 +144,9 @@ $(function() {
 
         // Delegated events for creating new items, and clearing completed ones.
         events: {
-            "keypress #new-day": "createOnEnter",
-            "keyup #new-day": "showTooltip",
-            "click .day-clear a": "clearCompleted"
+            "keypress #new-routine": "createOnEnter",
+            "keyup #new-routine": "showTooltip",
+            "click .routine-clear a": "clearCompleted"
         },
 
         // At initialization we bind to the relevant events on the `Days`
@@ -180,61 +155,54 @@ $(function() {
         initialize: function() {
             _.bindAll(this, 'addOne', 'addAll', 'render');
 
-            this.input = this.$("#new-day");
+            this.input = this.$("#new-routine");
 
-            Days.bind('add', this.addOne);
-            Days.bind('refresh', this.addAll);
-            Days.bind('all', this.render);
+            Routines.bind('add', this.addOne);
+            Routines.bind('refresh', this.addAll);
+            Routines.bind('all', this.render);
 
-            Days.fetch();
+            Routines.fetch();
         },
 
         // Re-rendering the App just means refreshing the statistics -- the rest
         // of the app doesn't change.
         render: function() {
-            var done = Days.done().length;
-            this.$('#day-stats').html(this.statsTemplate({
-                total: Days.length,
-                done: Days.done().length,
-                remaining: Days.remaining().length
+            var done = Routines.done().length;
+            this.$('#stats').html(this.statsTemplate({
+                total: Routines.length,
+                done: Routines.done().length,
+                remaining: Routines.remaining().length
             }));
         },
 
-        // Add a single day item to the list by creating a view for it, and
-        // appending its element to the `<ul>`.
-        addOne: function(day) {
-            var view = new DayView({
-                model: day
+        addOne: function(routine) {
+            var view = new RoutineView({
+                model: routine
             });
-            this.$("#day-list").append(view.render().el);
+            this.$("#routine-list").append(view.render().el);
         },
 
-        // Add all items in the **Days** collection at once.
         addAll: function() {
-            Days.each(this.addOne);
+            Routines.each(this.addOne);
         },
 
-        // Generate the attributes for a new Day item.
         newAttributes: function() {
             return {
                 content: this.input.val(),
-                order: Days.nextOrder(),
+                order: Routines.nextOrder(),
                 done: false
             };
         },
 
-        // If you hit return in the main input field, create new **Day** model,
-        // persisting it to *localStorage*.
         createOnEnter: function(e) {
             if (e.keyCode != 13) return;
-            Days.create(this.newAttributes());
+            Routines.create(this.newAttributes());
             this.input.val('');
         },
 
-        // Clear all done day items, destroying their models.
         clearCompleted: function() {
-            _.each(Days.done(), function(day) {
-                day.clear();
+            _.each(Routines.done(), function(routine) {
+                routine.clear();
             });
             return false;
         },

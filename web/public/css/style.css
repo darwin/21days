@@ -201,10 +201,10 @@ body {
     line-height: 1;
 }
 
-#create-day {
+#create-routine {
     position: relative;
 }
-#create-day input {
+#create-routine input {
     width: 466px;
     font-size: 24px;
     font-family: inherit;
@@ -218,10 +218,10 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
-#create-day input::-webkit-input-placeholder {
+#create-routine input::-webkit-input-placeholder {
     font-style: italic;
 }
-#create-day span {
+#create-routine span {
     position: absolute;
     z-index: 999;
     width: 170px;
@@ -229,17 +229,17 @@ body {
     margin-left: -85px;
 }
 
-#day-list {
+#routine-list {
     margin-top: 10px;
 }
-#day-list li {
+#routine-list li {
     padding: 12px 20px 11px 0;
     position: relative;
     font-size: 24px;
     line-height: 1.1em;
     border-bottom: 1px solid #cccccc;
 }
-#day-list li:after {
+#routine-list li:after {
     content: "\0020";
     display: block;
     height: 0;
@@ -247,18 +247,18 @@ body {
     overflow: hidden;
     visibility: hidden;
 }
-#day-list li.editing {
+#routine-list li.editing {
     padding: 0;
     border-bottom: 0;
 }
-#day-list .editing .display,
-#day-list .edit {
+#routine-list .editing .display,
+#routine-list .edit {
     display: none;
 }
-#day-list .editing .edit {
+#routine-list .editing .edit {
     display: block;
 }
-#day-list .editing input {
+#routine-list .editing input {
     width: 444px;
     font-size: 24px;
     font-family: inherit;
@@ -273,17 +273,17 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
-#day-list .check {
+#routine-list .check {
     position: relative;
     top: 9px;
     margin: 0 10px 0 7px;
     float: left;
 }
-#day-list .done .day-content {
+#routine-list .done .routine-content {
     text-decoration: line-through;
     color: #777777;
 }
-#day-list .day-destroy {
+#routine-list .routine-destroy {
     position: absolute;
     right: 5px;
     top: 14px;
@@ -294,19 +294,19 @@ body {
     /* background: url(destroy.png) no-repeat 0 0;
     */
 }
-#day-list li:hover .day-destroy {
+#routine-list li:hover .routine-destroy {
     display: block;
 }
-#day-list .day-destroy:hover {
+#routine-list .routine-destroy:hover {
     background-position: 0 -20px;
 }
 
-#day-stats {
+#stats {
     *zoom: 1;
     margin-top: 10px;
     color: #777777;
 }
-#day-stats:after {
+#stats:after {
     content: "\0020";
     display: block;
     height: 0;
@@ -314,49 +314,26 @@ body {
     overflow: hidden;
     visibility: hidden;
 }
-#day-stats .day-count {
+#stats .routine-count {
     float: left;
 }
-#day-stats .day-count .number {
+#stats .routine-count .number {
     font-weight: bold;
     color: #333333;
 }
-#day-stats .day-clear {
+#stats .routine-clear {
     float: right;
 }
-#day-stats .day-clear a {
+#stats .routine-clear a {
     color: #777777;
     font-size: 12px;
 }
-#day-stats .day-clear a:visited {
+#stats .routine-clear a:visited {
     color: #777777;
 }
-#day-stats .day-clear a:hover {
+#stats .routine-clear a:hover {
     color: #336699;
 }
-
-#instructions {
-    width: 520px;
-    margin: 10px auto;
-    color: #777777;
-    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-    text-align: center;
-}
-#instructions a {
-    color: #336699;
-}
-
-#credits {
-    width: 520px;
-    margin: 30px auto;
-    color: #999;
-    text-shadow: rgba(255, 255, 255, 0.8) 0 1px 0;
-    text-align: center;
-}
-#credits a {
-    color: #888;
-}
-
 
 /*
 * FranÃ§ois 'cahnory' Germain
