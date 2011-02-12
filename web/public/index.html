@@ -35,67 +35,11 @@
 </head>
 
 <body lang="en" >
-    
     <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-          FB.Event.subscribe('auth.sessionChange', function(response) {
-              console.log('auth.sessionChange', arguments);
-          });
-          FB.Event.subscribe('fb.log', function(response) {
-              console.log('fb.log', arguments);
-          });
-          FB.init({ 
-             appId: '101103209968654', 
-             cookie: true,
-             status: true,
-             xfbml: true
-          });
-          
-          FB.getLoginStatus(function(response) {
-              if (response.session) {
-                  // logged in and connected user, someone you know
-                  console.log('have fb user', response);
-                  $('.fb-login-button').hide();
-                  
-                  FB.api('/me', function(response) {
-                      var $avatar = $('.fb-avatar');
-                      console.log('user data', response);
-                      var template = _.template($('#avatar-template').html());
-                      $avatar.html(template({
-                          name: response.first_name,
-                          image: 'https://graph.facebook.com/'+response.id+'/picture'
-                      }));
-                      
-                      $avatar.show();
-                      
-                      ensureAppInit(function() {
-                          App.user.set({
-                              'facebook': response,
-                              'id': response.id
-                          });
-                          App.user.save();
-                          App.user.fetch();
-                      });
-                  });
-              } else {
-                  // no user session available, someone you dont know
-                  $('.avatar').hide();
-                  $('.fb-login-button').show();
-              }
-          });          
-      };
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-          '//static.ak.fbcdn.net/connect/en_US/core.debug.js';
- //         '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-      }());
-      
-    </script>
-    
     <div id="dayapp">
+        <div class="reset-session" onclick="resetSession()">
+            *
+        </div>
         <div class="fb-login-button">
             <fb:login-button perms="email">
                Login with Facebook
@@ -197,6 +141,7 @@
     <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.0.js"%3E%3C/script%3E'))</script>
   
     <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/plugins.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
     <script src="js/ls.js"></script>

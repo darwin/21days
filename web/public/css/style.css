@@ -509,14 +509,14 @@ body {
     display: none;
     position: absolute;
     top: 10px;
-    right: 0;
+    right: 10px;
 }
 
 .fb-avatar {
     display: none;
     position: absolute;
     top: 10px;
-    right: 0;
+    right: 10px;
 }
 
 .routine-input-wrapper {
@@ -525,6 +525,13 @@ body {
 
 .routine-frequency-wrapper {
     float: left;
+}
+
+.reset-session {
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    top: 0;
 }
 
 

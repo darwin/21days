@@ -16,6 +16,14 @@
 //
 // Today (dindex)
 
+function resetSession() {
+    FB.logout(function(response) {
+        // user is now logged out
+        $.cookie("21session", null);
+        location.reload();
+    });
+}
+
 var pendingTasks = [];
 window.ensureAppInit = function(fn) {
     if (!window.App) {
@@ -29,8 +37,6 @@ $(function() {
     
     var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     
-    window.currentUserId = null;
-        
     Date.prototype.getD = function() {
         return Math.floor(this.valueOf() / (1000*60*60*24));
     }
@@ -118,6 +124,14 @@ $(function() {
         
         initialize: function() {
             _.bindAll(this, 'addOne', 'addAll', 'resave');
+
+            if (!this.get("id")) {
+                var tempId = "temp"+(Math.random()+"").substring(2);
+                console.log('no id, generating temporary user', tempId);
+                this.set({
+                    "start_day": new Date().getD()
+                });
+            }
             
             if (!this.get("start_day")) {
                 this.set({
@@ -508,3 +522,63 @@ $(function() {
         task();
     });
 });
+
+function processLoginEvent(response) {
+    // logged in and connected user, someone you know
+    console.log('fb user logged', response);
+    $('.fb-login-button').hide();
+
+    FB.api('/me', function(response) {
+        var $avatar = $('.fb-avatar');
+        console.log('user data', response);
+        var template = _.template($('#avatar-template').html());
+        $avatar.html(template({
+            name: response.first_name,
+            image: 'https://graph.facebook.com/' + response.id + '/picture'
+        }));
+
+        $avatar.show();
+
+        ensureAppInit(function() {
+            App.user.set({
+                'facebook': response,
+                'id': response.id
+            });
+            App.user.save();
+            App.user.fetch();
+        });
+    });
+}
+
+window.fbAsyncInit = function() {
+    FB.Event.subscribe('auth.sessionChange', function(response) {
+        console.log('auth.sessionChange', arguments);
+        processLoginEvent(response);
+    });
+    FB.Event.subscribe('fb.log', function(response) {
+        console.log('fb.log', arguments);
+    });
+    FB.init({
+        appId: '101103209968654',
+        cookie: true,
+        status: true,
+        xfbml: true
+    });
+
+    FB.getLoginStatus(function(response) {
+        if (response.session) {
+            processLoginEvent(response.session);
+        } else {
+            // no user session available, someone you dont know
+            $('.avatar').hide();
+            $('.fb-login-button').show();
+        }
+    });
+};
+(function() {
+    var e = document.createElement('script');
+    e.async = true;
+    e.src = document.location.protocol + '//static.ak.fbcdn.net/connect/en_US/core.debug.js';
+    //         '//connect.facebook.net/en_US/all.js';
+    document.getElementById('fb-root').appendChild(e);
+} ());
