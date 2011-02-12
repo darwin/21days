@@ -95,14 +95,24 @@
     
     <div id="dayapp">
         <div class="title">
-            <h1>21 Days</h1>
+            <h1>my 21 days</h1>
         </div> 
  
         <div class="content">
  
             <div id="create-routine">
-                <input id="new-routine" placeholder="I want to ..." type="text" />
-                <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span>
+                <div class="routine-input-wrapper">
+                    <input id="new-routine" placeholder="I want to do something ..." type="text" />
+                    <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span>
+                </div>
+                <div class="routine-frequency-wrapper">
+                    <select id="new-routine-frequency">
+                        <option value="f1">every day</option>
+                        <option value="f3">once in 3 days</option>
+                        <option value="f7">once a week</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
             </div>
  
             <div id="routines">
@@ -121,27 +131,27 @@
         <div class="routine <%= done ? 'done' : '' %>">
             <div class="display">
                 <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-                <div class="routine-content"></div>
-                <span class="routine-destroy"></span>
+                <div class="routine-name"></div>
+                <div class="routine-checklist"></div>
             </div>
             <div class="edit">
                 <input class="routine-input" type="text" value="" />
             </div>
         </div>
-    </script> 
+    </script>
  
     <script type="text/template" id="stats-template">
         <% if (total) { %>
             <span class="day-count">
                 <span class="number"><%= remaining %></span>
-                <span class="word"><%= remaining == 1 ? 'item' : 'items' %></span> left.
+                <span class="word"><%= remaining == 1 ? 'routine' : 'routines' %></span>.
             </span>
         <% } %>
         <% if (done) { %>
-            <span class="day-clear">
+            <span class="routine-clear">
                 <a href="#">
-                Clear <span class="number-done"><%= done %></span>
-                completed <span class="word-done"><%= done == 1 ? 'item' : 'items' %></span>
+                give up <span class="number-done"><%= done %></span>
+                selected <span class="word-done"><%= done == 1 ? 'routine' : 'routines' %></span>
                 </a>
             </span>
         <% } %>
