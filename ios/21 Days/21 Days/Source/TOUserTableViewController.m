@@ -1,21 +1,19 @@
-//
-//  TOUserTableViewController.m
-//  21 Days
-//
-//  Created by Zdenek on 2/12/11.
-//  Copyright 2011 EskoArtwork. All rights reserved.
-//
-
 #import "TOUserTableViewController.h"
 
+// Facebook App ID
+static NSString* kAppId = @"101103209968654";
 
 @implementation TOUserTableViewController
+
+@synthesize facebook=_facebook;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self) {
-        // Custom initialization
+    if (self) 
+    {
+        _permissions = [[NSArray arrayWithObjects: @"read_stream", @"offline_access",nil] retain];
+        _isConnectedToFacebook = NO;
     }
     return self;
 }
@@ -23,6 +21,8 @@
 - (void)dealloc
 {
     [super dealloc];
+    [_facebook release];
+    [_permissions release];
 }
 
 - (void)didReceiveMemoryWarning
@@ -44,6 +44,8 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    _facebook = [[Facebook alloc] initWithAppId:kAppId];
 }
 
 - (void)viewDidUnload
@@ -83,15 +85,21 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
+    if (section == 0)
+    {
+        return 1;
+    }
+    else if (section == 1)
+    {
+        return 1;
+    }
     return 0;
 }
 
@@ -105,8 +113,28 @@
     }
     
     // Configure the cell...
+    MyLog(@"%@",  NSStringFromSelector(_cmd));
+
+    NSInteger section = [indexPath indexAtPosition:0];
+    if (section == 0)
+        [self BuildUserCell:cell];
+    else if (section == 1)
+        [self BuildConnectionCell:cell];
     
     return cell;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (section == 0)
+    {
+        return @"User";
+    }
+    else if (section == 1)
+    {
+        return @"Connection";
+    }
+    return @"";
 }
 
 /*
@@ -148,18 +176,117 @@
 }
 */
 
+- (UITableViewCell*) GetUserCell
+{
+    return [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+}
+
+// Returns Connection cell.
+- (UITableViewCell*) GetConnectionCell
+{
+    return [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+}
+
+
 #pragma mark - Table view delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     [detailViewController release];
-     */
+    if ([indexPath compare:[NSIndexPath indexPathForRow:0 inSection:1]] == NSOrderedSame)
+    {
+        if (![self IsConnectedToFacebook])
+            [self.facebook authorize:_permissions delegate:self];
+        else
+            [self.facebook logout:self];
+        
+        UITableViewCell* cell = [self GetConnectionCell];
+        cell.selected = NO;
+    }
+}
+
+#pragma mark Facebook Delegate
+
+- (void)fbDidLogin 
+{
+    MyLog(@"Facebook: Used did log in.");
+    _isConnectedToFacebook = YES;
+    
+    // Build user Cell
+    UITableViewCell* cell = [self GetUserCell];
+    [self BuildUserCell:cell];
+    
+    // Build connect Cell
+    cell = [self GetConnectionCell];
+    [self BuildConnectionCell:cell];
+    
+}
+
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    MyLog(@"Facebook: Used did NOT log in.");
+}
+
+- (void)fbDidLogout
+{
+    MyLog(@"Facebook: Used did log out.");
+    _isConnectedToFacebook = NO;
+
+    // Build user Cell
+    UITableViewCell* cell = [self GetUserCell];
+    [self BuildUserCell:cell];
+    
+    // Build connect Cell
+    cell = [self GetConnectionCell];
+    [self BuildConnectionCell:cell];    
+}
+
+- (BOOL) IsConnectedToFacebook
+{
+    return _isConnectedToFacebook;
+}
+
+- (void) BuildConnectionCell:(UITableViewCell*) cell
+{
+    if ([self IsConnectedToFacebook])
+        cell.textLabel.text = @"Logout";
+    else
+        cell.textLabel.text = @"Login with Facebook Connect";
+        
+    UIImage* image = [UIImage imageNamed:@"FBDialog.bundle/images/fbicon.png"];
+    [cell.imageView setImage:image];
+}
+
+- (void) BuildUserCell:(UITableViewCell*) cell
+{   
+    if ([self IsConnectedToFacebook])
+        [_facebook requestWithGraphPath:@"me" andDelegate:self];
+    else {
+        cell.textLabel.text = @"Please log in";
+    }
+}
+
+- (void)request:(FBRequest *)request didFailWithError:(NSError *)error
+{
+    MyLog(@"Facebook: didFailWithError: %@", error);
+}
+
+- (void)request:(FBRequest *)request didLoad:(id)result
+{
+    MyLog(@"Facebook: didLoad");
+    // TODO: check what was requested I am assuming dictionary
+    if (![result isKindOfClass:[NSDictionary class]])
+        return;
+    
+    NSDictionary* dict = (NSDictionary*) result;
+    MyLog(@"Dict: %@", dict);
+
+    NSString* fullName = [dict objectForKey:@"name"];
+    MyLog(@"Full Facebook Name: %@", fullName);
+    
+    UITableViewCell* cell = [self GetUserCell];
+    cell.textLabel.text = fullName;
 }
 
 @end
+

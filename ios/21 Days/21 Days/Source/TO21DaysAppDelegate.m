@@ -1,12 +1,11 @@
 #import "TO21DaysAppDelegate.h"
-
-// Facebook App ID
-static NSString* kAppId = @"101103209968654";
+#import "TOUserTableViewController.h"
 
 @implementation TO21DaysAppDelegate
 
 @synthesize window=_window;
 @synthesize tabBarController=_tabBarController;
+@synthesize userTableViewController=_userTableViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -55,6 +54,11 @@ static NSString* kAppId = @"101103209968654";
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url 
+{
+    return [[self.userTableViewController facebook] handleOpenURL:url];
 }
 
 - (void)dealloc
