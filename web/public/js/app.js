@@ -2,13 +2,17 @@
 $(function() {
 
     window.Routine = Backbone.Model.extend({
-
-        EMPTY: "empty routine...",
+        EMPTY: "define your routine...",
 
         initialize: function() {
-            if (!this.get("content")) {
+            if (!this.get("name")) {
                 this.set({
-                    "content": this.EMPTY
+                    "name": this.EMPTY
+                });
+            }
+            if (!this.get("frequency")) {
+                this.set({
+                    "frequency": 1
                 });
             }
         },
@@ -20,17 +24,14 @@ $(function() {
         },
 
         clear: function() {
+            console.log('clear', this);
             this.destroy();
             this.view.remove();
         }
-
     });
 
     window.RoutineList = Backbone.Collection.extend({
-
-        // Reference to this collection's model.
         model: Routine,
-
         localStorage: new Store("routines"),
 
         done: function() {
@@ -43,34 +44,24 @@ $(function() {
             return this.without.apply(this, this.done());
         },
 
-        // We keep the Days in sequential order, despite being saved by unordered
-        // GUID in the database. This generates the next order number for new items.
         nextOrder: function() {
             if (!this.length) return 1;
             return this.last().get('order') + 1;
         },
 
-        // Days are sorted by their original insertion order.
         comparator: function(routine) {
             return routine.get('order');
         }
-
     });
 
     window.Routines = new RoutineList;
 
     window.RoutineView = Backbone.View.extend({
-
-        //... is a list tag.
         tagName: "li",
-
-        // Cache the template function for a single item.
         template: _.template($('#routine-template').html()),
-
-        // The DOM events specific to an item.
         events: {
             "click .check": "toggleDone",
-            "dblclick div.routine-content": "edit",
+            "dblclick div.routine-name": "edit",
             "click span.routine-destroy": "clear",
             "keypress .routine-input": "updateOnEnter"
         },
@@ -88,11 +79,11 @@ $(function() {
         },
 
         setContent: function() {
-            var content = this.model.get('content');
-            this.$('.routine-content').text(content);
-            this.input = this.$('.routine-input');
-            this.input.bind('blur', this.close);
-            this.input.val(content);
+            var name = this.model.get('name');
+            this.$('.routine-name').text(name);
+            this.$input = this.$('.routine-input');
+            this.$input.bind('blur', this.close);
+            this.$input.val(name);
         },
 
         // Toggle the `"done"` state of the model.
@@ -103,12 +94,12 @@ $(function() {
         // Switch this view into `"editing"` mode, displaying the input field.
         edit: function() {
             $(this.el).addClass("editing");
-            this.input.focus();
+            this.$input.focus();
         },
 
         close: function() {
             this.model.save({
-                content: this.input.val()
+                name: this.$input.val()
             });
             $(this.el).removeClass("editing");
         },
@@ -127,24 +118,17 @@ $(function() {
         clear: function() {
             this.model.clear();
         }
-
     });
 
     // The Application
     // ---------------
     // Our overall **AppView** is the top-level piece of UI.
     window.AppView = Backbone.View.extend({
-
-        // Instead of generating a new element, bind to the existing skeleton of
-        // the App already present in the HTML.
         el: $("#dayapp"),
-
-        // Our template for the line of statistics at the bottom of the app.
         statsTemplate: _.template($('#stats-template').html()),
-
-        // Delegated events for creating new items, and clearing completed ones.
         events: {
             "keypress #new-routine": "createOnEnter",
+            "keypress #new-routine-frequency": "createOnEnter",
             "keyup #new-routine": "showTooltip",
             "click .routine-clear a": "clearCompleted"
         },
@@ -155,7 +139,8 @@ $(function() {
         initialize: function() {
             _.bindAll(this, 'addOne', 'addAll', 'render');
 
-            this.input = this.$("#new-routine");
+            this.$input = this.$("#new-routine");
+            this.$frequency = this.$("#new-routine-frequency");
 
             Routines.bind('add', this.addOne);
             Routines.bind('refresh', this.addAll);
@@ -188,7 +173,8 @@ $(function() {
 
         newAttributes: function() {
             return {
-                content: this.input.val(),
+                name: this.$input.val(),
+                frequency: parseInt(this.$frequency.val().substring(1), 10), //  f1, f3 or f7
                 order: Routines.nextOrder(),
                 done: false
             };
@@ -197,10 +183,11 @@ $(function() {
         createOnEnter: function(e) {
             if (e.keyCode != 13) return;
             Routines.create(this.newAttributes());
-            this.input.val('');
+            this.$input.val('');
         },
 
         clearCompleted: function() {
+            console.log('clearCompleted');
             _.each(Routines.done(), function(routine) {
                 routine.clear();
             });
@@ -211,16 +198,15 @@ $(function() {
         // a new day item, after one second.
         showTooltip: function(e) {
             var tooltip = this.$(".ui-tooltip-top");
-            var val = this.input.val();
+            var val = this.$input.val();
             tooltip.fadeOut();
             if (this.tooltipTimeout) clearTimeout(this.tooltipTimeout);
-            if (val == '' || val == this.input.attr('placeholder')) return;
+            if (val == '' || val == this.$input.attr('placeholder')) return;
             var show = function() {
                 tooltip.show().fadeIn();
             };
             this.tooltipTimeout = _.delay(show, 1000);
         }
-
     });
 
     // Finally, we kick things off by creating the **App**.

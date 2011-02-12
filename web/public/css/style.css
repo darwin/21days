@@ -183,8 +183,12 @@ body {
     color: #333333;
 }
 
+.clear {
+    clear: both;
+}
+
 #dayapp {
-    width: 480px;
+    width: 960px;
     margin: 0 auto 40px;
     background: white;
     padding: 20px;
@@ -202,6 +206,8 @@ body {
 }
 
 #create-routine {
+    width: 770px;
+    margin: auto;
     position: relative;
 }
 #create-routine input {
@@ -229,8 +235,27 @@ body {
     margin-left: -85px;
 }
 
+#new-routine-frequency {
+    width: 200px;
+    font-size: 24px;
+    font-family: inherit;
+    line-height: 1.4em;
+    border: 0;
+    outline: none;
+    padding: 6px;
+    border: 1px solid #999999;
+    height: 47px;
+}
+
+
+
+
+#routines {
+    clear: both;
+    margin-top: 30px;
+}
+
 #routine-list {
-    margin-top: 10px;
 }
 #routine-list li {
     padding: 12px 20px 11px 0;
@@ -273,13 +298,20 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
-#routine-list .check {
+
+.routine .check {
     position: relative;
     top: 9px;
     margin: 0 10px 0 7px;
     float: left;
+    display: none;
 }
-#routine-list .done .routine-content {
+
+.routine:hover .check {
+    display: block;
+}
+
+#routine-list .done .routine-name {
     text-decoration: line-through;
     color: #777777;
 }
@@ -447,7 +479,13 @@ body {
 }
 
 
+.routine-input-wrapper {
+    float: left;
+}
 
+.routine-frequency-wrapper {
+    float: left;
+}
 
 
 
