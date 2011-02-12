@@ -1,0 +1,124 @@
+nápady
+------
+Generovat URL na svůj blog/web
+- prvních 100 zdarma
+
+konkurence
+----------
+http://www.rexbox.co.uk/epicwin/
+
+kategorie
+---------
+-Weight & fitness
+Exercise daily
+Go to gym
+Go to swimm
+Run
+
+-Healthy lifestyle
+Quit smoking
+Take Vitamins
+Drink Water two glasses a day
+Stop Eating Out
+Eat Breakfast
+Floss
+
+-Pleasure & happiness
+Smile at stranger
+Read book
+Read to kids
+Not be lazy
+Kiss wife
+Call mom
+
+-Self development
+Meditate / Pray
+Read Bible
+Update Blog
+Write a page
+Photo a day
+No facebook day
+
+43things GOALS
+----
+lose weight 
+write a book 
+stop procrastinating 
+Fall in love 
+be happy 
+Get a tattoo 
+get married 
+go on a road trip with no predetermined destination
+drink more water 
+travel the world 
+
+-------------------
+
+zlepšit život začíná maličkostmi, začněte novou rutinu hned
+chci dělat.... 3x týdně <ano>
+doporučit, co dělají jiní lidé
+
+21 days
+
+Hi. I'm Tomas and this is my startup idea "21 days"
+21 days is an app for loosers.
+Yes. App for loosers. For every one of us who ever tried to quit smoking, start exercising regulary (hands up!), meditating, learning new language... you name it. Who tried and fail.
+21 days is here to save your selfrespect. It is a service which helps you to set up goals and routines leading towards these goals and stick with them.
+How is it different from similar services?
+Two features are cruical:
+1) it heavily uses power of social web to motivate you and protect from failure
+2) and it uses your mobile device to track your progress and "supervise" you
+There is much more I can fit into 90 sec. So please take your smartphones and go to bit.ly/ipo48 (yes, i've steal the keyword for my project). I'm not hiding anything form you so you will find all details including business model.
+If you are like the idea, especiall if you are developer, please join me.
+Because I'm very good with ideas - I'm working as strategy direrctor in the biggest advertising agency in town but I'm very poor coder.
+Thank you very much.
+
+And interesting fact: 21 days is a minimum to set up a routine.
+
+
+21days
+Teaser
+Millions of people want to improve their lives. They want to exercise more, learn languages, play piano, quit smoking, eat healthier, learn Python, you name it. They try... and they fail. 21days is a web/mobile application which helps them to stick with their resolutions by using power of social web and daily mobile journal interaction. 
+Click [View] ▼▼▼ to see project details, competitor analysis and business model.
+
+Pitch
+★ Project details
+21days is a web application which basically allows users to:
+1) Set up a goal (e.g. "Learn Spanish")
+2) Set up one or more tasks to reach the goal (e.g. "Learn at least 5 days a week at least for 20 minutes")
+3) Find one or more "angels" (supporters) who will be informed about successes and failures, who can comment, motivate and help (friends, family, teachers, strangers...)
+4) Start their 21 days routine (why 21 days? see below)
+5) Fill in journal about successes or failures (daily or in other set interval)
+Essential parts of the project:
+- mobile journaling application with push feature putting pressure to the user
+- Facebook and Twitter integration for connecting with "angels" and public pledges
+Other features: Discussions and online support groups. Badges and other game theory based tools to make everything more entertaining.
+
+★ Brief competitor analysis
+There are couple of similar services solving part of the problem:
+http://www.43things.com (very good at goal setting)
+http://www.joesgoals.com (very good at journaling)
+http://www.goalmigo.com (good in use of supporters)
+Recently I have found http://www.stickk.com. The bad news: it is very close to 21days idea. The good news: it lacks mobile app and is overall badly designed (check for yourself).
+
+★ Business model
+The app itself will be free for regular users. There will be two main sources of revenue:
+1) PRO users (teachers, sport coaches, therapists etc...) which will get the advanced version of the service with an option to set up goals and tasks for others, private comments, statistics etc...
+2) Service "appstore" where publishers of correspondence courses can sell their services to highly motivated users.
+The biggest potential is in US education system (US school districts multilicenses) and courses appstore.
+
+★ Marketing tools
+Except standard marketing tools there is high virallity built into the service - public pledges on FB or Twitter, finding "angels" among non-users, iPhone app in appstore.
+
+★ Notes
+Original inspiration for this project was "Modrý život" (Blue Life) routine invented by Czech writer Jaroslav Foglar for Boy Scouts (see attachment).
+21 days is a minimum to form a routine. Users can for sure continue with the service or set up another goal/task.
+
+
+http://www.pledgehammer.com/
+---
+http://mygoals.com/
+http://toolstolife.com/
+http://www.goalhappy.com/
+
+http://lifehacker.com/#!5439026/five-best-goal+tracking-tools

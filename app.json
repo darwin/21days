@@ -1,0 +1,11 @@
+{
+    "name": "21days",
+    "prefix": "./build",
+
+    "mongo": false,
+    "mongo_host": "localhost",
+    "mongo_port": 27017,
+
+    "landing": true,
+    "landing_port": 80
+}
