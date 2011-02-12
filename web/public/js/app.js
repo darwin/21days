@@ -1,4 +1,3 @@
-// Load the application once the DOM is ready, using `jQuery.ready`:
 $(function() {
 
     window.Routine = Backbone.Model.extend({
@@ -24,7 +23,6 @@ $(function() {
         },
 
         clear: function() {
-            console.log('clear', this);
             this.destroy();
             this.view.remove();
         }
@@ -120,9 +118,6 @@ $(function() {
         }
     });
 
-    // The Application
-    // ---------------
-    // Our overall **AppView** is the top-level piece of UI.
     window.AppView = Backbone.View.extend({
         el: $("#dayapp"),
         statsTemplate: _.template($('#stats-template').html()),
@@ -133,9 +128,6 @@ $(function() {
             "click .routine-clear a": "clearCompleted"
         },
 
-        // At initialization we bind to the relevant events on the `Days`
-        // collection, when items are added or changed. Kick things off by
-        // loading any preexisting days that might be saved in *localStorage*.
         initialize: function() {
             _.bindAll(this, 'addOne', 'addAll', 'render');
 
@@ -149,8 +141,6 @@ $(function() {
             Routines.fetch();
         },
 
-        // Re-rendering the App just means refreshing the statistics -- the rest
-        // of the app doesn't change.
         render: function() {
             var done = Routines.done().length;
             this.$('#stats').html(this.statsTemplate({
@@ -187,15 +177,13 @@ $(function() {
         },
 
         clearCompleted: function() {
-            console.log('clearCompleted');
             _.each(Routines.done(), function(routine) {
                 routine.clear();
             });
             return false;
         },
 
-        // Lazily show the tooltip that tells you to press `enter` to save
-        // a new day item, after one second.
+        // Lazily show the tooltip that tells you to press `enter` to save a new day item, after one second.
         showTooltip: function(e) {
             var tooltip = this.$(".ui-tooltip-top");
             var val = this.$input.val();
@@ -209,7 +197,5 @@ $(function() {
         }
     });
 
-    // Finally, we kick things off by creating the **App**.
     window.App = new AppView;
-
 });
