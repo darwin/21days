@@ -111,12 +111,15 @@
                       }));
                       
                       $avatar.show();
-                      App.user.set({
-                          'facebook': response,
-                          'id': response.id
+                      
+                      ensureAppInit(function() {
+                          App.user.set({
+                              'facebook': response,
+                              'id': response.id
+                          });
+                          App.user.save();
+                          App.user.fetch();
                       });
-                      App.user.save();
-                      App.user.fetch();
                   });
               } else {
                   // no user session available, someone you dont know
@@ -144,7 +147,6 @@
         <div class="fb-avatar">
 
         </div>
-
 
         <div class="title">
             <h1>my 21 days</h1>

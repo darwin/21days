@@ -16,6 +16,15 @@
 //
 // Today (dindex)
 
+var pendingTasks = [];
+window.ensureAppInit = function(fn) {
+    if (!window.App) {
+        pendingTasks.push(fn);
+    } else {
+        fn();
+    }
+}
+
 $(function() {
     
     var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -30,6 +39,80 @@ $(function() {
         return new Date(d*(1000*60*60*24));
     }
     
+    window.Connector = {
+        userUrl: function() {
+            return "/users/"+App.user.id;
+        },
+        
+        push: function() {
+            var userJSON = App.user.toJSON();
+            var routinesJSON = App.user.routines.toJSON();
+            var json = userJSON;
+            json.routines = routinesJSON;
+            console.log('push', json);
+            
+            $.ajax({
+                type: "POST",
+                url: this.userUrl(),
+                data: json,
+                success: function(json) {
+                }, 
+                error: function() {
+                }
+            });
+            
+            // $.post(this.userUrl(), json, function(data){
+            //     console.log('push done', data);
+            // }, "json");
+        },
+         
+        pull: function(success, error) {
+            console.log('pull');
+            $.getJSON(this.userUrl(), function(data) {
+                console.log('pull here', data);
+            });
+        }
+    };
+    
+    var plannedPush;
+    
+    // Backbone.sync = function(method, model, success, error) {
+    //     var resp;
+    //     var store = model.localStorage || model.collection.localStorage;
+    // 
+    //     console.log('sync', method, model, store.name);
+    // 
+    //     switch (method) {
+    //         case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
+    //         case "create":  resp = store.create(model);                            break;
+    //         case "update":  resp = store.update(model);                            break;
+    //         case "delete":  resp = store.destroy(model);                           break;
+    //     }
+    //     
+    //     if (method=="read") {
+    //         Connector.pull(function() {
+    //             if (store.name=="routines") {
+    //                 
+    //             }
+    //         }, function() {
+    //             // TODO:
+    //         });
+    //     } else {
+    //         if (!plannedPush) {
+    //             plannedPush = setTimeout(function() {
+    //                 plannedPush = null;
+    //                 Connector.push();
+    //             }, 200);
+    //         }
+    //     }
+    // 
+    //     if (resp) {
+    //         success(resp);
+    //     } else {
+    //         error("Record not found");
+    //     }
+    // };
+    
     window.User = Backbone.Model.extend({
         localStorage: new Store("user"),
         
@@ -43,11 +126,9 @@ $(function() {
             }
             
             this.routines = new RoutineList;
-            this.routines.url = "/users/"+this.id+"/routines";
 
             this.routines.bind('add', this.addOne);
             this.routines.bind('refresh', this.addAll);
-            // this.routines.bind('change', this.resave);
 
             this.routines.fetch();
         },
@@ -62,11 +143,8 @@ $(function() {
 
         addAll: function() {
             this.routines.each(this.addOne);
-        },
-
-        resave: function() {
-            this.save({'routines': this.routines.toJSON()});
         }
+
 
     });
     
@@ -347,7 +425,7 @@ $(function() {
             var date = new Date();
             
             this.today = date.getD();
-            this.user = window.User;
+            this.user = new User();
             this.user.routines.bind('all', this.render);
             this.user.bind('all', this.render);
         },
@@ -409,7 +487,7 @@ $(function() {
             });
             return false;
         },
-
+        
         // Lazily show the tooltip that tells you to press `enter` to save a new day item, after one second.
         // showTooltip: function(e) {
         //     var tooltip = this.$(".ui-tooltip-top");
@@ -425,6 +503,8 @@ $(function() {
     });
 
     window.Today = new Date().getD();
-    window.User = new User();
     window.App = new AppView;
+    _.each(pendingTasks, function(task) {
+        task();
+    });
 });
