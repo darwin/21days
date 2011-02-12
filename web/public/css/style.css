@@ -314,15 +314,33 @@ body {
 }
 
 #routine-list .routine-fixed {
-    background-color: #ffaaaa;
     width: 300px;
     float: left;
 }
 
-#routine-list .routine-weeks {
-    background-color: #ddffdd;
+.routine-weeks {
     float: left;
     width: 630px;
+    border-left: 2px solid #000;
+}
+
+.week {
+    border-right: 2px solid #000;
+    height: 30px;
+    float: left;
+}
+
+.day {
+    width: 28px;
+    height: 30px;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    float: left;
+    cursor: pointer;
+}
+
+.day.checked {
+    background-color: #aaf;
 }
 
 #stats {
@@ -456,8 +474,6 @@ body {
     -khtml-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
 }
-
-
 
 .fb-login-button {
     display: none;
