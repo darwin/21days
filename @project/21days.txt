@@ -3,6 +3,8 @@ nápady
 Generovat URL na svůj blog/web
 - prvních 100 zdarma
 
+Badge na web
+
 konkurence
 ----------
 http://www.rexbox.co.uk/epicwin/
