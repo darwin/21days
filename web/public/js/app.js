@@ -19,7 +19,7 @@
 $(function() {
     
     window.currentUserId = null;
-    
+        
     Date.prototype.getD = function() {
         return Math.floor(this.valueOf() / (1000*60*60*24));
     }
@@ -171,9 +171,8 @@ $(function() {
 
     });
 
-    window.WeekView = Backbone.View.extend({
-        className: 'week',
-        template: _.template($('#week-template').html()),
+    window.DayHeaderView = Backbone.View.extend({
+        className: 'day-header',
         events: {
         },
 
@@ -182,8 +181,45 @@ $(function() {
         },
 
         render: function() {
-            $(this.el).html(this.template(this.model.toJSON()));
+            var root = $(this.el);
+            root.html('1');
+            return this;
+        },
+    });
+
+    window.WeekHeaderView = Backbone.View.extend({
+        className: 'week-header',
+        events: {
+        },
+
+        initialize: function() {
+            _.bindAll(this, 'render');
+        },
+
+        render: function() {
+            var root = $(this.el);
+            for (var i=0; i<7; i++) {
+                var day = new DayHeaderView({
+                    dindex: this.options.dindex + i
+                });
+                day.render();
+                root.append(day.el);
+            }
             
+            return this;
+        },
+    });
+
+    window.WeekView = Backbone.View.extend({
+        className: 'week',
+        events: {
+        },
+
+        initialize: function() {
+            _.bindAll(this, 'render');
+        },
+
+        render: function() {
             var root = $(this.el);
             for (var i=0; i<7; i++) {
                 var day = new DayView({
@@ -253,28 +289,23 @@ $(function() {
             $(this.el).removeClass("editing");
         },
 
-        // Toggle the `"done"` state of the model.
         toggleDone: function() {
             this.model.toggle();
         },
 
-        // Switch this view into `"editing"` mode, displaying the input field.
         edit: function() {
             $(this.el).addClass("editing");
             this.$input.focus();
         },
 
-        // If you hit `enter`, we're through editing the item.
         updateOnEnter: function(e) {
             if (e.keyCode == 13) this.close();
         },
 
-        // Remove this view from the DOM.
         remove: function() {
             $(this.el).remove();
         },
 
-        // Remove the item, destroy the model.
         clear: function() {
             this.model.clear();
         }
@@ -311,6 +342,8 @@ $(function() {
                 done: this.user.routines.done().length,
                 remaining: this.user.routines.remaining().length
             }));
+            
+            this.$('#');
         },
 
         newAttributes: function() {
