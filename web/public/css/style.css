@@ -601,36 +601,3 @@ body {
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
 }
-
-.main {
-    background-color: white;
-}
-
-.content {
-    font-size: 24px;
-    line-height: 120%;
-    text-align: justify;
-}
-
-h1 {    
-    font-size: 56px;
-    margin-top: 10px;    
-}
-
-h2 {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-h3 {
-    font-weight: normal;
-}
-
-li{
-    padding: 10px 0;
-}
-
-img {
-    vertical-align: middle;
-    padding-right: 10px;
-}
