@@ -1,6 +1,8 @@
 #import <UIKit/UIKit.h>
 #import "Facebook.h"
 
+@class TOUser;
+
 @interface TOUserTableViewController : UITableViewController <FBSessionDelegate, FBRequestDelegate> {
     NSArray* _permissions;
     BOOL _isConnectedToFacebook;
@@ -9,18 +11,21 @@
 @property(readonly) Facebook* facebook;
 
 // Returns YES if we have connection to the Facebook.
-- (BOOL) IsConnectedToFacebook;
+- (BOOL) isConnectedToFacebook;
 
 // Builds user cell.
-- (void) BuildUserCell:(UITableViewCell*) cell;
+- (void) buildUserCell:(UITableViewCell*) cell;
 
 // Builds cell for login / logout.
-- (void) BuildConnectionCell:(UITableViewCell*) cell;
+- (void) buildConnectionCell:(UITableViewCell*) cell;
 
 // Returns User' cell.
-- (UITableViewCell*) GetUserCell;
+- (UITableViewCell*) getUserCell;
 
 // Returns Connection cell.
-- (UITableViewCell*) GetConnectionCell;
+- (UITableViewCell*) getConnectionCell;
+
+// Builds user Object from facebook Graph reply.
+- (TOUser*) buildUserFromFacebookDictionary:(NSDictionary*)result;
 
 @end
