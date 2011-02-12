@@ -189,7 +189,7 @@ body {
      color: #333333;
    }
 
- #todoapp {
+ #dayapp {
    width: 480px;
    margin: 0 auto 40px;
    background: white;
@@ -199,7 +199,7 @@ body {
    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
  }
-   #todoapp h1 {
+   #dayapp h1 {
      font-size: 36px;
      font-weight: bold;
      text-align: center;
@@ -207,10 +207,10 @@ body {
      line-height: 1;
    }
 
- #create-todo {
+ #create-day {
    position: relative;
  }
-   #create-todo input {
+   #create-day input {
      width: 466px;
      font-size: 24px;
      font-family: inherit;
@@ -224,10 +224,10 @@ body {
      -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
      box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
    }
-     #create-todo input::-webkit-input-placeholder {
+     #create-day input::-webkit-input-placeholder {
        font-style: italic;
      }
-   #create-todo span {
+   #create-day span {
      position: absolute;
      z-index: 999;
      width: 170px;
@@ -235,17 +235,17 @@ body {
      margin-left: -85px;
    }
 
- #todo-list {
+ #day-list {
    margin-top: 10px;
  }
-   #todo-list li {
+   #day-list li {
      padding: 12px 20px 11px 0;
      position: relative;
      font-size: 24px;
      line-height: 1.1em;
      border-bottom: 1px solid #cccccc;
    }
-     #todo-list li:after {
+     #day-list li:after {
        content: "\0020";
        display: block;
        height: 0;
@@ -253,18 +253,18 @@ body {
        overflow: hidden;
        visibility: hidden;
      }
-     #todo-list li.editing {
+     #day-list li.editing {
        padding: 0;
        border-bottom: 0;
      }
-   #todo-list .editing .display,
-   #todo-list .edit {
+   #day-list .editing .display,
+   #day-list .edit {
      display: none;
    }
-     #todo-list .editing .edit {
+     #day-list .editing .edit {
        display: block;
      }
-     #todo-list .editing input {
+     #day-list .editing input {
        width: 444px;
        font-size: 24px;
        font-family: inherit;
@@ -279,17 +279,17 @@ body {
        -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
        box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
      }
-   #todo-list .check {
+   #day-list .check {
      position: relative;
      top: 9px;
      margin: 0 10px 0 7px;
      float: left;
    }
-   #todo-list .done .todo-content {
+   #day-list .done .day-content {
      text-decoration: line-through;
      color: #777777;
    }
-   #todo-list .todo-destroy {
+   #day-list .day-destroy {
      position: absolute;
      right: 5px;
      top: 14px;
@@ -297,21 +297,21 @@ body {
      cursor: pointer;
      width: 20px;
      height: 20px;
-     background: url(destroy.png) no-repeat 0 0;
-   }
-     #todo-list li:hover .todo-destroy {
+/*     background: url(destroy.png) no-repeat 0 0;
+*/   }
+     #day-list li:hover .day-destroy {
        display: block;
      }
-     #todo-list .todo-destroy:hover {
+     #day-list .day-destroy:hover {
        background-position: 0 -20px;
      }
 
- #todo-stats {
+ #day-stats {
    *zoom: 1;
    margin-top: 10px;
    color: #777777;
  }
-   #todo-stats:after {
+   #day-stats:after {
      content: "\0020";
      display: block;
      height: 0;
@@ -319,24 +319,24 @@ body {
      overflow: hidden;
      visibility: hidden;
    }
-   #todo-stats .todo-count {
+   #day-stats .day-count {
      float: left;
    }
-     #todo-stats .todo-count .number {
+     #day-stats .day-count .number {
        font-weight: bold;
        color: #333333;
      }
-   #todo-stats .todo-clear {
+   #day-stats .day-clear {
      float: right;
    }
-     #todo-stats .todo-clear a {
+     #day-stats .day-clear a {
        color: #777777;
        font-size: 12px;
      }
-       #todo-stats .todo-clear a:visited {
+       #day-stats .day-clear a:visited {
          color: #777777;
        }
-       #todo-stats .todo-clear a:hover {
+       #day-stats .day-clear a:hover {
          color: #336699;
        }
 

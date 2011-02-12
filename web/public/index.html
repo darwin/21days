@@ -35,72 +35,58 @@
 
 <body lang="en" >
 
-    <!-- Todo App Interface --> 
- 
-    <div id="todoapp"> 
- 
-      <div class="title"> 
-        <h1>21 Days</h1> 
-      </div> 
- 
-      <div class="content"> 
- 
-        <div id="create-todo"> 
-          <input id="new-todo" placeholder="I want to ..." type="text" /> 
-          <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span> 
+    <div id="dayapp"> 
+        <div class="title"> 
+            <h1>21 Days</h1> 
         </div> 
  
-        <div id="todos"> 
-          <ul id="todo-list"></ul> 
+        <div class="content"> 
+ 
+            <div id="create-day"> 
+                <input id="new-day" placeholder="I want to ..." type="text" /> 
+                <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span> 
+            </div> 
+ 
+            <div id="days"> 
+                <ul id="day-list"></ul> 
+            </div> 
+ 
+            <div id="day-stats"></div> 
+ 
         </div> 
  
-        <div id="todo-stats"></div> 
- 
-      </div> 
- 
-    </div> 
- 
-    <ul id="instructions"> 
-      <li>Double-click to edit a todo.</li> 
-      <li><a href="../../docs/todos.html">View the annotated source.</a></li> 
-    </ul> 
- 
-    <div id="credits"> 
-      Created by
-      <br /> 
-      <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a> 
     </div> 
  
     <!-- Templates --> 
  
     <script type="text/template" id="item-template"> 
-      <div class="todo <%= done ? 'done' : '' %>">
-        <div class="display">
-          <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
-          <div class="todo-content"></div>
-          <span class="todo-destroy"></span>
+        <div class="day <%= done ? 'done' : '' %>">
+            <div class="display">
+                <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                <div class="day-content"></div>
+                <span class="day-destroy"></span>
+            </div>
+            <div class="edit">
+                <input class="day-input" type="text" value="" />
+            </div>
         </div>
-        <div class="edit">
-          <input class="todo-input" type="text" value="" />
-        </div>
-      </div>
     </script> 
  
     <script type="text/template" id="stats-template"> 
-      <% if (total) { %>
-        <span class="todo-count">
-          <span class="number"><%= remaining %></span>
-          <span class="word"><%= remaining == 1 ? 'item' : 'items' %></span> left.
-        </span>
-      <% } %>
-      <% if (done) { %>
-        <span class="todo-clear">
-          <a href="#">
-            Clear <span class="number-done"><%= done %></span>
-            completed <span class="word-done"><%= done == 1 ? 'item' : 'items' %></span>
-          </a>
-        </span>
-      <% } %>
+        <% if (total) { %>
+            <span class="day-count">
+                <span class="number"><%= remaining %></span>
+                <span class="word"><%= remaining == 1 ? 'item' : 'items' %></span> left.
+            </span>
+        <% } %>
+        <% if (done) { %>
+            <span class="day-clear">
+                <a href="#">
+                Clear <span class="number-done"><%= done %></span>
+                completed <span class="word-done"><%= done == 1 ? 'item' : 'items' %></span>
+                </a>
+            </span>
+        <% } %>
     </script>
 
     <!-- JavaScript at the bottom for fast page loading -->
@@ -109,12 +95,10 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.5.0/jquery.js"></script>
     <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.0.js"%3E%3C/script%3E'))</script>
   
-  
     <!-- scripts concatenated and minified via ant build script-->
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
     <script src="js/ls.js"></script>
-    <script src="js/script.js"></script>
     <script src="js/app.js"></script>
     <!-- end concatenated and minified scripts-->
   
