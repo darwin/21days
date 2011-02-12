@@ -5,5 +5,7 @@ Icon?
 web/.classpath
 web/.project
 web/.settings/
+web/data/
 web/eclipse/
+web/test-result/
 web/tmp/
