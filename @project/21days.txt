@@ -1,4 +1,4 @@
-nápady
+﻿nápady
 ------
 Generovat URL na svůj blog/web
 - prvních 100 zdarma
@@ -125,3 +125,6 @@ http://toolstolife.com/
 http://www.goalhappy.com/
 
 http://lifehacker.com/#!5439026/five-best-goal+tracking-tools
+
+http://750words.com/
+http://zenhabits.net/the-habit-change-cheatsheet-29-ways-to-successfully-ingrain-a-behavior/

@@ -35,6 +35,37 @@
 
 <body lang="en" >
 
+    <div id="fb-root"></div>
+    <script>
+      window.fbAsyncInit = function() {
+          FB.Event.subscribe('auth.sessionChange', function(response) {
+              console.log(arguments);
+          });
+          FB.Event.subscribe('fb.log', function(response) {
+              console.log(arguments);
+          });      
+          FB.init({ 
+             appId:'332451499524', 
+             cookie:true,
+             status:true,
+             xfbml:true
+          });
+      };
+      (function() {
+        var e = document.createElement('script'); e.async = true;
+        e.src = document.location.protocol +
+          '//static.ak.fbcdn.net/connect/en_US/core.debug.js';
+ //         '//connect.facebook.net/en_US/all.js';
+        document.getElementById('fb-root').appendChild(e);
+      }());
+      
+    </script>
+    <div class="fb-login-button">
+        <fb:login-button perms="email">
+           Login with Facebook
+        </fb:login-button>
+    </div>
+    
     <div id="dayapp"> 
         <div class="title"> 
             <h1>21 Days</h1> 
