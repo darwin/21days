@@ -1,16 +1,15 @@
-//
-//  TOUser.h
-//  21 Days
-//
-//  Created by Zdenek on 2/12/11.
-//  Copyright 2011 EskoArtwork. All rights reserved.
-//
-
 #import <Foundation/Foundation.h>
-
 
 @interface TOUser : NSObject {
     
 }
+
+@property (nonatomic, copy) NSString* fullName;
+@property (nonatomic, copy) NSString* facebookId;
+@property (nonatomic, assign) NSUInteger startDayIndex;
+@property (nonatomic, retain) NSArray* routines;
+
+- (void) parseServerReply:(NSString*) reply;
+- (void) parseFacebookReply:(NSString*) reply;
 
 @end
