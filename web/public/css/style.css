@@ -458,6 +458,13 @@ body {
 
 
 .fb-login-button {
+    display: none;
+    position: absolute;
+    right: 0;
+}
+
+.fb-avatar {
+    display: none;
     position: absolute;
     right: 0;
 }

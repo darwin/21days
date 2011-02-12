@@ -39,17 +39,41 @@
     <script>
       window.fbAsyncInit = function() {
           FB.Event.subscribe('auth.sessionChange', function(response) {
-              console.log(arguments);
+              console.log('auth.sessionChange', arguments);
           });
           FB.Event.subscribe('fb.log', function(response) {
-              console.log(arguments);
-          });      
-          FB.init({ 
-             appId:'332451499524', 
-             cookie:true,
-             status:true,
-             xfbml:true
+              console.log('fb.log', arguments);
           });
+          FB.init({ 
+             appId: '101103209968654', 
+             cookie: true,
+             status: true,
+             xfbml: true
+          });
+          
+          FB.getLoginStatus(function(response) {
+              if (response.session) {
+                  // logged in and connected user, someone you know
+                  console.log('have fb user', response);
+                  $('.fb-login-button').hide();
+                  
+                  FB.api('/me', function(response) {
+                      var $avatar = $('.fb-avatar');
+                      console.log('user data', response);
+                      var template = _.template($('#avatar-template').html());
+                      $avatar.html(template({
+                          name: response.first_name,
+                          image: 'https://graph.facebook.com/'+response.id+'/picture'
+                      }));
+                      
+                      $avatar.show();
+                  });                  
+              } else {
+                  // no user session available, someone you dont know
+                  $('.avatar').hide();
+                  $('.fb-login-button').show();
+              }
+          });          
       };
       (function() {
         var e = document.createElement('script'); e.async = true;
@@ -65,32 +89,35 @@
            Login with Facebook
         </fb:login-button>
     </div>
+    <div class="fb-avatar">
+        
+    </div>
     
-    <div id="dayapp"> 
-        <div class="title"> 
-            <h1>21 Days</h1> 
+    <div id="dayapp">
+        <div class="title">
+            <h1>21 Days</h1>
         </div> 
  
-        <div class="content"> 
+        <div class="content">
  
-            <div id="create-day"> 
-                <input id="new-day" placeholder="I want to ..." type="text" /> 
-                <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span> 
-            </div> 
+            <div id="create-day">
+                <input id="new-day" placeholder="I want to ..." type="text" />
+                <span class="ui-tooltip-top" style="display:none;">Press Enter to save this task</span>
+            </div>
  
-            <div id="days"> 
-                <ul id="day-list"></ul> 
-            </div> 
+            <div id="days">
+                <ul id="day-list"></ul>
+            </div>
  
-            <div id="day-stats"></div> 
+            <div id="day-stats"></div>
  
-        </div> 
+        </div>
  
-    </div> 
+    </div>
  
     <!-- Templates --> 
  
-    <script type="text/template" id="item-template"> 
+    <script type="text/template" id="item-template">
         <div class="day <%= done ? 'done' : '' %>">
             <div class="display">
                 <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
@@ -103,7 +130,7 @@
         </div>
     </script> 
  
-    <script type="text/template" id="stats-template"> 
+    <script type="text/template" id="stats-template">
         <% if (total) { %>
             <span class="day-count">
                 <span class="number"><%= remaining %></span>
@@ -118,6 +145,13 @@
                 </a>
             </span>
         <% } %>
+    </script>
+
+    <script type="text/template" id="avatar-template">
+        <div class="avatar">
+            <div class="avatar-name"><%= name %></div>
+            <img src="<%= image %>"></img>
+        </div>
     </script>
 
     <!-- JavaScript at the bottom for fast page loading -->
