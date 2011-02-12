@@ -18,10 +18,16 @@
 
 $(function() {
     
+    var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+    
     window.currentUserId = null;
         
     Date.prototype.getD = function() {
         return Math.floor(this.valueOf() / (1000*60*60*24));
+    }
+
+    var newD = function(d) {
+        return new Date(d*(1000*60*60*24));
     }
     
     window.User = Backbone.Model.extend({
@@ -41,7 +47,7 @@ $(function() {
 
             this.routines.bind('add', this.addOne);
             this.routines.bind('refresh', this.addAll);
-            this.routines.bind('change', this.resave);
+            // this.routines.bind('change', this.resave);
 
             this.routines.fetch();
         },
@@ -102,7 +108,7 @@ $(function() {
         
         toggleDayCheckin: function(dindex) {
             var checkins = this.get('checkins') || {};
-            checkins = _.clone(checkins);
+            //checkins = _.clone(checkins);
             var record = checkins[dindex];
             if (!record) {
                 checkins[dindex] = {
@@ -114,8 +120,9 @@ $(function() {
             this.set({
                 'checkins': checkins
             });
+            this.trigger('change');
         },
-
+        
         clear: function() {
             this.destroy();
             this.view.remove();
@@ -148,7 +155,6 @@ $(function() {
 
     window.DayView = Backbone.View.extend({
         className: 'day',
-        template: _.template($('#day-template').html()),
         events: {
             "click": "check",
         },
@@ -158,13 +164,12 @@ $(function() {
         },
 
         render: function() {
-            $(this.el).html(this.template(this.model.toJSON()));
             if (this.model.isDayChecked(this.options.dindex)) $(this.el).addClass('checked');
             return this;
         },
 
         check: function() {
-            console.log('checked', this, this.options.dindex);
+            console.log('checked', this.model.id, this.options.dindex);
             this.model.toggleDayCheckin(this.options.dindex);
             this.model.save();
         }
@@ -173,8 +178,7 @@ $(function() {
 
     window.DayHeaderView = Backbone.View.extend({
         className: 'day-header',
-        events: {
-        },
+        template: _.template($('#day-header-template').html()),
 
         initialize: function() {
             _.bindAll(this, 'render');
@@ -182,7 +186,19 @@ $(function() {
 
         render: function() {
             var root = $(this.el);
-            root.html('1');
+            var dindex = this.options.dindex;
+            
+            var date = newD(dindex);
+            var dayNum = date.getDay();
+            var month = date.getMonth()+1;
+            var monthDay = date.getDate()+1;
+            var dayString = dayTable[dayNum];
+            var shortDate = monthDay+"."+month+".";
+            
+            $(this.el).html(this.template({
+                day: dayString,
+                shortDate: shortDate
+            }));
             return this;
         },
     });
@@ -229,6 +245,7 @@ $(function() {
                 day.render();
                 root.append(day.el);
             }
+            root.append('<div class="clear"></div>');
             
             return this;
         },
@@ -271,7 +288,7 @@ $(function() {
             week2.render();
             week3.render();
             
-            this.$('.routine-weeks').empty().append(week1.el, week2.el, week3.el);
+            this.$('.routine-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
             
             return this;
         },
@@ -334,6 +351,13 @@ $(function() {
             this.user.routines.bind('all', this.render);
             this.user.bind('all', this.render);
         },
+        
+        computeInitialViewDay: function(dtoday) {
+            var startDay = this.user.get('start_day');
+            var daysSinceBeginning = dtoday - startDay;
+            var weeksSinceBeginning = Math.floor(daysSinceBeginning / 7);
+            return startDay + (weeksSinceBeginning * 7);
+        },
 
         render: function() {
             var done = this.user.routines.done().length;
@@ -343,7 +367,25 @@ $(function() {
                 remaining: this.user.routines.remaining().length
             }));
             
-            this.$('#');
+            this.options.firstViewDay = this.computeInitialViewDay(this.today);
+            
+            var week1 = new WeekHeaderView({
+                dindex: this.options.firstViewDay
+            });
+            var week2 = new WeekHeaderView({
+                dindex: this.options.firstViewDay + 7
+            });
+            var week3 = new WeekHeaderView({
+                dindex: this.options.firstViewDay + 14
+            });
+            
+            week1.render();
+            week2.render();
+            week3.render();
+            
+            $('.routine-header-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
+            
+            $('#routines').show();
         },
 
         newAttributes: function() {

@@ -23,8 +23,8 @@
 
 
     <!-- CSS : implied media="all" -->
-    <link rel="stylesheet" href="css/style.css?v=2">
     <link rel="stylesheet" href="css/golden.css">
+    <link rel="stylesheet" href="css/style.css?v=2">
 
     <!-- Uncomment if you are specifically targeting less enabled mobile browsers
     <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
@@ -35,45 +35,47 @@
 </head>
 
 <body lang="en" >
-    <div class="main">
-        <div class="header g960">
-            <div class="inside g80">
-                <h1>21</h1>
-                <h2>DAYS</h2>
+    <div id="landing-page" style="display:none">
+        <div class="main">
+            <div class="header g960">
+                <div class="inside g80">
+                    <h1>21</h1>
+                    <h2>DAYS</h2>
+                </div>
+                <h3 class="g880">Better every day</h3>
             </div>
-            <h3 class="g880">Better every day</h3>
-        </div>
-        <div class="clear"></div>
+            <div class="clear"></div>
         
-        <div class="content ml80 g800">
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-        </div>
-        <div class="clear"></div>
+            <div class="content ml80 g800">
+                alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
+                alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
+                alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
+                alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
+            </div>
+            <div class="clear"></div>
         
-        <div class="ml80 g800">
+            <div class="ml80 g800">
         
-        </div>
-        <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
         
-        <div class="ml80 g800">               
-            <ul>
-                <li>Realtime inspiration</li>
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174719_113097355406002_230741_q.jpg">
-                    Antonin will code less than 30 hours a day daily
-                </li>
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/41602_107530565964331_4345_q.jpg">
-                    Zdenek will play at PSP with his 3 times a week
-                </li>                
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174819_162480730467399_3036677_q.jpg">
-                    Miro will worship Google App Engine once a week
-                </li>
-            </ul>
+            <div class="ml80 g800">
+                <ul>
+                    <li>Realtime inspiration</li>
+                    <li>
+                        <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174719_113097355406002_230741_q.jpg">
+                        Antonin will code less than 30 hours a day daily
+                    </li>
+                    <li>
+                        <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/41602_107530565964331_4345_q.jpg">
+                        Zdenek will play at PSP with his 3 times a week
+                    </li>
+                    <li>
+                        <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174819_162480730467399_3036677_q.jpg">
+                        Miro will worship Google App Engine once a week
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -109,14 +111,13 @@
                       }));
                       
                       $avatar.show();
-                      
                       App.user.set({
                           'facebook': response,
                           'id': response.id
                       });
                       App.user.save();
                       App.user.fetch();
-                  });                  
+                  });
               } else {
                   // no user session available, someone you dont know
                   $('.avatar').hide();
@@ -133,16 +134,18 @@
       }());
       
     </script>
-    <div class="fb-login-button">
-        <fb:login-button perms="email">
-           Login with Facebook
-        </fb:login-button>
-    </div>
-    <div class="fb-avatar">
-        
-    </div>
     
     <div id="dayapp">
+        <div class="fb-login-button">
+            <fb:login-button perms="email">
+               Login with Facebook
+            </fb:login-button>
+        </div>
+        <div class="fb-avatar">
+
+        </div>
+
+
         <div class="title">
             <h1>my 21 days</h1>
         </div>
@@ -164,7 +167,7 @@
                 <div class="clear"></div>
             </div>
  
-            <div id="routines">
+            <div id="routines" style="display:none">
                 <div id="routine-header">
                     <div class="routine-header-name"></div>
                     <div class="routine-header-weeks"></div>
@@ -199,7 +202,9 @@
     <script type="text/template" id="week-template">
     </script>
  
-    <script type="text/template" id="day-template">
+    <script type="text/template" id="day-header-template">
+        <div class="day-header-short"><%= shortDate %></div>
+        <div class="day-header-day"><%= day %></div>
     </script>
 
     <script type="text/template" id="stats-template">

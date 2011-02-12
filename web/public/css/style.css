@@ -188,8 +188,9 @@ body {
 }
 
 #dayapp {
+    position: relative;
     width: 960px;
-    margin: 0 auto 40px;
+    margin: 40px auto 40px;
     background: white;
     padding: 20px;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
@@ -253,13 +254,14 @@ body {
 }
 
 #routine-list {
+    margin: 0;
+    padding: 0;
 }
 #routine-list li {
     padding: 0;
     position: relative;
     font-size: 14px;
     line-height: 30px;
-    border-bottom: 1px solid #cccccc;
 }
 #routine-list li:after {
     content: "\0020";
@@ -304,7 +306,7 @@ body {
     display: none;
 }
 
-.routine:hover .check {
+.routine-fixed:hover .check {
     display: block;
 }
 
@@ -313,8 +315,21 @@ body {
     color: #777777;
 }
 
-#routine-list .routine-fixed {
-    width: 300px;
+.routine-header-name {
+    width: 280px;
+    float: left;
+    height: 30px;
+}
+
+.routine-header-weeks {
+    float: left;
+    width: 630px;
+    position: relative;
+    left: 2px;
+}
+
+.routine-fixed {
+    width: 280px;
     float: left;
 }
 
@@ -341,6 +356,21 @@ body {
 
 .day.checked {
     background-color: #aaf;
+}
+
+.day-header {
+    float: left;
+    width: 28px;
+    height: 30px;
+    line-height: 14px;
+    border-right: 1px solid #999;
+    border-bottom: 1px solid #999;
+    text-align: center;
+}
+
+.week-header {
+    font-size: 10px;
+    border-right: 2px solid #f00; 
 }
 
 #stats {
@@ -478,12 +508,14 @@ body {
 .fb-login-button {
     display: none;
     position: absolute;
+    top: 10px;
     right: 0;
 }
 
 .fb-avatar {
     display: none;
     position: absolute;
+    top: 10px;
     right: 0;
 }
 
