@@ -58,7 +58,7 @@ function initStage() {
 var initedStages = {};
 var wentThroughLanding = false;
 function switchStage(stage) {
-    console.log('switchStage: ', stage)
+    // console.log('switchStage: ', stage)
     if (!initedStages[stage]) {
         initedStages[stage] = true;
         $('.comments-footer').hide();
@@ -143,7 +143,7 @@ $(function() {
             var json = userJSON;
             json.routines = routinesJSON;
 
-            console.log('push', json);
+            // console.log('push', json);
             $.ajax({
                 type: "POST",
                 url: this.userUrl(),
@@ -158,7 +158,7 @@ $(function() {
         },
          
         pull: function(success, error) {
-            console.log('pull no-op TODO!');
+            // console.log('pull no-op TODO!');
             // $.getJSON(this.userUrl(), function(data) {
             //     console.log('pull here', data);
             //     
@@ -176,7 +176,7 @@ $(function() {
         var resp;
         var store = model.localStorage || model.collection.localStorage;
     
-        console.log('sync', method, model, store.name);
+        // console.log('sync', method, model, store.name);
     
         switch (method) {
             case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
@@ -220,7 +220,7 @@ $(function() {
 
             if (!this.get("id")) {
                 var tempId = "temp"+(Math.random()+"").substring(2);
-                console.log('no id, generating temporary user', tempId);
+                // console.log('no id, generating temporary user', tempId);
                 this.set({
                     "id": tempId
                 });
@@ -249,7 +249,7 @@ $(function() {
         },
 
         addAll: function() {
-            console.log('addAll');
+            // console.log('addAll');
             $(".routine-list").empty();
             this.routines.each(this.addOne);
         }
@@ -357,7 +357,7 @@ $(function() {
         },
 
         check: function() {
-            console.log('checked', this.model.id, this.options.dindex);
+            // console.log('checked', this.model.id, this.options.dindex);
             this.model.toggleDayCheckin(this.options.dindex);
             this.model.save();
         }
@@ -596,7 +596,7 @@ $(function() {
         
         handleEsc: function(e) {
             if (e.keyCode==27) {
-                console.log(e);
+                // console.log(e);
                 $('.addnew-button').show();
                 $('#page-standard .create-routine').hide();
             }
@@ -635,11 +635,11 @@ function processLoginEvent(response) {
     switchStage(2);
     
     // logged in and connected user, someone you know
-    console.log('fb user logged', response);
+    // console.log('fb user logged', response);
 
     FB.api('/me', function(response) {
         var $avatar = $('.fb-avatar');
-        console.log('user data', response);
+        // console.log('user data', response);
         var template = _.template($('#avatar-template').html());
         $avatar.html(template({
             name: response.first_name,
@@ -667,11 +667,11 @@ function processLoginEvent(response) {
 
 window.fbAsyncInit = function() {
     FB.Event.subscribe('auth.sessionChange', function(response) {
-        console.log('auth.sessionChange', arguments);
+        // console.log('auth.sessionChange', arguments);
         processLoginEvent(response);
     });
     FB.Event.subscribe('fb.log', function(response) {
-        console.log('fb.log', arguments);
+        // console.log('fb.log', arguments);
     });
     FB.init({
         appId: '101103209968654',
