@@ -33,6 +33,32 @@
     <script src="js/libs/modernizr-1.6.min.js"></script>
 
     <link href='http://fonts.googleapis.com/css?family=Cabin:600' rel='stylesheet' type='text/css'>
+    
+    <script type="text/javascript" charset="utf-8">
+        // define dummy replacements for firebug functionality (needed for Opera)
+        if (!window.console) {
+            window.console = {};
+            function fn() {
+                opera.postError(arguments);
+            };
+            ['log', 'debug', 'info', 'warn', 'error', 'assert', 'dir', 'dirxml', 'group', 'groupEnd', 
+            'time', 'timeEnd', 'count', 'trace', 'profile', 'profileEnd'].forEach(function(name) {
+                window.console[name] = fn;
+            });
+        }            
+        (function() {
+                var names = ["log", "debug", "info", "warn", "error", "assert", "dir", "dirxml", "group", "groupEnd", "time", "timeEnd", "count", "trace", "profile", "profileEnd"];
+                if(!window.console){
+                    window.console = {};
+                }
+                for (var i in names) {
+                    window.console[names[i]] = window.console[names[i]] || function(){
+                        return;
+                    };
+                }
+        })();
+    </script>
+    
 </head>
 
 <body lang="en" >
