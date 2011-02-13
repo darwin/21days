@@ -142,12 +142,6 @@ input:invalid, textarea:invalid {
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
 
-/* These selection declarations have to be separate.
-   No text-shadow: twitter.com/miketaylr/status/12228805301
-   Also: hot pink. */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-
 /* j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #FF5E99; }
 
@@ -179,8 +173,12 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.4em;
-    background: #eeeeee;
     color: #333333;
+    background: #F2F2F3 url('/images/background.png') repeat-x;
+}
+
+body.selected-stage-2 {
+    background: #fff url('/images/bg3.png') repeat-x;
 }
 
 .clear {
@@ -188,29 +186,89 @@ body {
 }
 
 #dayapp {
+    position: relative;
     width: 960px;
-    margin: 0 auto 40px;
-    background: white;
-    padding: 20px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
+    margin: 0px auto 0px;
+    min-height: 1080px;
 }
+
+body.selected-stage-2 #dayapp {
+    min-height: 600px;
+}
+
+.add-angels {
+    display: none;
+}
+
+#dayapp .logo {
+    position: absolute;
+    left: 20px;
+    width: 170px;
+    height: 170px;
+    background: #f2f3f4 url('/images/logo.png');
+}
+
 #dayapp h1 {
-    font-size: 36px;
+    font-family: 'Cabin', arial, serif;
+    color: #107FFF;
+    position: absolute;
+    font-size: 48px;
+    left: 200px;
     font-weight: bold;
-    text-align: center;
-    padding: 20px 0 30px 0;
+    top: 100px;
     line-height: 1;
 }
 
-#create-routine {
-    width: 700px;
+#dayapp h2 {
+    position: absolute;
+    font-size: 18px;
+    top: 28px;
+    right: 0px;
+    font-weight: normal;
+}
+
+#dayapp .story {
+    position: absolute;
+    left: 200px;
+    top: 180px;
+    font-size: 30px;
+    line-height: 34px;
+}
+
+#dayapp .story strong {
+    padding: 0px 4px;
+    background-color: #E5E2CA;
+}
+
+#dayapp .bottom {
+    position: absolute;
+    width: 960px;
+    height: 700px;
+    left: 0px;
+    top: 312px;
+    font-size: 30px;
+    line-height: 34px;
+    background: #f2f3f4 url('/images/landing-bottom.png');
+}
+
+.mock3 {
+    display: none;
+    position: relative;
+    z-index: 0;
+    opacity: 0.1;
+    width: 960px;
+    height: 700px;
+    background: #f2f3f4 url('/images/mock3.png');
+    margin: auto auto;
+    margin-bottom: -700px;
+}
+
+.create-routine {
+    width: 760px;
     margin: auto;
     position: relative;
 }
-#create-routine input {
+.create-routine input {
     width: 466px;
     font-size: 24px;
     font-family: inherit;
@@ -224,10 +282,10 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
-#create-routine input::-webkit-input-placeholder {
+.create-routine input::-webkit-input-placeholder {
     font-style: italic;
 }
-#create-routine span {
+.create-routine span {
     position: absolute;
     z-index: 999;
     width: 170px;
@@ -235,7 +293,7 @@ body {
     margin-left: -85px;
 }
 
-#new-routine-frequency {
+.new-routine-frequency {
     width: 200px;
     font-size: 24px;
     font-family: inherit;
@@ -247,21 +305,62 @@ body {
     height: 47px;
 }
 
-#routines {
+.routines {
+    padding-top: 180px;
     clear: both;
-    margin-top: 30px;
+    min-height: 10px;
+    position: relative;
 }
 
-#routine-list {
+.vseparator {
+    position: absolute;
+    bottom: -50px;
+    top: 160px;
+    width: 1px;
+    background-color: #dbdbdb;
+    z-index: 10;
 }
-#routine-list li {
+
+.s1 {
+    left: 535px;
+}
+
+.s2 {
+    left: 738px;
+}
+
+.routine-list {
+    clear: both;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 20px;
+}
+.routine-list li {
     padding: 0;
     position: relative;
-    font-size: 14px;
-    line-height: 30px;
-    border-bottom: 1px solid #cccccc;
+    line-height: 29px;
 }
-#routine-list li:after {
+
+.badges-row {
+    position: relative;
+    top: -20px;
+    left: 350px;
+}
+
+.badges-potemking {
+    background: #fff url('/images/badges.png') top left;
+    width: 127px;
+    height: 68px;
+}
+
+
+.routine-separator {
+    background: #999 url('/images/separator.png') top left;
+    height: 8px;
+    width: 960px;
+}
+
+.routine-list li:after {
     content: "\0020";
     display: block;
     height: 0;
@@ -269,26 +368,26 @@ body {
     overflow: hidden;
     visibility: hidden;
 }
-#routine-list li.editing {
+.routine-list li.editing {
     padding: 0;
     border-bottom: 0;
 }
-#routine-list .editing .display,
-#routine-list .edit {
+.routine-list .editing .display,
+.routine-list .edit {
     display: none;
 }
-#routine-list .editing .edit {
+.routine-list .editing .edit {
     display: block;
 }
-#routine-list .editing input {
-    width: 444px;
-    font-size: 24px;
+.routine-list .editing input {
+    width: 920px;
+    font-size: 18px;
     font-family: inherit;
     margin: 0;
-    line-height: 1.6em;
+    line-height: 18px;
     border: 0;
     outline: none;
-    padding: 10px 7px 0px 27px;
+    padding: 0px 8px;
     border: 1px solid #999999;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
@@ -304,43 +403,93 @@ body {
     display: none;
 }
 
-.routine:hover .check {
+.routine-fixed:hover .check {
     display: block;
 }
 
-#routine-list .done .routine-name {
-    text-decoration: line-through;
-    color: #777777;
+.col1 {
+    width: 330px;
 }
 
-#routine-list .routine-fixed {
-    width: 300px;
+.col2 {
+    width: 630px;
+}
+
+.routine-header-name {
+    float: left;
+    height: 30px;
+}
+
+.routine-header-weeks {
+    float: left;
+    position: relative;
+    left: 2px;
+}
+
+.routine-fixed {
     float: left;
 }
 
 .routine-weeks {
     float: left;
-    width: 630px;
-    border-left: 2px solid #000;
 }
 
 .week {
-    border-right: 2px solid #000;
-    height: 30px;
     float: left;
 }
 
 .day {
-    width: 28px;
-    height: 30px;
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border: 2px solid #999;
     float: left;
     cursor: pointer;
 }
 
+.addnew-button {
+    background: #f2f3f4 url('/images/button-addnew.png');
+    width:162px;
+    height:32px;
+    cursor: pointer;
+}
+
 .day.checked {
-    background-color: #aaf;
+    background: #1067FF url('/images/checker.png');
+}
+
+.day.today {
+    border-color: #000;
+}
+
+.day-header {
+    float: left;
+    width: 29px;
+    height: 30px;
+    line-height: 14px;
+    text-align: center;
+    color: #ccc;
+}
+
+.day-header.today  {
+    color: #000;
+}
+
+.day-header-day {
+    font-weight: bold;
+}
+
+.props {
+    margin-top: 30px;
+    background: #fff url('/images/props.png');
+    width: 960px;
+    height: 270px;
+}
+
+.week-header {
+    font-size: 10px;
+    border-right: 2px solid #f00; 
 }
 
 #stats {
@@ -478,15 +627,25 @@ body {
 .fb-login-button {
     display: none;
     position: absolute;
-    right: 0;
+    top: 10px;
+    right: 10px;
 }
 
 .fb-avatar {
     display: none;
     position: absolute;
-    right: 0;
+    top: 10px;
+    right: 150px;
 }
 
+.fb-avatar {
+   border: 1px solid #ccc;
+}
+
+.fb-avatar img {
+    display: block;
+    border: 1px solid #fff;
+}
 
 .routine-input-wrapper {
     float: left;
@@ -496,10 +655,188 @@ body {
     float: left;
 }
 
+.routine-picker-wrapper {
+    float: left;
+    margin-right: 10px;
+}
 
+.routine-start {
+    margin-left: 10px;
+    padding: 4px 10px;
+    color: #fff;
+    font-size: 24px;
+    float: left;
+    border: 3px solid #fff;
+    background-color: #262626;
+    cursor: pointer;
+     -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}
 
+.routine-alternate-start {
+    top: 110px;
+    left: 598px;
+    position: absolute;
+    font-size: 11px;
+    line-height: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #777;
+}
 
+.routine-alternate-start:hover {
+    color: #999;
+}
 
+.routine-fore {
+    float: left;
+    margin-right: 20px;
+    padding-top: 8px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+#page-landing .create-routine {
+    padding-top: 50px;
+}
+
+#page-landing select {
+    font-weight: bold;
+}
+
+.new-routine-picker {
+    width: 300px;
+    font-size: 24px;
+    font-family: inherit;
+    line-height: 1.4em;
+    border: 0;
+    outline: none;
+    padding: 6px;
+    border: 1px solid #999999;
+    height: 47px;
+}
+
+.reset-session {
+    cursor: pointer;
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.connect-bg {
+    position:absolute;
+    top: 180px;
+    width: 960px;
+    height: 311px;
+    background: #f2f3f4 url('/images/potemkin-fbscreen.png');
+}
+
+.cal-left-arrow {
+    position:absolute;
+    top: 184px;
+    left: 300px;
+    width: 22px;
+    height: 22px;
+    background: #eee url('/images/small-arrows.png') 0 0;
+    cursor: pointer;
+    z-index: 200;
+}
+
+.cal-right-arrow {
+    position:absolute;
+    top: 184px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    background: #eee url('/images/small-arrows.png') -22px 0;
+    cursor: pointer;
+    z-index: 200;
+}
+
+.tasks-label {
+    color: #ccc;
+    font-size: 14px;
+    position: absolute;
+    top: 188px;
+    left: 10px;
+}
+
+.potemkin-routine-name {
+    position: absolute;
+    top: 53px;
+    left:10px;
+}
+
+.fake-connect-button {
+    position: absolute;
+    left: 552px;
+    top: 164px;
+    width: 310px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.angels-area {
+    position: absolute;
+    top: 0;
+    left: 300px;
+}
+
+.routine-name {
+    font-size: 18px;
+    padding: 0px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.angels-list {
+    background-color: red;
+    position: absolute;
+    top: 90px;
+    left: 30px;
+}
+
+.angels-list img {
+    display: block;
+}
+
+#page-standard .create-routine {
+    width: auto;
+    margin: 0;
+}
+
+#page-standard .create-routine input {
+    width: 320px;
+    font-size: 18px;
+    height: 20px;
+}
+
+#page-standard .create-routine select {
+    width: 140px;
+    font-size: 18px;
+    height: 34px;
+}
+
+.comments-footer {
+    height: 445px;
+    background: #eee url('/images/comments-repeat.png') repeat-x;
+}
+
+.comments-inner {
+    height: 445px;
+    width: 960px;
+    margin: auto;
+    background: #eee url('/images/comments.png');
+}
+
+#page-landing .create-routine {
+    width: 780px;
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.
@@ -573,37 +910,4 @@ body {
   @page { margin: 0.5cm; }
   p, h2, h3 { orphans: 3; widows: 3; }
   h2, h3{ page-break-after: avoid; }
-}
-
-.main {
-    background-color: white;
-}
-
-.content {
-    font-size: 24px;
-    line-height: 120%;
-    text-align: justify;
-}
-
-h1 {    
-    font-size: 56px;
-    margin-top: 10px;    
-}
-
-h2 {
-    font-size: 20px;
-    margin-top: 10px;
-}
-
-h3 {
-    font-weight: normal;
-}
-
-li{
-    padding: 10px 0;
-}
-
-img {
-    vertical-align: middle;
-    padding-right: 10px;
 }

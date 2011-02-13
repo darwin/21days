@@ -1,4 +1,5 @@
 #import "TOUserTableViewController.h"
+#import "TOUser.h"
 
 // Facebook App ID
 static NSString* kAppId = @"101103209968654";
@@ -117,9 +118,9 @@ static NSString* kAppId = @"101103209968654";
 
     NSInteger section = [indexPath indexAtPosition:0];
     if (section == 0)
-        [self BuildUserCell:cell];
+        [self buildUserCell:cell];
     else if (section == 1)
-        [self BuildConnectionCell:cell];
+        [self buildConnectionCell:cell];
     
     return cell;
 }
@@ -176,15 +177,35 @@ static NSString* kAppId = @"101103209968654";
 }
 */
 
-- (UITableViewCell*) GetUserCell
+- (UITableViewCell*) getUserCell
 {
     return [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 // Returns Connection cell.
-- (UITableViewCell*) GetConnectionCell
+- (UITableViewCell*) getConnectionCell
 {
     return [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+}
+
+- (void) buildConnectionCell:(UITableViewCell*) cell
+{
+    if ([self isConnectedToFacebook])
+        cell.textLabel.text = @"Logout";
+    else
+        cell.textLabel.text = @"Connect with Facebook";
+    
+    UIImage* image = [UIImage imageNamed:@"FBDialog.bundle/images/fbicon.png"];
+    [cell.imageView setImage:image];
+}
+
+- (void) buildUserCell:(UITableViewCell*) cell
+{   
+    if ([self isConnectedToFacebook])
+        [_facebook requestWithGraphPath:@"me" andDelegate:self];
+    else {
+        cell.textLabel.text = @" ";
+    }
 }
 
 
@@ -195,17 +216,19 @@ static NSString* kAppId = @"101103209968654";
     // Navigation logic may go here. Create and push another view controller.
     if ([indexPath compare:[NSIndexPath indexPathForRow:0 inSection:1]] == NSOrderedSame)
     {
-        if (![self IsConnectedToFacebook])
+        if (![self isConnectedToFacebook])
             [self.facebook authorize:_permissions delegate:self];
         else
             [self.facebook logout:self];
         
-        UITableViewCell* cell = [self GetConnectionCell];
-        cell.selected = NO;
     }
+    
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    cell.selected = NO;
+    
 }
 
-#pragma mark Facebook Delegate
+#pragma mark - Facebook Delegate
 
 - (void)fbDidLogin 
 {
@@ -213,12 +236,12 @@ static NSString* kAppId = @"101103209968654";
     _isConnectedToFacebook = YES;
     
     // Build user Cell
-    UITableViewCell* cell = [self GetUserCell];
-    [self BuildUserCell:cell];
+    UITableViewCell* cell = [self getUserCell];
+    [self buildUserCell:cell];
     
     // Build connect Cell
-    cell = [self GetConnectionCell];
-    [self BuildConnectionCell:cell];
+    cell = [self getConnectionCell];
+    [self buildConnectionCell:cell];
     
 }
 
@@ -233,37 +256,17 @@ static NSString* kAppId = @"101103209968654";
     _isConnectedToFacebook = NO;
 
     // Build user Cell
-    UITableViewCell* cell = [self GetUserCell];
-    [self BuildUserCell:cell];
+    UITableViewCell* cell = [self getUserCell];
+    [self buildUserCell:cell];
     
     // Build connect Cell
-    cell = [self GetConnectionCell];
-    [self BuildConnectionCell:cell];    
+    cell = [self getConnectionCell];
+    [self buildConnectionCell:cell];    
 }
 
-- (BOOL) IsConnectedToFacebook
+- (BOOL) isConnectedToFacebook
 {
     return _isConnectedToFacebook;
-}
-
-- (void) BuildConnectionCell:(UITableViewCell*) cell
-{
-    if ([self IsConnectedToFacebook])
-        cell.textLabel.text = @"Logout";
-    else
-        cell.textLabel.text = @"Login with Facebook Connect";
-        
-    UIImage* image = [UIImage imageNamed:@"FBDialog.bundle/images/fbicon.png"];
-    [cell.imageView setImage:image];
-}
-
-- (void) BuildUserCell:(UITableViewCell*) cell
-{   
-    if ([self IsConnectedToFacebook])
-        [_facebook requestWithGraphPath:@"me" andDelegate:self];
-    else {
-        cell.textLabel.text = @"Please log in";
-    }
 }
 
 - (void)request:(FBRequest *)request didFailWithError:(NSError *)error
@@ -274,18 +277,37 @@ static NSString* kAppId = @"101103209968654";
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
     MyLog(@"Facebook: didLoad");
-    // TODO: check what was requested I am assuming dictionary
+    
     if (![result isKindOfClass:[NSDictionary class]])
         return;
     
     NSDictionary* dict = (NSDictionary*) result;
     MyLog(@"Dict: %@", dict);
+    
+    //TODO: remove
+    NSString *filePath = [[NSBundle mainBundle] pathForResource:@"sample" ofType:@"json"];  
+    NSString* dummyReply = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
+    
+    TOUser* user = [self buildUserFromFacebookDictionary:dict];
+    [user parseServerReply:dummyReply];
+    
+    UITableViewCell* cell = [self getUserCell];
+    cell.textLabel.text = user.fullName;
+}
+
+- (TOUser*) buildUserFromFacebookDictionary:(NSDictionary*)dict
+{  
+    TOUser* user = [[[TOUser alloc] init] autorelease];
 
     NSString* fullName = [dict objectForKey:@"name"];
     MyLog(@"Full Facebook Name: %@", fullName);
+    user.fullName = fullName;
     
-    UITableViewCell* cell = [self GetUserCell];
-    cell.textLabel.text = fullName;
+    NSString* userId = [dict objectForKey:@"id"];
+    MyLog(@"User id: %@", userId);
+    user.facebookId = userId;
+    
+    return user;
 }
 
 @end

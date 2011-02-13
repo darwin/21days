@@ -1,3 +1,4 @@
+*.xlsx
 .livereload
 .dropbox
 .DS_Store

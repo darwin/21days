@@ -23,8 +23,8 @@
 
 
     <!-- CSS : implied media="all" -->
+    <!-- <link rel="stylesheet" href="css/golden.css"> -->
     <link rel="stylesheet" href="css/style.css?v=2">
-    <link rel="stylesheet" href="css/golden.css">
 
     <!-- Uncomment if you are specifically targeting less enabled mobile browsers
     <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
@@ -32,172 +32,172 @@
     <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
     <script src="js/libs/modernizr-1.6.min.js"></script>
 
+    <link href='http://fonts.googleapis.com/css?family=Cabin:600' rel='stylesheet' type='text/css'>
 </head>
 
 <body lang="en" >
-    <div class="main">
-        <div class="header g960">
-            <div class="inside g80">
-                <h1>21</h1>
-                <h2>DAYS</h2>
-            </div>
-            <h3 class="g880">Better every day</h3>
-        </div>
-        <div class="clear"></div>
-        
-        <div class="content ml80 g800">
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-            alksdjf haslkd jfhaslkd jhsalkfjhsalkfjhsaldkf jhasldkfalksdjf aslkdjf
-        </div>
-        <div class="clear"></div>
-        
-        <div class="ml80 g800">
-        
-        </div>
-        <div class="clear"></div>
-        
-        <div class="ml80 g800">               
-            <ul>
-                <li>Realtime inspiration</li>
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174719_113097355406002_230741_q.jpg">
-                    Antonin will code less than 30 hours a day daily
-                </li>
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/41602_107530565964331_4345_q.jpg">
-                    Zdenek will play at PSP with his 3 times a week
-                </li>                
-                <li>
-                    <img src="http://profile.ak.fbcdn.net/hprofile-ak-snc4/174819_162480730467399_3036677_q.jpg">
-                    Miro will worship Google App Engine once a week
-                </li>
-            </ul>
-        </div>
-    </div>
-    
     <div id="fb-root"></div>
-    <script>
-      window.fbAsyncInit = function() {
-          FB.Event.subscribe('auth.sessionChange', function(response) {
-              console.log('auth.sessionChange', arguments);
-          });
-          FB.Event.subscribe('fb.log', function(response) {
-              console.log('fb.log', arguments);
-          });
-          FB.init({ 
-             appId: '101103209968654', 
-             cookie: true,
-             status: true,
-             xfbml: true
-          });
-          
-          FB.getLoginStatus(function(response) {
-              if (response.session) {
-                  // logged in and connected user, someone you know
-                  console.log('have fb user', response);
-                  $('.fb-login-button').hide();
-                  
-                  FB.api('/me', function(response) {
-                      var $avatar = $('.fb-avatar');
-                      console.log('user data', response);
-                      var template = _.template($('#avatar-template').html());
-                      $avatar.html(template({
-                          name: response.first_name,
-                          image: 'https://graph.facebook.com/'+response.id+'/picture'
-                      }));
-                      
-                      $avatar.show();
-                      
-                      App.user.set({
-                          'facebook': response,
-                          'id': response.id
-                      });
-                      App.user.save();
-                      App.user.fetch();
-                  });                  
-              } else {
-                  // no user session available, someone you dont know
-                  $('.avatar').hide();
-                  $('.fb-login-button').show();
-              }
-          });          
-      };
-      (function() {
-        var e = document.createElement('script'); e.async = true;
-        e.src = document.location.protocol +
-          '//static.ak.fbcdn.net/connect/en_US/core.debug.js';
- //         '//connect.facebook.net/en_US/all.js';
-        document.getElementById('fb-root').appendChild(e);
-      }());
-      
-    </script>
-    <div class="fb-login-button">
-        <fb:login-button perms="email">
-           Login with Facebook
-        </fb:login-button>
-    </div>
-    <div class="fb-avatar">
-        
-    </div>
-    
+    <div class="mock3"></div>
     <div id="dayapp">
-        <div class="title">
-            <h1>my 21 days</h1>
+        <div class="header">
+            <a href="/"><div class="logo"></div></a>
+            <div class="reset-session" onclick="resetSession()">
+                *
+            </div>
+            <div class="fb-login-button" style="display:none">
+                <fb:login-button perms="email">
+                   Login with Facebook
+                </fb:login-button>
+            </div>
+            <div class="fb-avatar" style="display:none">
+            </div>
+            <div class="claim">
+                <h2>better every day!</h2>
+            </div>
         </div>
 
-        <div class="content">
+        <div id="page-landing" class="stage stage-0" style="display:none">
+            <div class="title">
+                <h1>Form better habits 21 days</h1>
+            </div>
+            
+            <div class="story">
+                <strong>Want to quit smoking?</strong> <strong>Eat better?</strong> <strong>Loose weight</strong><br>
+                Setting up a new habit is hard. Some says it takes<br>
+                21 days for our brains and bodies to get used to.
+            </div>
+            <div class="bottom">
+                <div class="create-routine">
+                    <div class="routine-fore">
+                        I will
+                    </div>
+                    <div class="routine-picker-wrapper">
+                        <select class="new-routine-picker">
+                            <option value="go for 30min run">go for 30min run</option>
+                            <option value="eat healthier">eat healthier</option>
+                            <option value="be happy">be happy</option>
+                        </select>
+                    </div>
+                    <div class="routine-frequency-wrapper">
+                        <select class="new-routine-frequency">
+                            <option value="every day">every day</option>
+                            <option value="once in 3 days">once in 3 days</option>
+                            <option value="once a week">once a week</option>
+                        </select>
+                    </div>
+                    <div class="routine-start">
+                        from Monday
+                    </div>
+                    <div class="routine-alternate-start">
+                        Can't wait. I want to start today.
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
 
-            <div id="create-routine">
-                <div class="routine-input-wrapper">
-                    <input id="new-routine" placeholder="I want to do something..." type="text" />
-                    <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
+        <div id="page-connect" class="stage stage-1" style="display:none">
+            <div class="connect-bg">
+                <div class="potemkin-routine-name routine-name">
                 </div>
-                <div class="routine-frequency-wrapper">
-                    <select id="new-routine-frequency">
-                        <option value="f1">every day</option>
-                        <option value="f3">once in 3 days</option>
-                        <option value="f7">once a week</option>
-                    </select>
+                <div class="fake-connect-button">
                 </div>
-                <div class="clear"></div>
             </div>
- 
-            <div id="routines">
-                <ul id="routine-list"></ul>
+        </div>
+
+        <div id="page-standard" class="stage stage-2" style="display:none">
+            <div class="content">
+                <div class="tasks-label">
+                    TASKS
+                </div>
+                <div>
+                    <div class="cal-left-arrow">
+                    </div>
+                    <div class="cal-right-arrow">
+                    </div>
+                </div>
+                <div class="angels-area">
+                    <div class="angels-list">
+                        <img src="/images/angels-mock.png">
+                    </div>
+                    <div class="fb-add-angels">
+                        <div class="add-angels">Add angels</div>
+                    </div>
+                </div>
+                <div class="routines" style="display:none">
+                    <div class="vseparator s1"></div>
+                    <div class="vseparator s2"></div>
+                    <div class="routine-header">
+                        <div class="routine-header-name col1"></div>
+                        <div class="routine-header-weeks col2"></div>
+                    </div>
+                    <ul class="routine-list"></ul>
+                    <br class="clear">
+                </div>
+                <div class="badges-row">
+                    <div class="badges-potemking"></div>
+                </div>
+                <div id="stats" style="display:none"></div>
+                <div class="note-row">
+                    <div class="addnew-button">
+                    </div>
+                </div>
+                <div class="create-routine" style="display:none">
+                    <div class="routine-input-wrapper">
+                        <input class="new-routine" placeholder="I will do more..." type="text" />
+                        <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
+                    </div>
+                    <div class="routine-frequency-wrapper">
+                        <select class="new-routine-frequency">
+                            <option value="f1">every day</option>
+                            <option value="f3">once in 3 days</option>
+                            <option value="f7">once a week</option>
+                        </select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="badges-row">
+                </div>
+                <br clear="both">
             </div>
- 
-            <div id="stats"></div>
- 
         </div>
  
+    </div>
+    <div class="comments-footer">
+        <div class="comments-inner">
+            
+        </div>
     </div>
  
     <!-- Templates --> 
  
     <script type="text/template" id="routine-template">
-        <div class="routine <%= done ? 'done' : '' %>">
+        <div class="routine">
+            <div class="routine-separator">
+            </div>
             <div class="display">
-                <div class="routine-fixed">
-                    <input class="check" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+                <div class="routine-fixed col1">
                     <div class="routine-name"></div>
                 </div>
-                <div class="routine-weeks">
+                <div class="routine-weeks col2">
                 </div>
             </div>
             <div class="edit">
                 <input class="routine-input" type="text" value="" />
             </div>
         </div>
+        <div class="props" style="display:none">
+        </div>
     </script>
 
     <script type="text/template" id="week-template">
     </script>
  
-    <script type="text/template" id="day-template">
+    <script type="text/template" id="day-header-template">
+        <div class="day-header-short"><%= shortDate %></div>
+        <div class="day-header-day"><%= day %></div>
     </script>
- 
+
     <script type="text/template" id="stats-template">
         <% if (total) { %>
             <span class="day-count">
@@ -205,20 +205,11 @@
                 <span class="word"><%= remaining == 1 ? 'routine' : 'routines' %></span>.
             </span>
         <% } %>
-        <% if (done) { %>
-            <span class="routine-clear">
-                <a href="#">
-                give up <span class="number-done"><%= done %></span>
-                selected <span class="word-done"><%= done == 1 ? 'routine' : 'routines' %></span>
-                </a>
-            </span>
-        <% } %>
     </script>
 
     <script type="text/template" id="avatar-template">
         <div class="avatar">
             <img src="<%= image %>"></img>
-            <div class="avatar-name"><%= name %></div>
         </div>
     </script>
 
@@ -229,6 +220,7 @@
     <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.5.0.js"%3E%3C/script%3E'))</script>
   
     <!-- scripts concatenated and minified via ant build script-->
+    <script src="js/plugins.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
     <script src="js/ls.js"></script>
