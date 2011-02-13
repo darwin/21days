@@ -8,6 +8,6 @@ web/.project
 web/.settings/
 web/data/
 web/eclipse/
-web/log/
+web/logs/
 web/test-result/
 web/tmp/
