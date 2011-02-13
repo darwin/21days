@@ -32,10 +32,16 @@ window.stage = 0;
 window.refDay = 15018 - 7; // hacks
 window.today = 15018 - 1;
 
+function xreset() {
+    localStorage.setItem('user', null);
+    localStorage.setItem('routines', null);
+}
+
 function resetSession() {
     FB.logout(function(response) {
         // user is now logged out
         $.cookie("21session", null);
+        xreset();
         location.reload();
     });
 }
@@ -47,20 +53,23 @@ function initStage() {
     } else {
         // TODO: pass user session
     }
-    switchStage(1);
 }
 
 var initedStages = {};
+var wentThroughLanding = false;
 function switchStage(stage) {
     console.log('switchStage: ', stage)
     if (!initedStages[stage]) {
         initedStages[stage] = true;
+        $('.comments-footer').hide();
         if (stage==0) {
             $('.routine-start').bind('click', function() {
                 switchStage(1);
+                wentThroughLanding = true;
             });
             $('.routine-alternate-start').bind('click', function() {
                 switchStage(1);
+                wentThroughLanding = true;
             });
         }
         if (stage==1) {
@@ -91,13 +100,12 @@ function switchStage(stage) {
                 App.user.addAll();
                 App.user.trigger('change');
             });
-            $('.add-angels').bind('click', function() {
-                addAnglelsAction();
-            });
+            // $('.add-angels').bind('click', function() {
+            //     addAnglelsAction();
+            // });
         }
     }
 
-    if (stage==window.stage) return;
     $('body').get(0).className = 'selected-stage-'+stage;
     
     window.stage = stage;
@@ -516,8 +524,10 @@ $(function() {
             this.$input = this.$(".new-routine");
             this.$frequency = this.$(".new-routine-frequency");
             
-            var date = new Date();
-            
+            this.resetUser();
+        },
+        
+        resetUser: function() {
             this.user = new User();
             this.user.routines.bind('all', this.render);
             this.user.bind('all', this.render);
@@ -633,12 +643,16 @@ function processLoginEvent(response) {
                 'id': response.id
             });
             App.user.save();
-            App.user.fetch();
+            
+            if (wentThroughLanding) {
+                var attrs = App.newAttributes();
+                attrs.name = $('#page-landing .new-routine-picker').val();
+                App.user.routines.create(attrs);
+                App.user.save();
+            }
         });
     });
 }
-
-initStage();
 
 window.fbAsyncInit = function() {
     FB.Event.subscribe('auth.sessionChange', function(response) {

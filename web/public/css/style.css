@@ -192,6 +192,14 @@ body.selected-stage-2 {
     min-height: 1080px;
 }
 
+body.selected-stage-2 #dayapp {
+    min-height: 600px;
+}
+
+.add-angels {
+    display: none;
+}
+
 #dayapp .logo {
     position: absolute;
     left: 20px;
@@ -638,7 +646,7 @@ body.selected-stage-2 {
 
 .routine-alternate-start {
     top: 110px;
-    right: 106px;
+    left: 598px;
     position: absolute;
     font-size: 11px;
     line-height: 12px;
@@ -742,6 +750,7 @@ body.selected-stage-2 {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    cursor: pointer;
 }
 
 .angels-list {
@@ -782,6 +791,10 @@ body.selected-stage-2 {
     width: 960px;
     margin: auto;
     background: #eee url('/images/comments.png');
+}
+
+#page-landing .create-routine {
+    width: 780px;
 }
 
 /**
