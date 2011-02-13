@@ -420,6 +420,10 @@ body.selected-stage-2 {
     background: #1067FF url('/images/checker.png');
 }
 
+.day.today {
+    border-color: #000;
+}
+
 .day-header {
     float: left;
     width: 29px;
@@ -429,8 +433,19 @@ body.selected-stage-2 {
     color: #ccc;
 }
 
+.day-header.today  {
+    color: #000;
+}
+
 .day-header-day {
     font-weight: bold;
+}
+
+.props {
+    margin-top: 30px;
+    background: #fff url('/images/props.png');
+    width: 960px;
+    height: 270px;
 }
 
 .week-header {
@@ -743,6 +758,18 @@ body.selected-stage-2 {
 #page-standard .create-routine {
     width: auto;
     margin: 0;
+}
+
+#page-standard .create-routine input {
+    width: 320px;
+    font-size: 18px;
+    height: 20px;
+}
+
+#page-standard .create-routine select {
+    width: 140px;
+    font-size: 18px;
+    height: 34px;
 }
 
 .comments-footer {

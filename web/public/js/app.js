@@ -28,7 +28,9 @@ var newD = function(d) {
 
 window.stage = 0;
 
-window.refDay = new Date().getD();
+
+window.refDay = 15018 - 7; // hacks
+window.today = 15018 - 1;
 
 function resetSession() {
     FB.logout(function(response) {
@@ -82,10 +84,15 @@ function switchStage(stage) {
             $('.cal-left-arrow').bind('click', function() {
                 refDay -= 7;
                 App.user.addAll();
+                App.user.trigger('change');
             });
             $('.cal-right-arrow').bind('click', function() {
                 refDay += 7;
                 App.user.addAll();
+                App.user.trigger('change');
+            });
+            $('.add-angels').bind('click', function() {
+                addAnglelsAction();
             });
         }
     }
@@ -194,13 +201,13 @@ $(function() {
                 var tempId = "temp"+(Math.random()+"").substring(2);
                 console.log('no id, generating temporary user', tempId);
                 this.set({
-                    "start_day": new Date().getD()
+                    "id": tempId
                 });
             }
             
             if (!this.get("start_day")) {
                 this.set({
-                    "start_day": new Date().getD()
+                    "start_day": 15018 - 7, 
                 });
             }
             
@@ -324,6 +331,7 @@ $(function() {
 
         render: function() {
             if (this.model.isDayChecked(this.options.dindex)) $(this.el).addClass('checked');
+            if (this.options.dindex==window.today) $(this.el).addClass('today');
             return this;
         },
 
@@ -353,6 +361,8 @@ $(function() {
             var monthDay = date.getDate()+1;
             var dayString = dayTable[dayNum];
             var shortDate = monthDay+"."+month+".";
+            
+            if (this.options.dindex==window.today) $(this.el).addClass('today');
             
             $(this.el).html(this.template({
                 day: dayString,
@@ -415,6 +425,7 @@ $(function() {
         template: _.template($('#routine-template').html()),
         events: {
             "dblclick div.routine-name": "edit",
+            "click div.routine-name": "showProps",
             "keypress .routine-input": "updateOnEnter"
         },
 
@@ -427,8 +438,6 @@ $(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.setContent();
-            
-            console.log('x');
             
             var week1 = new WeekView({
                 model: this.model,
@@ -479,6 +488,10 @@ $(function() {
 
         remove: function() {
             $(this.el).remove();
+        },
+        
+        showProps: function() {
+            $(this.el).find('.props').toggle();
         },
 
         clear: function() {
@@ -589,15 +602,6 @@ $(function() {
     });
 });
 
-function prepareAngelsSection() {
-    
-    // $('.add-angels').bind('click', function() {
-    //     addAnglelsAction();
-    // });
-    // 
-    // $('.fb-add-angels').show();
-}
-
 function addAnglelsAction() {
     FB.ui({
         method: 'apprequests', 
@@ -611,8 +615,6 @@ function processLoginEvent(response) {
     
     // logged in and connected user, someone you know
     console.log('fb user logged', response);
-
-    // prepareAngelsSection();
 
     FB.api('/me', function(response) {
         var $avatar = $('.fb-avatar');
