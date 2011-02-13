@@ -1,11 +1,62 @@
-﻿3 minutes pitch
+﻿web teaser
+----------
+★★★ Form better habits in 21 days ★★★
+
+Millions of people want to improve their lives a bit. They want to start exercising, quit smoking, lose weight, learn Spanish, learn to play piano... you name it. They try... and fail. 21days is a web/mobile application which helps them to set up, form and stick to desirable daily routines.
+
+★ Problem
+People are trying and failing with their resolutions and dreams about better themselves.
+
+★ Solution
+Web/mobile application which helps them to set up, form and stick to daily routines by motivating them "carrot and stick" way. It is not about goals and tasks - it is about routines. Not about dreams but life change.
+
+Interesting fact: Did you know it takes about 21 days for people to get use to new routine? This is why the first 21 days are extremely hard.
+
+★ Magic
+There are three features creating winning formula of 21 days:
+1) Focus on daily habits tracking and personal satisfaction comming from successfuly filled in form.
+2) Peer pressure. Your friends become your "angels" nad supervise you. If you start to fail, application alerts them first to help you get back on track
+3) Fun. We use game principles. You get praise and badges for successfully completed resolutions. 
+
+You can see mockups here: https://gomockingbird.com/mockingbird/#l8eb1c3
+
+★ Business model
+The service is free for users. There are two main sources of revenue:
+
+➀ PREMIUM accounts for trainers, coaches, therapists, teachers etc...) For as little as 16 USD/month and close to zero effort they will get a tool to "coach" their learners throught a week. They can set up routines for them, commenting privately, see statistics etc... It is up to them how much they want to be involved personally and how much they leave automated. This service is added value and differenciator for theirs business.
+➁ "APPSTORE" for courses. Autors and publishers of courses from any field (fitness, nutrition, self-help, education...) can create (or convert) courses and sell them through our platform to highly motivated customers. There is a huge opportunity to consolidate currently fragmented market and to create completely new one by lowering entrance barriers for courses authors (think www.etsy.com or iphone appstore).
+
+Premium accounts is low hanging fruit, "appstore" for courses is a main opportunity field.
+
+★ Competition
+We don't hide there are couple of similar services solving part of the problem. None of them can match our winning formula and pricing scheme. Please see attached comparsion table.
+
+Competition list:
+http://www.joesgoals.com
+http://www.goalsontrack.com
+http://bit.ly/habitfactor
+http://www.stickk.com
+http://www.goalmigo.com
+http://www.43things.com
+http://www.superviva.com
+
+★ Marketing
+Core target group: middle-aged affluent US females with Facebook account
+
+From marketers perspective two points are worth mentioning:
+a) we have virality built in the application ("angels" and learners)
+b) we have an evocative story about 21 days habit forming theory
+
+
+3 minutes pitch
 ---------------
 
 Problem
 people trying and failing with their resolutions and dreams about better themselves
+start jogging, quit smoking, lose weight, learn Spanish and to play piano
 
 Your solution
-application which helps them to set up, form and stick to new daily routines by coaching them
+application which helps them to set up, form and stick to daily routines by coaching them
 - its not about "set up goals and tasks" but daily routines and repeating them
 - zákazník v ní získá inspiraci a motivaci to nevzdat
  
@@ -19,6 +70,8 @@ a) Premium accounts from 16 USD/month (average price of hour yoga class in US)
 b) "Appstore" for courses
 	for diet authors, fitness programme authors, language and art teachers and whole "self-help industry" which was 11 billion USD industry at 2008 in US
 	sell courses online - instructions, forming a habit, keeping it, feedback it, new instruction
+	cousers are bought as odpustek
+	děti/rodiče
 	
 Underlying magic/technology
 a) satisfaction creating view
@@ -65,6 +118,8 @@ killer developers + me killer idealist
 Summary and call to action
 We think we should WIN this competition!
 
+Why us?
+
 ----
 ----
 
@@ -76,7 +131,7 @@ Drink Water
 Read more
 Eat more veg
 Learn spanish
-Loose weight
+Lose weight
 Play guitar
 Eat less chocolate
 

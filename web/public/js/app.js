@@ -130,7 +130,11 @@ $(function() {
     
     window.Connector = {
         userUrl: function() {
-            return "/users/"+0; // App.user.id;
+            if (window.App) {
+                return "/users/"+App.user.id;
+            } else {
+                return "/users/"+0;
+            }
         },
         
         push: function() {
@@ -138,28 +142,31 @@ $(function() {
             var routinesJSON = App.user.routines.toJSON();
             var json = userJSON;
             json.routines = routinesJSON;
+
             console.log('push', json);
-            
             $.ajax({
                 type: "POST",
                 url: this.userUrl(),
-                data: json,
+                data: JSON.stringify(json),
+                // contentType: "application/json; charset=utf-8",
+                dataType: "json",
                 success: function(json) {
                 }, 
                 error: function() {
                 }
             });
-            
-            $.post(this.userUrl(), json, function(data){
-                console.log('push done', data);
-            }, "json");
         },
          
         pull: function(success, error) {
-            console.log('pull');
-            $.getJSON(this.userUrl(), function(data) {
-                console.log('pull here', data);
-            });
+            console.log('pull no-op TODO!');
+            // $.getJSON(this.userUrl(), function(data) {
+            //     console.log('pull here', data);
+            //     
+            //     App.user.localStorage.data = data;
+            //     App.user..localStorage.data = data.rou
+            //     
+            //     success(data);
+            // });
         }
     };
     
@@ -178,14 +185,18 @@ $(function() {
             case "delete":  resp = store.destroy(model);                           break;
         }
         
+        
         if (method=="read") {
-            Connector.pull(function() {
-                if (store.name=="routines") {
-                    
-                }
-            }, function() {
-                // TODO:
-            });
+            // Connector.pull(function(data) {
+            //     resp = model.id ? store.find(model) : store.findAll();
+            //     if (store.name=="routines") {
+            //         success(data.routines);
+            //     } else {
+            //         success(data);
+            //     }
+            // }, function() {
+            //     // TODO:
+            // });
         } else {
             if (!plannedPush) {
                 plannedPush = setTimeout(function() {
@@ -194,7 +205,6 @@ $(function() {
                 }, 200);
             }
         }
-    
         if (resp) {
             success(resp);
         } else {
@@ -469,7 +479,6 @@ $(function() {
             
             this.$('.routine-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
             
-            
             return this;
         },
 
@@ -586,7 +595,6 @@ $(function() {
         },
         
         handleEsc: function(e) {
-            console.log(e.keyCode);
             if (e.keyCode==27) {
                 console.log(e);
                 $('.addnew-button').show();
