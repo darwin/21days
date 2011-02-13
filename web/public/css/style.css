@@ -177,6 +177,10 @@ body {
     background: #F2F2F3 url('/images/background.png') repeat-x;
 }
 
+body.selected-stage-2 {
+    background: #fff url('/images/bg3.png') repeat-x;
+}
+
 .clear {
     clear: both;
 }
@@ -197,7 +201,7 @@ body {
 }
 
 #dayapp h1 {
-    font-family: 'Kreon', arial, serif;
+    font-family: 'Cabin', arial, serif;
     color: #107FFF;
     position: absolute;
     font-size: 48px;
@@ -237,6 +241,18 @@ body {
     font-size: 30px;
     line-height: 34px;
     background: #f2f3f4 url('/images/landing-bottom.png');
+}
+
+.mock3 {
+    display: none;
+    position: relative;
+    z-index: 0;
+    opacity: 0.1;
+    width: 960px;
+    height: 700px;
+    background: #f2f3f4 url('/images/mock3.png');
+    margin: auto auto;
+    margin-bottom: -700px;
 }
 
 .create-routine {
@@ -281,22 +297,31 @@ body {
     height: 47px;
 }
 
-#routines {
+.routines {
+    padding-top: 180px;
     clear: both;
-    margin-top: 30px;
+    min-height: 10px;
 }
 
-#routine-list {
+.routine-list {
+    clear: both;
     margin: 0;
     padding: 0;
 }
-#routine-list li {
+.routine-list li {
     padding: 0;
     position: relative;
-    font-size: 14px;
-    line-height: 30px;
+    line-height: 29px;
 }
-#routine-list li:after {
+
+
+.routine-separator {
+    background: #999 url('/images/separator.png') top left;
+    height: 8px;
+    width: 960px;
+}
+
+.routine-list li:after {
     content: "\0020";
     display: block;
     height: 0;
@@ -304,26 +329,26 @@ body {
     overflow: hidden;
     visibility: hidden;
 }
-#routine-list li.editing {
+.routine-list li.editing {
     padding: 0;
     border-bottom: 0;
 }
-#routine-list .editing .display,
-#routine-list .edit {
+.routine-list .editing .display,
+.routine-list .edit {
     display: none;
 }
-#routine-list .editing .edit {
+.routine-list .editing .edit {
     display: block;
 }
-#routine-list .editing input {
-    width: 444px;
-    font-size: 24px;
+.routine-list .editing input {
+    width: 920px;
+    font-size: 18px;
     font-family: inherit;
     margin: 0;
-    line-height: 1.6em;
+    line-height: 18px;
     border: 0;
     outline: none;
-    padding: 10px 7px 0px 27px;
+    padding: 0px 8px;
     border: 1px solid #999999;
     -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
@@ -343,62 +368,69 @@ body {
     display: block;
 }
 
-#routine-list .done .routine-name {
-    text-decoration: line-through;
-    color: #777777;
+.col1 {
+    width: 330px;
+}
+
+.col2 {
+    width: 630px;
 }
 
 .routine-header-name {
-    width: 280px;
     float: left;
     height: 30px;
 }
 
 .routine-header-weeks {
     float: left;
-    width: 630px;
     position: relative;
     left: 2px;
 }
 
 .routine-fixed {
-    width: 280px;
     float: left;
 }
 
 .routine-weeks {
     float: left;
-    width: 630px;
-    border-left: 2px solid #000;
 }
 
 .week {
-    border-right: 2px solid #000;
-    height: 30px;
     float: left;
 }
 
 .day {
-    width: 28px;
-    height: 30px;
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+    border: 2px solid #999;
     float: left;
     cursor: pointer;
 }
 
+.addnew-button {
+    background: #f2f3f4 url('/images/button-addnew.png');
+    width:162px;
+    height:32px;
+    cursor: pointer;
+}
+
 .day.checked {
-    background-color: #aaf;
+    background: #1067FF url('/images/checker.png');
 }
 
 .day-header {
     float: left;
-    width: 28px;
+    width: 29px;
     height: 30px;
     line-height: 14px;
-    border-right: 1px solid #999;
-    border-bottom: 1px solid #999;
     text-align: center;
+    color: #ccc;
+}
+
+.day-header-day {
+    font-weight: bold;
 }
 
 .week-header {
@@ -640,6 +672,90 @@ body {
     top: 0;
 }
 
+.connect-bg {
+    position:absolute;
+    top: 180px;
+    width: 960px;
+    height: 311px;
+    background: #f2f3f4 url('/images/potemkin-fbscreen.png');
+}
+
+.cal-left-arrow {
+    position:absolute;
+    top: 184px;
+    left: 300px;
+    width: 22px;
+    height: 22px;
+    background: #eee url('/images/small-arrows.png') 0 0;
+    cursor: pointer;
+}
+
+.cal-right-arrow {
+    position:absolute;
+    top: 184px;
+    right: -10px;
+    width: 22px;
+    height: 22px;
+    background: #eee url('/images/small-arrows.png') -22px 0;
+    cursor: pointer;
+}
+
+.potemkin-routine-name {
+    position: absolute;
+    top: 53px;
+    left:10px;
+}
+
+.fake-connect-button {
+    position: absolute;
+    left: 552px;
+    top: 164px;
+    width: 310px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.angels-area {
+    position: absolute;
+    top: 0;
+    left: 300px;
+}
+
+.routine-name {
+    font-size: 18px;
+    padding: 0px 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.angels-list {
+    background-color: red;
+    position: absolute;
+    top: 90px;
+    left: 30px;
+}
+
+.angels-list img {
+    display: block;
+}
+
+#page-standard .create-routine {
+    width: auto;
+    margin: 0;
+}
+
+.comments-footer {
+    height: 445px;
+    background: #eee url('/images/comments-repeat.png') repeat-x;
+}
+
+.comments-inner {
+    height: 445px;
+    width: 960px;
+    margin: auto;
+    background: #eee url('/images/comments.png');
+}
 
 /**
  * Non-semantic helper classes: please define your styles before this section.

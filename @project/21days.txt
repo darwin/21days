@@ -1,6 +1,73 @@
 ﻿3 minutes pitch
 ---------------
 
+Problem
+people trying and failing with their resolutions and dreams about better themselves
+
+Your solution
+application which helps them to set up, form and stick to new daily routines by coaching them
+- its not about "set up goals and tasks" but daily routines and repeating them
+- zákazník v ní získá inspiraci a motivaci to nevzdat
+ 
+Business model
+Free for users
+a) Premium accounts from 16 USD/month (average price of hour yoga class in US)
+	for sports, fitness trainers, nutrition, meditation, language, musical, art, personal development teachers/studios
+	- setting routines for users and track, coach and comment their "homeworks"
+	- differentiator "added value" at very low cost, better students
+- side benefit: new users
+b) "Appstore" for courses
+	for diet authors, fitness programme authors, language and art teachers and whole "self-help industry" which was 11 billion USD industry at 2008 in US
+	sell courses online - instructions, forming a habit, keeping it, feedback it, new instruction
+	
+Underlying magic/technology
+a) satisfaction creating view
+b) power of social peers - not building social network 
+c) game mechanics
+
+Marketing and sales
+TG - Mainly middle-aged, affluent females. What are they getting for their money? In a word: hope.
+
+Fitness trainers 261,100
+Self-enrichments teachers 253,600
+Dietitians and nutritionists 60,300
+Chiropractors - 49,100 - 2nd most profitable small business
+http://blogs.forbes.com/brettnelson/2011/02/10/the-most-profitable-small-businesses/?partner=minihomepage
+
+Weight-loss programs and products is 40 billion industry
+"self-help" is $11 billion industry
+Global Smoking Cessation Aids Market To Reach 2.6 Billion Dollars By 2010
+
+http://www.medicalnewstoday.com/articles/104949.php
+(2008, US - http://www.bls.gov/oco/ocos296.htm)
+Many revenue sources, useful and free for user.
+
+Competition
+joesgoals.com
+http://www.everydaysystems.com/habitcal/
+goalsontrack.com $68 per year - 10 tis. uživatelů
+http://itunes.apple.com/us/app/the-habit-factor-daily-habits/id316925674?mt=8 $6.99
+Top #10 Productivity App in 3 Continents!
+http://www.stickk.com/
+http://www.superviva.com/
+http://www.43things.com/
+http://www.goalmigo.com
+není tu nic podobného. je to jako říct, že před něčím bylo něco. jako smartphony a iphone.
+no monetisation scheme
+sustainable advantage: appstore - courses, platform (open API)
+
+Team
+We hardly know each other
+48 hours there was just a foggy idea - no wireframes, nothing
+we have live working app with iphone app (not in appstore)
+killer developers + me killer idealist
+
+Summary and call to action
+We think we should WIN this competition!
+
+----
+----
+
 problem
  „Chci se odnaučit kouřit/naučit hrát na klavír/… ale nevím jak a nemám dostatečnou motivaci.“
 Quit smoking
@@ -10,28 +77,43 @@ Read more
 Eat more veg
 Learn spanish
 Loose weight
+Play guitar
+Eat less chocolate
+
+Imagine what habit YOU would like to get or get rid off. You very probably do have some.
 ...
-Not ruining just life but self respect
+the real problem is not problem they think they have but weak will and "objective obstacles"
+Not ruining just life but self esteem
 
 solution
-Webová a mobilní aplikace, vám bude 21 dní pomáhat nastavit rutinu - to je jediný způsob, jak něco opravdu zlepšít.
+Small achievable tasks. 
+Routine
+Support from peers
+Awards and recognition
+Pledges
+Webová a mobilní aplikace, vám bude 21 dní pomáhat nastavit a držet rutinu. 
 
 benefit/unikum
 není tu nic podobného. je to jako říct, že před něčím bylo něco. jako smartphony a iphone.
-a) buzerování přes živé moderátory (no new social network)
-b) motivace pohledem na celou tabulku (dobrý pocit)
+a) they get support buzerování přes živé moderátory (no new social network)
+b) rutina, motivace pohledem na celou tabulku (dobrý pocit ze sebe sama)
 c) game mechanic badges/ocenění a soutěže, pochvala
 d) mobilní aplikace pro snadné vyplňování a kapesní buzerování
 
+competition - there is some but if focus on goal setting or particular tasks we go for ROUTINE/HABITS
+- more satisfaction, more sophistication
+- we want to become platform for course providers
+
 marketing
-tg: Mainly middle-aged, affluent females. What are they getting for their money? In a word: hope.
+
 
 finance
 několik pilířů
 a) premium verze - střednědobá
 	- BUY: malí poskytovatelé služeb
+		- statistiky/dashboard pro více userů, automatické odpovědi atd...
 	- SELL: firemní klienti
-	- statistiky/dashboard pro více userů
+		- korporátní fašismus, školy
 b) "appstore" pro kurzy - dlouhodobá - user platí za content kurzů/coaching
 	- autoři knih, diet, korespondenčních kurzů...
 	- build a new industry to sell motivation and courses to internet
@@ -46,21 +128,17 @@ http://www.forbes.com/2009/01/15/self-help-industry-ent-sales-cx_ml_0115selfhelp
 As of 2005, when Sham was published, the industry reportedly grossed $8.56 billion annually.
 http://www.suite101.com/content/is-the-self-help-industry-a-sham-steve-salerno-investigates-a236680#ixzz1DnFBFXGb
 
-Chiropractors - 2nd 
-Orthodontists - 7th
-Physical, Occupational and Speech Therapists, and Audiologists - 19th
-http://blogs.forbes.com/brettnelson/2011/02/10/the-most-profitable-small-businesses/?partner=minihomepage
 
 team
 killer devs
 pro strategists
-we like thinking
 
 future
 zlaté stránky
 
 It is important to remember that “discipline” derives from the Latin “disciplina,” meaning teaching or learning. Desire and drive alone do not add up to discipline. It must be learned.
 
+21-days Dr. Maxwell Maltz - Psycho-Cybernetics: cease limbo
 
 ----------
 edit inplace  -pattern tab

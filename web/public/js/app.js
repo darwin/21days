@@ -16,7 +16,19 @@
 //
 // Today (dindex)
 
+var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+Date.prototype.getD = function() {
+    return Math.floor(this.valueOf() / (1000*60*60*24));
+}
+
+var newD = function(d) {
+    return new Date(d*(1000*60*60*24));
+}
+
 window.stage = 0;
+
+window.refDay = new Date().getD();
 
 function resetSession() {
     FB.logout(function(response) {
@@ -30,13 +42,17 @@ function initStage() {
     var session = $.cookie("21session");
     if (!session) {
         switchStage(0);
+    } else {
+        // TODO: pass user session
     }
+    switchStage(1);
 }
 
 var initedStages = {};
 function switchStage(stage) {
     console.log('switchStage: ', stage)
     if (!initedStages[stage]) {
+        initedStages[stage] = true;
         if (stage==0) {
             $('.routine-start').bind('click', function() {
                 switchStage(1);
@@ -45,9 +61,37 @@ function switchStage(stage) {
                 switchStage(1);
             });
         }
+        if (stage==1) {
+            $('.potemkin-routine-name').html($('#page-landing .new-routine-picker').val());
+            $('.fake-connect-button').bind('click', function() {
+                FB.login(function(response) {
+                    if (response.session) {
+                        // user successfully logged in
+                        
+                    } else {
+                        // user cancelled login
+                    }
+                });            
+            });
+        }
+        if (stage==2) {
+            $('.addnew-button').bind('click', function() {
+                $(this).hide();
+                $('#page-standard .create-routine').show();
+            });
+            $('.cal-left-arrow').bind('click', function() {
+                refDay -= 7;
+                App.user.addAll();
+            });
+            $('.cal-right-arrow').bind('click', function() {
+                refDay += 7;
+                App.user.addAll();
+            });
+        }
     }
 
     if (stage==window.stage) return;
+    $('body').get(0).className = 'selected-stage-'+stage;
     
     window.stage = stage;
     $('.stage').hide();
@@ -65,16 +109,6 @@ window.ensureAppInit = function(fn) {
 }
 
 $(function() {
-    
-    var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    
-    Date.prototype.getD = function() {
-        return Math.floor(this.valueOf() / (1000*60*60*24));
-    }
-
-    var newD = function(d) {
-        return new Date(d*(1000*60*60*24));
-    }
     
     window.Connector = {
         userUrl: function() {
@@ -154,7 +188,7 @@ $(function() {
         localStorage: new Store("user"),
         
         initialize: function() {
-            _.bindAll(this, 'addOne', 'addAll', 'resave');
+            _.bindAll(this, 'addOne', 'addAll');
 
             if (!this.get("id")) {
                 var tempId = "temp"+(Math.random()+"").substring(2);
@@ -181,12 +215,14 @@ $(function() {
         addOne: function(routine) {
             var view = new RoutineView({
                 model: routine,
-                firstDay: this.get('start_day')
+                firstDay: refDay
             });
-            $("#routine-list").append(view.render().el);
+            $(".routine-list").append(view.render().el);
         },
 
         addAll: function() {
+            console.log('addAll');
+            $(".routine-list").empty();
             this.routines.each(this.addOne);
         }
 
@@ -283,7 +319,7 @@ $(function() {
         },
 
         initialize: function() {
-            _.bindAll(this, 'render', 'check');
+            _.bindAll(this, 'render');
         },
 
         render: function() {
@@ -378,9 +414,7 @@ $(function() {
         tagName: "li",
         template: _.template($('#routine-template').html()),
         events: {
-            "click .check": "toggleDone",
             "dblclick div.routine-name": "edit",
-            "click span.routine-destroy": "clear",
             "keypress .routine-input": "updateOnEnter"
         },
 
@@ -393,6 +427,8 @@ $(function() {
         render: function() {
             $(this.el).html(this.template(this.model.toJSON()));
             this.setContent();
+            
+            console.log('x');
             
             var week1 = new WeekView({
                 model: this.model,
@@ -413,6 +449,7 @@ $(function() {
             
             this.$('.routine-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
             
+            
             return this;
         },
 
@@ -429,17 +466,15 @@ $(function() {
             $(this.el).removeClass("editing");
         },
 
-        toggleDone: function() {
-            this.model.toggle();
-        },
-
         edit: function() {
             $(this.el).addClass("editing");
             this.$input.focus();
         },
 
         updateOnEnter: function(e) {
-            if (e.keyCode == 13) this.close();
+            if (e.keyCode == 13) {
+                this.close();
+            }
         },
 
         remove: function() {
@@ -455,8 +490,9 @@ $(function() {
         el: $("#dayapp"),
         statsTemplate: _.template($('#stats-template').html()),
         events: {
-            "keypress #new-routine": "createOnEnter",
-            "keypress #new-routine-frequency": "createOnEnter",
+            "keypress .new-routine": "createOnEnter",
+            "keydown .new-routine": "handleEsc",
+            "keypress .new-routine-frequency": "createOnEnter",
             "click .routine-clear a": "clearCompleted"
         },
 
@@ -464,12 +500,11 @@ $(function() {
 
             _.bindAll(this, 'render');
             
-            this.$input = this.$("#new-routine");
-            this.$frequency = this.$("#new-routine-frequency");
+            this.$input = this.$(".new-routine");
+            this.$frequency = this.$(".new-routine-frequency");
             
             var date = new Date();
             
-            this.today = date.getD();
             this.user = new User();
             this.user.routines.bind('all', this.render);
             this.user.bind('all', this.render);
@@ -483,14 +518,12 @@ $(function() {
         },
 
         render: function() {
-            var done = this.user.routines.done().length;
-            this.$('#stats').html(this.statsTemplate({
+            this.$('.stats').html(this.statsTemplate({
                 total: this.user.routines.length,
-                done: this.user.routines.done().length,
                 remaining: this.user.routines.remaining().length
             }));
             
-            this.options.firstViewDay = this.computeInitialViewDay(this.today);
+            this.options.firstViewDay = this.computeInitialViewDay(refDay);
             
             var week1 = new WeekHeaderView({
                 dindex: this.options.firstViewDay
@@ -508,31 +541,33 @@ $(function() {
             
             $('.routine-header-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
             
-            $('#routines').show();
+            $('.routines').show();
         },
 
         newAttributes: function() {
             return {
                 name: this.$input.val(),
                 frequency: parseInt(this.$frequency.val().substring(1), 10), //  f1, f3 or f7
-                order: this.user.routines.nextOrder(),
-                done: false
+                order: this.user.routines.nextOrder()
             };
         },
 
         createOnEnter: function(e) {
-            if (e.keyCode != 13) return;
-            this.user.routines.create(this.newAttributes());
-            this.$input.val('');
-        },
-
-        clearCompleted: function() {
-            _.each(this.user.routines.done(), function(routine) {
-                routine.clear();
-            });
-            return false;
+            if (e.keyCode == 13) {
+                this.user.routines.create(this.newAttributes());
+                this.$input.val('');
+            }
         },
         
+        handleEsc: function(e) {
+            console.log(e.keyCode);
+            if (e.keyCode==27) {
+                console.log(e);
+                $('.addnew-button').show();
+                $('#page-standard .create-routine').hide();
+            }
+        }
+
         // Lazily show the tooltip that tells you to press `enter` to save a new day item, after one second.
         // showTooltip: function(e) {
         //     var tooltip = this.$(".ui-tooltip-top");
@@ -572,9 +607,10 @@ function addAnglelsAction() {
 }
 
 function processLoginEvent(response) {
+    switchStage(2);
+    
     // logged in and connected user, someone you know
     console.log('fb user logged', response);
-    // $('.fb-login-button').hide();
 
     // prepareAngelsSection();
 
@@ -600,6 +636,8 @@ function processLoginEvent(response) {
     });
 }
 
+initStage();
+
 window.fbAsyncInit = function() {
     FB.Event.subscribe('auth.sessionChange', function(response) {
         console.log('auth.sessionChange', arguments);
@@ -620,9 +658,6 @@ window.fbAsyncInit = function() {
             processLoginEvent(response.session);
         } else {
             switchStage(0);
-            // no user session available, someone you dont know
-            // $('.avatar').hide();
-            // $('.fb-login-button').show();
         }
     });
 };
