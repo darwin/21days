@@ -756,6 +756,14 @@ body.selected-stage-2 #dayapp {
     z-index: 200;
 }
 
+.tasks-label {
+    color: #ccc;
+    font-size: 14px;
+    position: absolute;
+    top: 188px;
+    left: 10px;
+}
+
 .potemkin-routine-name {
     position: absolute;
     top: 53px;
