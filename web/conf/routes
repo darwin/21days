@@ -4,7 +4,7 @@
 
 GET     /users/{facebookId}                     Users.detail
 GET     /                                       staticDir:public
-POST    /users/{facebookId}/{data}              Users.createOrUpdate
+POST    /users/{facebookId}                     Users.createOrUpdate
 
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public

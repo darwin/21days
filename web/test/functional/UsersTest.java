@@ -25,7 +25,7 @@ public class UsersTest extends FunctionalTest {
     @Test
     public void createsUserWhenUserDoesntExist() {
         String data = StringUtils.repeat("d", 1024 * 1024);
-        Response response = POST("/users/facebookId3/" + data);
+        Response response = POST("/users/facebookId3", "application/json", data);
         assertIsOk(response);
         assertThat(User.get("facebookId3").data, is(data));
     }
@@ -33,7 +33,7 @@ public class UsersTest extends FunctionalTest {
     @Test
     public void updatesUserWhenUserExists() {
         String data = "updatedData";
-        Response response = POST("/users/facebookId1/" + data);
+        Response response = POST("/users/facebookId1", "application/json", data);
         assertIsOk(response);
         assertThat(User.get("facebookId1").data, is(data));
     }

@@ -13,12 +13,12 @@ public class Users extends Controller {
                 + facebookId + "')"));
     }
 
-    public static void createOrUpdate(String facebookId, String data) {
+    public static void createOrUpdate(String facebookId, String body) {
         User user = User.get(facebookId);
         if (user == null) {
-            user = new User(facebookId, data);
+            user = new User(facebookId, body);
         } else {
-            user.data = data;
+            user.data = body;
         }
         user.save();
     }
