@@ -7,6 +7,8 @@ import play.db.jpa.*;
 @Entity
 public class User extends Model {
     public String facebookId;
+    
+    @Lob
     public String data;
 
     public User(String facebookId, String data) {

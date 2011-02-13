@@ -130,7 +130,7 @@ $(function() {
     
     window.Connector = {
         userUrl: function() {
-            return "/users/"+App.user.id;
+            return "/users/"+0; // App.user.id;
         },
         
         push: function() {
@@ -150,9 +150,9 @@ $(function() {
                 }
             });
             
-            // $.post(this.userUrl(), json, function(data){
-            //     console.log('push done', data);
-            // }, "json");
+            $.post(this.userUrl(), json, function(data){
+                console.log('push done', data);
+            }, "json");
         },
          
         pull: function(success, error) {
@@ -165,42 +165,42 @@ $(function() {
     
     var plannedPush;
     
-    // Backbone.sync = function(method, model, success, error) {
-    //     var resp;
-    //     var store = model.localStorage || model.collection.localStorage;
-    // 
-    //     console.log('sync', method, model, store.name);
-    // 
-    //     switch (method) {
-    //         case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
-    //         case "create":  resp = store.create(model);                            break;
-    //         case "update":  resp = store.update(model);                            break;
-    //         case "delete":  resp = store.destroy(model);                           break;
-    //     }
-    //     
-    //     if (method=="read") {
-    //         Connector.pull(function() {
-    //             if (store.name=="routines") {
-    //                 
-    //             }
-    //         }, function() {
-    //             // TODO:
-    //         });
-    //     } else {
-    //         if (!plannedPush) {
-    //             plannedPush = setTimeout(function() {
-    //                 plannedPush = null;
-    //                 Connector.push();
-    //             }, 200);
-    //         }
-    //     }
-    // 
-    //     if (resp) {
-    //         success(resp);
-    //     } else {
-    //         error("Record not found");
-    //     }
-    // };
+    Backbone.sync = function(method, model, success, error) {
+        var resp;
+        var store = model.localStorage || model.collection.localStorage;
+    
+        console.log('sync', method, model, store.name);
+    
+        switch (method) {
+            case "read":    resp = model.id ? store.find(model) : store.findAll(); break;
+            case "create":  resp = store.create(model);                            break;
+            case "update":  resp = store.update(model);                            break;
+            case "delete":  resp = store.destroy(model);                           break;
+        }
+        
+        if (method=="read") {
+            Connector.pull(function() {
+                if (store.name=="routines") {
+                    
+                }
+            }, function() {
+                // TODO:
+            });
+        } else {
+            if (!plannedPush) {
+                plannedPush = setTimeout(function() {
+                    plannedPush = null;
+                    Connector.push();
+                }, 200);
+            }
+        }
+    
+        if (resp) {
+            success(resp);
+        } else {
+            error("Record not found");
+        }
+    };
     
     window.User = Backbone.Model.extend({
         localStorage: new Store("user"),
