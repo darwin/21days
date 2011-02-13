@@ -309,17 +309,48 @@ body.selected-stage-2 #dayapp {
     padding-top: 180px;
     clear: both;
     min-height: 10px;
+    position: relative;
+}
+
+.vseparator {
+    position: absolute;
+    bottom: -50px;
+    top: 160px;
+    width: 1px;
+    background-color: #dbdbdb;
+    z-index: 10;
+}
+
+.s1 {
+    left: 535px;
+}
+
+.s2 {
+    left: 738px;
 }
 
 .routine-list {
     clear: both;
     margin: 0;
     padding: 0;
+    margin-bottom: 20px;
 }
 .routine-list li {
     padding: 0;
     position: relative;
     line-height: 29px;
+}
+
+.badges-row {
+    position: relative;
+    top: -20px;
+    left: 350px;
+}
+
+.badges-potemking {
+    background: #fff url('/images/badges.png') top left;
+    width: 127px;
+    height: 68px;
 }
 
 
@@ -711,6 +742,7 @@ body.selected-stage-2 #dayapp {
     height: 22px;
     background: #eee url('/images/small-arrows.png') 0 0;
     cursor: pointer;
+    z-index: 200;
 }
 
 .cal-right-arrow {
@@ -721,6 +753,7 @@ body.selected-stage-2 #dayapp {
     height: 22px;
     background: #eee url('/images/small-arrows.png') -22px 0;
     cursor: pointer;
+    z-index: 200;
 }
 
 .potemkin-routine-name {

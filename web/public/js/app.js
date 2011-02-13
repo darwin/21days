@@ -94,12 +94,15 @@ function switchStage(stage) {
                 refDay -= 7;
                 App.user.addAll();
                 App.user.trigger('change');
+                $('.badges-potemking').hide();
             });
             $('.cal-right-arrow').bind('click', function() {
                 refDay += 7;
                 App.user.addAll();
                 App.user.trigger('change');
+                $('.badges-potemking').hide();
             });
+            $('.comments-footer').show();
             // $('.add-angels').bind('click', function() {
             //     addAnglelsAction();
             // });
