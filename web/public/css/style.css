@@ -142,12 +142,6 @@ input:invalid, textarea:invalid {
 .no-boxshadow input:invalid, .no-boxshadow textarea:invalid { background-color: #f0dddd; }
 
 
-/* These selection declarations have to be separate.
-   No text-shadow: twitter.com/miketaylr/status/12228805301
-   Also: hot pink. */
-::-moz-selection{ background: #FF5E99; color:#fff; text-shadow: none; }
-::selection { background:#FF5E99; color:#fff; text-shadow: none; }
-
 /* j.mp/webkit-tap-highlight-color */
 a:link { -webkit-tap-highlight-color: #FF5E99; }
 
@@ -179,8 +173,8 @@ body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
     line-height: 1.4em;
-    background: #eeeeee;
     color: #333333;
+    background: #F2F2F3 url('/images/background.png') repeat-x;
 }
 
 .clear {
@@ -190,28 +184,67 @@ body {
 #dayapp {
     position: relative;
     width: 960px;
-    margin: 40px auto 40px;
-    background: white;
-    padding: 20px;
-    -moz-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    -o-box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
-    box-shadow: rgba(0, 0, 0, 0.2) 0 5px 6px 0;
+    margin: 0px auto 0px;
+    min-height: 1080px;
 }
+
+#dayapp .logo {
+    position: absolute;
+    left: 20px;
+    width: 170px;
+    height: 170px;
+    background: #f2f3f4 url('/images/logo.png');
+}
+
 #dayapp h1 {
-    font-size: 36px;
+    font-family: 'Kreon', arial, serif;
+    color: #107FFF;
+    position: absolute;
+    font-size: 48px;
+    left: 200px;
     font-weight: bold;
-    text-align: center;
-    padding: 20px 0 30px 0;
+    top: 100px;
     line-height: 1;
 }
 
-#create-routine {
-    width: 700px;
+#dayapp h2 {
+    position: absolute;
+    font-size: 18px;
+    top: 28px;
+    right: 0px;
+    font-weight: normal;
+}
+
+#dayapp .story {
+    position: absolute;
+    left: 200px;
+    top: 180px;
+    font-size: 30px;
+    line-height: 34px;
+}
+
+#dayapp .story strong {
+    padding: 0px 4px;
+    background-color: #E5E2CA;
+}
+
+#dayapp .bottom {
+    position: absolute;
+    width: 960px;
+    height: 700px;
+    left: 0px;
+    top: 312px;
+    font-size: 30px;
+    line-height: 34px;
+    background: #f2f3f4 url('/images/landing-bottom.png');
+}
+
+.create-routine {
+    width: 760px;
     margin: auto;
     position: relative;
 }
-#create-routine input {
+.create-routine input {
     width: 466px;
     font-size: 24px;
     font-family: inherit;
@@ -225,10 +258,10 @@ body {
     -o-box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
     box-shadow: rgba(0, 0, 0, 0.2) 0 1px 2px 0 inset;
 }
-#create-routine input::-webkit-input-placeholder {
+.create-routine input::-webkit-input-placeholder {
     font-style: italic;
 }
-#create-routine span {
+.create-routine span {
     position: absolute;
     z-index: 999;
     width: 170px;
@@ -236,7 +269,7 @@ body {
     margin-left: -85px;
 }
 
-#new-routine-frequency {
+.new-routine-frequency {
     width: 200px;
     font-size: 24px;
     font-family: inherit;
@@ -516,7 +549,16 @@ body {
     display: none;
     position: absolute;
     top: 10px;
-    right: 10px;
+    right: 150px;
+}
+
+.fb-avatar {
+   border: 1px solid #ccc;
+}
+
+.fb-avatar img {
+    display: block;
+    border: 1px solid #fff;
 }
 
 .routine-input-wrapper {
@@ -525,6 +567,70 @@ body {
 
 .routine-frequency-wrapper {
     float: left;
+}
+
+.routine-picker-wrapper {
+    float: left;
+    margin-right: 10px;
+}
+
+.routine-start {
+    margin-left: 10px;
+    padding: 4px 10px;
+    color: #fff;
+    font-size: 24px;
+    float: left;
+    border: 3px solid #fff;
+    background-color: #262626;
+    cursor: pointer;
+     -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -khtml-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.routine-alternate-start {
+    top: 110px;
+    right: 106px;
+    position: absolute;
+    font-size: 11px;
+    line-height: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    color: #777;
+}
+
+.routine-alternate-start:hover {
+    color: #999;
+}
+
+.routine-fore {
+    float: left;
+    margin-right: 20px;
+    padding-top: 8px;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 30px;
+}
+
+#page-landing .create-routine {
+    padding-top: 50px;
+}
+
+#page-landing select {
+    font-weight: bold;
+}
+
+.new-routine-picker {
+    width: 300px;
+    font-size: 24px;
+    font-family: inherit;
+    line-height: 1.4em;
+    border: 0;
+    outline: none;
+    padding: 6px;
+    border: 1px solid #999999;
+    height: 47px;
 }
 
 .reset-session {

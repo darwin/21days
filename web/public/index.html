@@ -32,54 +32,104 @@
     <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
     <script src="js/libs/modernizr-1.6.min.js"></script>
 
+    <link href='http://fonts.googleapis.com/css?family=Kreon:regular,bold' rel='stylesheet' type='text/css'>
 </head>
 
 <body lang="en" >
     <div id="fb-root"></div>
     <div id="dayapp">
-        <div class="reset-session" onclick="resetSession()">
-            *
-        </div>
-        <div class="fb-login-button">
-            <fb:login-button perms="email">
-               Login with Facebook
-            </fb:login-button>
-        </div>
-        <div class="fb-avatar">
-
-        </div>
-
-        <div class="title">
-            <h1>my 21 days</h1>
-        </div>
-
-        <div class="content">
-
-            <div id="create-routine">
-                <div class="routine-input-wrapper">
-                    <input id="new-routine" placeholder="I want to do something..." type="text" />
-                    <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
-                </div>
-                <div class="routine-frequency-wrapper">
-                    <select id="new-routine-frequency">
-                        <option value="f1">every day</option>
-                        <option value="f3">once in 3 days</option>
-                        <option value="f7">once a week</option>
-                    </select>
-                </div>
-                <div class="clear"></div>
+        <div class="mock"></div>
+        <div class="header">
+            <a href="/"><div class="logo"></div></a>
+            <div class="reset-session" onclick="resetSession()">
+                *
             </div>
- 
-            <div id="routines" style="display:none">
-                <div id="routine-header">
-                    <div class="routine-header-name"></div>
-                    <div class="routine-header-weeks"></div>
-                </div>
-                <ul id="routine-list"></ul>
+            <div class="fb-login-button" style="display:none">
+                <fb:login-button perms="email">
+                   Login with Facebook
+                </fb:login-button>
             </div>
- 
-            <div id="stats"></div>
- 
+            <div class="fb-avatar" style="display:none">
+            </div>
+            <div class="fb-add-angels" style="display:none">
+                <button class="add-angels">Add angels</button>
+            </div>
+            <div class="claim">
+                <h2>better every day!</h2>
+            </div>
+        <div>
+
+        <div id="page-landing" class="stage stage-0">
+            <div class="title">
+                <h1>Form better habits 21 days</h1>
+            </div>
+            
+            <div class="story">
+                <strong>Want to quit smoking?</strong> <strong>Eat better?</strong> <strong>Loose weight</strong><br>
+                Setting up a new habit is hard. Some says it takes<br>
+                21 days for our brains and bodies to get used to.
+            </div>
+            <div class="bottom">
+                <div class="create-routine">
+                    <dic class="routine-fore">
+                        I will
+                    </div>
+                    <!-- <div class="routine-input-wrapper">
+                        <input id="new-routine" placeholder="go run" type="text" />
+                        <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
+                    </div> -->
+                    <div class="routine-picker-wrapper">
+                        <select class="new-routine-picker">
+                            <option value="f1">go for 30min run</option>
+                            <option value="f3">eat healthier</option>
+                            <option value="f7">be happy</option>
+                        </select>
+                    </div>
+                    <div class="routine-frequency-wrapper">
+                        <select class="new-routine-frequency">
+                            <option value="f1">every day</option>
+                            <option value="f3">once in 3 days</option>
+                            <option value="f7">once a week</option>
+                        </select>
+                    </div>
+                    <div class="routine-start">
+                        from Monday
+                    </div>
+                    <div class="routine-alternate-start">
+                        Can't wait. I want to start today.
+                    </div>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="page-standard" class="stage stage-3" style="display:none">
+            <div class="content">
+                <div class="create-routine">
+                    <div class="routine-input-wrapper">
+                        <input class="new-routine" placeholder="I want to do something..." type="text" />
+                        <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
+                    </div>
+                    <div class="routine-frequency-wrapper">
+                        <select class="new-routine-frequency">
+                            <option value="f1">every day</option>
+                            <option value="f3">once in 3 days</option>
+                            <option value="f7">once a week</option>
+                        </select>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div id="routines" style="display:none">
+                    <div id="routine-header">
+                        <div class="routine-header-name"></div>
+                        <div class="routine-header-weeks"></div>
+                    </div>
+                    <ul id="routine-list"></ul>
+                </div>
+
+                <div id="stats"></div>
+            </div>
         </div>
  
     </div>
@@ -130,7 +180,6 @@
     <script type="text/template" id="avatar-template">
         <div class="avatar">
             <img src="<%= image %>"></img>
-            <div class="avatar-name"><%= name %></div>
         </div>
     </script>
 

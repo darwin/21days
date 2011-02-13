@@ -7,7 +7,7 @@
 //
 // User
 //  - id
-//  - facebook (info)
+//  - facebook (info hash)
 //  - start_day (dindex)
 //
 // Routine
@@ -16,12 +16,43 @@
 //
 // Today (dindex)
 
+window.stage = 0;
+
 function resetSession() {
     FB.logout(function(response) {
         // user is now logged out
         $.cookie("21session", null);
         location.reload();
     });
+}
+
+function initStage() {
+    var session = $.cookie("21session");
+    if (!session) {
+        switchStage(0);
+    }
+}
+
+var initedStages = {};
+function switchStage(stage) {
+    console.log('switchStage: ', stage)
+    if (!initedStages[stage]) {
+        if (stage==0) {
+            $('.routine-start').bind('click', function() {
+                switchStage(1);
+            });
+            $('.routine-alternate-start').bind('click', function() {
+                switchStage(1);
+            });
+        }
+    }
+
+    if (stage==window.stage) return;
+    
+    window.stage = stage;
+    $('.stage').hide();
+    $('.stage-'+stage).show();
+    
 }
 
 var pendingTasks = [];
@@ -523,10 +554,29 @@ $(function() {
     });
 });
 
+function prepareAngelsSection() {
+    
+    // $('.add-angels').bind('click', function() {
+    //     addAnglelsAction();
+    // });
+    // 
+    // $('.fb-add-angels').show();
+}
+
+function addAnglelsAction() {
+    FB.ui({
+        method: 'apprequests', 
+        message: 'Please become my *angel* for 21 Days', 
+        data: 'angels'
+    });
+}
+
 function processLoginEvent(response) {
     // logged in and connected user, someone you know
     console.log('fb user logged', response);
-    $('.fb-login-button').hide();
+    // $('.fb-login-button').hide();
+
+    // prepareAngelsSection();
 
     FB.api('/me', function(response) {
         var $avatar = $('.fb-avatar');
@@ -569,9 +619,10 @@ window.fbAsyncInit = function() {
         if (response.session) {
             processLoginEvent(response.session);
         } else {
+            switchStage(0);
             // no user session available, someone you dont know
-            $('.avatar').hide();
-            $('.fb-login-button').show();
+            // $('.avatar').hide();
+            // $('.fb-login-button').show();
         }
     });
 };

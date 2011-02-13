@@ -1,4 +1,73 @@
-﻿edit inplace  -pattern tab
+﻿3 minutes pitch
+---------------
+
+problem
+ „Chci se odnaučit kouřit/naučit hrát na klavír/… ale nevím jak a nemám dostatečnou motivaci.“
+Quit smoking
+Go to gym
+Drink Water 
+Read more
+Eat more veg
+Learn spanish
+Loose weight
+...
+Not ruining just life but self respect
+
+solution
+Webová a mobilní aplikace, vám bude 21 dní pomáhat nastavit rutinu - to je jediný způsob, jak něco opravdu zlepšít.
+
+benefit/unikum
+není tu nic podobného. je to jako říct, že před něčím bylo něco. jako smartphony a iphone.
+a) buzerování přes živé moderátory (no new social network)
+b) motivace pohledem na celou tabulku (dobrý pocit)
+c) game mechanic badges/ocenění a soutěže, pochvala
+d) mobilní aplikace pro snadné vyplňování a kapesní buzerování
+
+marketing
+tg: Mainly middle-aged, affluent females. What are they getting for their money? In a word: hope.
+
+finance
+několik pilířů
+a) premium verze - střednědobá
+	- BUY: malí poskytovatelé služeb
+	- SELL: firemní klienti
+	- statistiky/dashboard pro více userů
+b) "appstore" pro kurzy - dlouhodobá - user platí za content kurzů/coaching
+	- autoři knih, diet, korespondenčních kurzů...
+	- build a new industry to sell motivation and courses to internet
+
+"self help" industry
+
+"This industry is exploitive," he says. "It takes advantage of people's weaknesses."
+
+Americans spent $11 billion in 2008 on self-improvement books, CDs, seminars, coaching and stress-management programs--13.6% more than they did back in 2005
+http://www.forbes.com/2009/01/15/self-help-industry-ent-sales-cx_ml_0115selfhelp.html
+	
+As of 2005, when Sham was published, the industry reportedly grossed $8.56 billion annually.
+http://www.suite101.com/content/is-the-self-help-industry-a-sham-steve-salerno-investigates-a236680#ixzz1DnFBFXGb
+
+Chiropractors - 2nd 
+Orthodontists - 7th
+Physical, Occupational and Speech Therapists, and Audiologists - 19th
+http://blogs.forbes.com/brettnelson/2011/02/10/the-most-profitable-small-businesses/?partner=minihomepage
+
+team
+killer devs
+pro strategists
+we like thinking
+
+future
+zlaté stránky
+
+It is important to remember that “discipline” derives from the Latin “disciplina,” meaning teaching or learning. Desire and drive alone do not add up to discipline. It must be learned.
+
+
+----------
+edit inplace  -pattern tab
+
+Telling yourself to “try harder” is not enough. Telling yourself you could get the information for free “if you really wanted” is delusional. Trusted guidance matters.
+
+
 
 https://gomockingbird.com/mockingbird/#l8eb1c3
 
