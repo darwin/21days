@@ -35,12 +35,22 @@
 		BB7F952E13075FDB001DFDBB /* dummy_routine_2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952B13075FDA001DFDBB /* dummy_routine_2.png */; };
 		BB7F952F13075FDB001DFDBB /* dummy_routine_3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952C13075FDA001DFDBB /* dummy_routine_3.png */; };
 		BB8FE2F313074176009B5DDC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8FE2F213074176009B5DDC /* icon.png */; };
+		BB9A38031307DBF3006DB6F2 /* TONewRoutineControllerView.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9A38011307DBF3006DB6F2 /* TONewRoutineControllerView.m */; };
+		BB9A38041307DBF3006DB6F2 /* TONewRoutineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB9A38021307DBF3006DB6F2 /* TONewRoutineView.xib */; };
+		BB9A381A1307F0B9006DB6F2 /* TORoutineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB9A38181307F0A2006DB6F2 /* TORoutineViewController.m */; };
+		BB9A381B1307F0B9006DB6F2 /* TORoutineView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB9A38191307F0AC006DB6F2 /* TORoutineView.xib */; };
+		BBB33E30130828DF003F1AAE /* arrowleft.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB33E2E130828DF003F1AAE /* arrowleft.png */; };
+		BBB33E31130828DF003F1AAE /* arrowright.png in Resources */ = {isa = PBXBuildFile; fileRef = BBB33E2F130828DF003F1AAE /* arrowright.png */; };
 		BBC843D01306A80F00CD5D9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843CE1306A80F00CD5D9E /* main.m */; };
 		BBC843D41306A83600CD5D9E /* TO21DaysAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843D31306A83600CD5D9E /* TO21DaysAppDelegate.m */; };
 		BBC843F81306F92C00CD5D9E /* TOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843F71306F92500CD5D9E /* TOUser.m */; };
 		BBC843FB130700FD00CD5D9E /* TORoutine.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843FA130700F400CD5D9E /* TORoutine.m */; };
 		BBC843FE130702FB00CD5D9E /* TOCheckin.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843FD130702EE00CD5D9E /* TOCheckin.m */; };
 		BBC8440113070B8700CD5D9E /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = BBC8440013070B8600CD5D9E /* sample.json */; };
+		BBD5ED9D1307F98D003766A7 /* button_empty.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD5ED9C1307F98D003766A7 /* button_empty.png */; };
+		BBD5ED9F1307FA24003766A7 /* button_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD5ED9E1307FA24003766A7 /* button_selected.png */; };
+		BBD5EDA11307FBA9003766A7 /* button_placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD5EDA01307FBA9003766A7 /* button_placeholder.png */; };
+		BBD5EDA71307FEF4003766A7 /* TOCheckUIButton.m in Sources */ = {isa = PBXBuildFile; fileRef = BBD5EDA61307FEF1003766A7 /* TOCheckUIButton.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +99,14 @@
 		BB7F952B13075FDA001DFDBB /* dummy_routine_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dummy_routine_2.png; sourceTree = "<group>"; };
 		BB7F952C13075FDA001DFDBB /* dummy_routine_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dummy_routine_3.png; sourceTree = "<group>"; };
 		BB8FE2F213074176009B5DDC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		BB9A38001307DBF3006DB6F2 /* TONewRoutineControllerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TONewRoutineControllerView.h; path = Source/TONewRoutineControllerView.h; sourceTree = "<group>"; };
+		BB9A38011307DBF3006DB6F2 /* TONewRoutineControllerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TONewRoutineControllerView.m; path = Source/TONewRoutineControllerView.m; sourceTree = "<group>"; };
+		BB9A38021307DBF3006DB6F2 /* TONewRoutineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TONewRoutineView.xib; path = en.lproj/TONewRoutineView.xib; sourceTree = "<group>"; };
+		BB9A38171307F09F006DB6F2 /* TORoutineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TORoutineViewController.h; path = Source/TORoutineViewController.h; sourceTree = "<group>"; };
+		BB9A38181307F0A2006DB6F2 /* TORoutineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TORoutineViewController.m; path = Source/TORoutineViewController.m; sourceTree = "<group>"; };
+		BB9A38191307F0AC006DB6F2 /* TORoutineView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TORoutineView.xib; path = en.lproj/TORoutineView.xib; sourceTree = "<group>"; };
+		BBB33E2E130828DF003F1AAE /* arrowleft.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowleft.png; sourceTree = "<group>"; };
+		BBB33E2F130828DF003F1AAE /* arrowright.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = arrowright.png; sourceTree = "<group>"; };
 		BBC843CE1306A80F00CD5D9E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		BBC843CF1306A80F00CD5D9E /* TO21Days-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TO21Days-Prefix.pch"; sourceTree = "<group>"; };
 		BBC843D21306A83500CD5D9E /* TO21DaysAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TO21DaysAppDelegate.h; path = Source/TO21DaysAppDelegate.h; sourceTree = "<group>"; };
@@ -100,6 +118,11 @@
 		BBC843FC130702EA00CD5D9E /* TOCheckin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOCheckin.h; path = Source/TOCheckin.h; sourceTree = "<group>"; };
 		BBC843FD130702EE00CD5D9E /* TOCheckin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TOCheckin.m; path = Source/TOCheckin.m; sourceTree = "<group>"; };
 		BBC8440013070B8600CD5D9E /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sample.json; sourceTree = "<group>"; };
+		BBD5ED9C1307F98D003766A7 /* button_empty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_empty.png; sourceTree = "<group>"; };
+		BBD5ED9E1307FA24003766A7 /* button_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_selected.png; sourceTree = "<group>"; };
+		BBD5EDA01307FBA9003766A7 /* button_placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button_placeholder.png; sourceTree = "<group>"; };
+		BBD5EDA51307FEF0003766A7 /* TOCheckUIButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOCheckUIButton.h; path = Source/TOCheckUIButton.h; sourceTree = "<group>"; };
+		BBD5EDA61307FEF1003766A7 /* TOCheckUIButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TOCheckUIButton.m; path = Source/TOCheckUIButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +234,11 @@
 		BB4A79D913069F41000C318A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				BBB33E2E130828DF003F1AAE /* arrowleft.png */,
+				BBB33E2F130828DF003F1AAE /* arrowright.png */,
+				BBD5EDA01307FBA9003766A7 /* button_placeholder.png */,
+				BBD5ED9E1307FA24003766A7 /* button_selected.png */,
+				BBD5ED9C1307F98D003766A7 /* button_empty.png */,
 				BB7F952813075321001DFDBB /* plus.png */,
 				BB8FE2F213074176009B5DDC /* icon.png */,
 				BB4A79DA13069F41000C318A /* man.png */,
@@ -238,6 +266,14 @@
 				BBC843FA130700F400CD5D9E /* TORoutine.m */,
 				BBC843FC130702EA00CD5D9E /* TOCheckin.h */,
 				BBC843FD130702EE00CD5D9E /* TOCheckin.m */,
+				BB9A38001307DBF3006DB6F2 /* TONewRoutineControllerView.h */,
+				BB9A38011307DBF3006DB6F2 /* TONewRoutineControllerView.m */,
+				BB9A38021307DBF3006DB6F2 /* TONewRoutineView.xib */,
+				BB9A38171307F09F006DB6F2 /* TORoutineViewController.h */,
+				BB9A38181307F0A2006DB6F2 /* TORoutineViewController.m */,
+				BB9A38191307F0AC006DB6F2 /* TORoutineView.xib */,
+				BBD5EDA51307FEF0003766A7 /* TOCheckUIButton.h */,
+				BBD5EDA61307FEF1003766A7 /* TOCheckUIButton.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -306,6 +342,13 @@
 				BB7F952D13075FDB001DFDBB /* dummy_routine_1.png in Resources */,
 				BB7F952E13075FDB001DFDBB /* dummy_routine_2.png in Resources */,
 				BB7F952F13075FDB001DFDBB /* dummy_routine_3.png in Resources */,
+				BB9A38041307DBF3006DB6F2 /* TONewRoutineView.xib in Resources */,
+				BB9A381B1307F0B9006DB6F2 /* TORoutineView.xib in Resources */,
+				BBD5ED9D1307F98D003766A7 /* button_empty.png in Resources */,
+				BBD5ED9F1307FA24003766A7 /* button_selected.png in Resources */,
+				BBD5EDA11307FBA9003766A7 /* button_placeholder.png in Resources */,
+				BBB33E30130828DF003F1AAE /* arrowleft.png in Resources */,
+				BBB33E31130828DF003F1AAE /* arrowright.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,6 +376,9 @@
 				BBC843F81306F92C00CD5D9E /* TOUser.m in Sources */,
 				BBC843FB130700FD00CD5D9E /* TORoutine.m in Sources */,
 				BBC843FE130702FB00CD5D9E /* TOCheckin.m in Sources */,
+				BB9A38031307DBF3006DB6F2 /* TONewRoutineControllerView.m in Sources */,
+				BB9A381A1307F0B9006DB6F2 /* TORoutineViewController.m in Sources */,
+				BBD5EDA71307FEF4003766A7 /* TOCheckUIButton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

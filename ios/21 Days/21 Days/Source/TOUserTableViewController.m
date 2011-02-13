@@ -1,3 +1,8 @@
+//
+//  21 Days
+//
+//  Created by Zdenek on 2/13/11.
+
 #import "TOUserTableViewController.h"
 #import "TOUser.h"
 
@@ -6,7 +11,8 @@ static NSString* kAppId = @"101103209968654";
 
 @implementation TOUserTableViewController
 
-@synthesize facebook=_facebook;
+@synthesize facebook = _facebook;
+@synthesize delegate = _delegate;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -243,6 +249,8 @@ static NSString* kAppId = @"101103209968654";
     cell = [self getConnectionCell];
     [self buildConnectionCell:cell];
     
+    // Inform the world.
+    [self.delegate FacebookConnected];
 }
 
 - (void)fbDidNotLogin:(BOOL)cancelled
@@ -261,7 +269,10 @@ static NSString* kAppId = @"101103209968654";
     
     // Build connect Cell
     cell = [self getConnectionCell];
-    [self buildConnectionCell:cell];    
+    [self buildConnectionCell:cell];
+    
+    // Inform the world.
+    [self.delegate FacebookDisconnected];
 }
 
 - (BOOL) isConnectedToFacebook
