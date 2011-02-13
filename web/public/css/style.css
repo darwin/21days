@@ -355,7 +355,7 @@ body.selected-stage-2 #dayapp {
 
 
 .routine-separator {
-    background: #999 url('/images/separator.png') top left;
+    background: #fff url('/images/separator.png') top left;
     height: 8px;
     width: 960px;
 }
