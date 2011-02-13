@@ -9,7 +9,11 @@
 @property (nonatomic, assign) NSUInteger startDayIndex;
 @property (nonatomic, retain) NSArray* routines;
 
+
+// Parses 21 Days server reply (JSON).
 - (void) parseServerReply:(NSString*) reply;
+
+// Parses Facebook server reply (JSON).
 - (void) parseFacebookReply:(NSString*) reply;
 
 @end

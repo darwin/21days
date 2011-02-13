@@ -9,6 +9,7 @@
 @property (nonatomic, assign) NSInteger order;
 @property (nonatomic, retain) NSArray* checkins;
 
+// Inits with dictionary formed from Routine section of 21 Days JSON.
 - (id) initWithDictionary:(NSDictionary*)dictionary;
 
 @end
