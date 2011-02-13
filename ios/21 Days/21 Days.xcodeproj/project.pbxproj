@@ -30,6 +30,11 @@
 		BB4A79ED1306A35B000C318A /* TOStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4A79EB1306A35B000C318A /* TOStatusView.xib */; };
 		BB4A7A011306A6DD000C318A /* TOUserTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BB4A79FF1306A6DB000C318A /* TOUserTableViewController.m */; };
 		BB4A7A021306A6DD000C318A /* TOUserTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BB4A7A001306A6DC000C318A /* TOUserTableView.xib */; };
+		BB7F952913075321001DFDBB /* plus.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952813075321001DFDBB /* plus.png */; };
+		BB7F952D13075FDB001DFDBB /* dummy_routine_1.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952A13075FDA001DFDBB /* dummy_routine_1.png */; };
+		BB7F952E13075FDB001DFDBB /* dummy_routine_2.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952B13075FDA001DFDBB /* dummy_routine_2.png */; };
+		BB7F952F13075FDB001DFDBB /* dummy_routine_3.png in Resources */ = {isa = PBXBuildFile; fileRef = BB7F952C13075FDA001DFDBB /* dummy_routine_3.png */; };
+		BB8FE2F313074176009B5DDC /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = BB8FE2F213074176009B5DDC /* icon.png */; };
 		BBC843D01306A80F00CD5D9E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843CE1306A80F00CD5D9E /* main.m */; };
 		BBC843D41306A83600CD5D9E /* TO21DaysAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843D31306A83600CD5D9E /* TO21DaysAppDelegate.m */; };
 		BBC843F81306F92C00CD5D9E /* TOUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BBC843F71306F92500CD5D9E /* TOUser.m */; };
@@ -79,6 +84,11 @@
 		BB4A79FE1306A6DB000C318A /* TOUserTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TOUserTableViewController.h; path = Source/TOUserTableViewController.h; sourceTree = "<group>"; };
 		BB4A79FF1306A6DB000C318A /* TOUserTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TOUserTableViewController.m; path = Source/TOUserTableViewController.m; sourceTree = "<group>"; };
 		BB4A7A001306A6DC000C318A /* TOUserTableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TOUserTableView.xib; path = en.lproj/TOUserTableView.xib; sourceTree = "<group>"; };
+		BB7F952813075321001DFDBB /* plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plus.png; sourceTree = "<group>"; };
+		BB7F952A13075FDA001DFDBB /* dummy_routine_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dummy_routine_1.png; sourceTree = "<group>"; };
+		BB7F952B13075FDA001DFDBB /* dummy_routine_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dummy_routine_2.png; sourceTree = "<group>"; };
+		BB7F952C13075FDA001DFDBB /* dummy_routine_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = dummy_routine_3.png; sourceTree = "<group>"; };
+		BB8FE2F213074176009B5DDC /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		BBC843CE1306A80F00CD5D9E /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Source/main.m; sourceTree = "<group>"; };
 		BBC843CF1306A80F00CD5D9E /* TO21Days-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TO21Days-Prefix.pch"; sourceTree = "<group>"; };
 		BBC843D21306A83500CD5D9E /* TO21DaysAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TO21DaysAppDelegate.h; path = Source/TO21DaysAppDelegate.h; sourceTree = "<group>"; };
@@ -146,6 +156,9 @@
 		BB0B55441306804800C83953 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BB7F952A13075FDA001DFDBB /* dummy_routine_1.png */,
+				BB7F952B13075FDA001DFDBB /* dummy_routine_2.png */,
+				BB7F952C13075FDA001DFDBB /* dummy_routine_3.png */,
 				BBC8440013070B8600CD5D9E /* sample.json */,
 				BB4A79D913069F41000C318A /* Icons */,
 				BBC843CE1306A80F00CD5D9E /* main.m */,
@@ -198,6 +211,8 @@
 		BB4A79D913069F41000C318A /* Icons */ = {
 			isa = PBXGroup;
 			children = (
+				BB7F952813075321001DFDBB /* plus.png */,
+				BB8FE2F213074176009B5DDC /* icon.png */,
 				BB4A79DA13069F41000C318A /* man.png */,
 				BB4A79DB13069F41000C318A /* preferences.png */,
 				BB4A79DC13069F41000C318A /* star.png */,
@@ -286,6 +301,11 @@
 				BB4A79ED1306A35B000C318A /* TOStatusView.xib in Resources */,
 				BB4A7A021306A6DD000C318A /* TOUserTableView.xib in Resources */,
 				BBC8440113070B8700CD5D9E /* sample.json in Resources */,
+				BB8FE2F313074176009B5DDC /* icon.png in Resources */,
+				BB7F952913075321001DFDBB /* plus.png in Resources */,
+				BB7F952D13075FDB001DFDBB /* dummy_routine_1.png in Resources */,
+				BB7F952E13075FDB001DFDBB /* dummy_routine_2.png in Resources */,
+				BB7F952F13075FDB001DFDBB /* dummy_routine_3.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

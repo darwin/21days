@@ -193,7 +193,7 @@ static NSString* kAppId = @"101103209968654";
     if ([self isConnectedToFacebook])
         cell.textLabel.text = @"Logout";
     else
-        cell.textLabel.text = @"Login with Facebook Connect";
+        cell.textLabel.text = @"Connect with Facebook";
     
     UIImage* image = [UIImage imageNamed:@"FBDialog.bundle/images/fbicon.png"];
     [cell.imageView setImage:image];
