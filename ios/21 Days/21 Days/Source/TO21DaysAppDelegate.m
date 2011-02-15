@@ -1,11 +1,17 @@
+//
+//  21 Days
+//
+//  Created by Zdenek on 2/13/11.
+
 #import "TO21DaysAppDelegate.h"
 #import "TOUserTableViewController.h"
 
 @implementation TO21DaysAppDelegate
 
-@synthesize window=_window;
-@synthesize tabBarController=_tabBarController;
-@synthesize userTableViewController=_userTableViewController;
+@synthesize window = _window;
+@synthesize tabBarController = _tabBarController;
+@synthesize userTableViewController = _userTableViewController;
+@synthesize statusViewController = _statusViewController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -14,6 +20,8 @@
     
     [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
+    
+    self.userTableViewController.delegate = self.statusViewController;
     return YES;
 }
 
