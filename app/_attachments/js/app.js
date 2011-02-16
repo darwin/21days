@@ -1,40 +1,4 @@
-//
-// window.App
-// window.User
-// 
-// User has many Routines
-// Routines is collection of Routine
-//
-// User
-//  - id
-//  - facebook (info hash)
-//  - start_day (dindex)
-//
-// Routine
-//  - name
-//  - checkins (hash of jsons, indexed by dindex)
-//
-// Today (dindex)
-
-
-// HACK to be friend with pretty couchdb urls
-// $.origAjax = $.ajax;
-// $.ajax = function() {
-//     var args = $.makeArray(arguments);
-//     var url = args[0].url;
-//     var prefix = "/daysdb/_design/21days";
-//     if (url.substring(0, prefix.length)==prefix) {
-//         url = url.substring(prefix.length);
-//     }
-//     var prefix = "/daysdb";
-//     if (url.substring(0, prefix.length)==prefix) {
-//         url = url.substring(prefix.length);
-//     }
-//     args[0].url = url;
-//     $.origAjax.apply(this, args);
-// }
-
-var dayTable = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+var dayTable = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 Date.prototype.getD = function() {
     return Math.floor(this.valueOf() / (1000*60*60*24));
@@ -46,35 +10,25 @@ var newD = function(d) {
 
 window.stage = 0;
 
+window.refDay = (new Date()).getD();
+window.today = (new Date()).getD();
 
-window.refDay = 15018 - 7; // hacks
-window.today = 15018 - 1;
+var initedStages = {};
+var wentThroughLanding = false;
 
-function xreset() {
-    localStorage.setItem('user', null);
-    localStorage.setItem('routines', null);
+function computeInitialViewDay(referenceDay, startDay) {
+    var daysSinceBeginning = referenceDay - startDay;
+    var weeksSinceBeginning = Math.floor(daysSinceBeginning / 7);
+    return startDay + (weeksSinceBeginning * 7);
 }
 
 function resetSession() {
     FB.logout(function(response) {
-        // user is now logged out
-        $.cookie("21session", null);
-        xreset();
+        // user is now logged out from facebook
         location.reload();
     });
 }
 
-function initStage() {
-    var session = $.cookie("21session");
-    if (!session) {
-        switchStage(0);
-    } else {
-        // TODO: pass user session
-    }
-}
-
-var initedStages = {};
-var wentThroughLanding = false;
 function switchStage(stage) {
     // console.log('switchStage: ', stage)
     if (!initedStages[stage]) {
@@ -107,6 +61,7 @@ function switchStage(stage) {
             $('.addnew-button').bind('click', function() {
                 $(this).hide();
                 $('#page-standard .create-routine').show();
+                $('.new-routine').focus();
             });
             $('.cal-left-arrow').bind('click', function() {
                 refDay -= 7;
@@ -121,9 +76,6 @@ function switchStage(stage) {
                 $('.badges-potemking').hide();
             });
             $('.comments-footer').show();
-            // $('.add-angels').bind('click', function() {
-            //     addAnglelsAction();
-            // });
         }
     }
 
@@ -135,6 +87,7 @@ function switchStage(stage) {
     
 }
 
+// some workaround for case when facebook is too fast and calls us before window.App get initialized
 var pendingTasks = [];
 window.ensureAppInit = function(fn) {
     if (!window.App) {
@@ -155,7 +108,7 @@ $(function() {
 
             if (!this.get("start_day")) {
                 this.set({
-                    "start_day": 15018 - 7, 
+                    "start_day": today, 
                 });
             }
             
@@ -167,7 +120,7 @@ $(function() {
         addOne: function(routine) {
             var view = new RoutineView({
                 model: routine,
-                firstDay: refDay
+                firstDay: computeInitialViewDay(refDay, this.get('start_day'))
             });
             $(".routine-list").append(view.render().el);
         },
@@ -201,12 +154,6 @@ $(function() {
             }
         },
 
-        toggle: function() {
-            this.save({
-                done: !this.get("done")
-            });
-        },
-        
         isDayChecked: function(dindex) {
             var checkins = this.get('checkins');
             if (checkins) {
@@ -218,7 +165,6 @@ $(function() {
         
         toggleDayCheckin: function(dindex) {
             var checkins = this.get('checkins') || {};
-            //checkins = _.clone(checkins);
             var record = checkins[dindex];
             if (!record) {
                 checkins[dindex] = {
@@ -230,7 +176,6 @@ $(function() {
             this.set({
                 'checkins': checkins
             });
-            // this.trigger('change');
         },
         
         clear: function() {
@@ -273,8 +218,17 @@ $(function() {
         },
 
         render: function() {
-            if (this.model.isDayChecked(this.options.dindex)) $(this.el).addClass('checked');
-            if (this.options.dindex==window.today) $(this.el).addClass('today');
+            var root = $(this.el);
+            if (this.model.isDayChecked(this.options.dindex)) { 
+                root.addClass('checked');
+            }
+            if (this.options.dindex==window.today) {
+                root.addClass('today');
+            }
+            if (this.options.dindex < App.user.get("start_day")) {
+                root.addClass('disabled');
+            }
+            root.attr('data-dindex', this.options.dindex);
             return this;
         },
 
@@ -301,13 +255,16 @@ $(function() {
             var date = newD(dindex);
             var dayNum = date.getDay();
             var month = date.getMonth()+1;
-            var monthDay = date.getDate()+1;
+            var monthDay = date.getDate();
             var dayString = dayTable[dayNum];
             var shortDate = monthDay+"."+month+".";
             
-            if (this.options.dindex==window.today) $(this.el).addClass('today');
+            if (this.options.dindex==window.today) {
+                root.addClass('today');
+            }
+            root.attr('data-dindex', this.options.dindex);
             
-            $(this.el).html(this.template({
+            root.html(this.template({
                 day: dayString,
                 shortDate: shortDate
             }));
@@ -368,7 +325,6 @@ $(function() {
         template: _.template($('#routine-template').html()),
         events: {
             "dblclick div.routine-name": "edit",
-            "click div.routine-name": "showProps",
             "keypress .routine-input": "updateOnEnter"
         },
 
@@ -432,10 +388,6 @@ $(function() {
             $(this.el).remove();
         },
         
-        showProps: function() {
-            $(this.el).find('.props').toggle();
-        },
-
         clear: function() {
             this.model.clear();
         }
@@ -456,27 +408,20 @@ $(function() {
             _.bindAll(this, 'render');
             
             this.$input = this.$(".new-routine");
-            this.$frequency = this.$(".new-routine-frequency");
+            this.$frequency = this.$(".new-routine-frequency").eq(1);
             
             this.user = new User();
             this.user.routines.bind('all', this.render);
             this.user.bind('all', this.render);
         },
         
-        computeInitialViewDay: function(dtoday) {
-            var startDay = this.user.get('start_day');
-            var daysSinceBeginning = dtoday - startDay;
-            var weeksSinceBeginning = Math.floor(daysSinceBeginning / 7);
-            return startDay + (weeksSinceBeginning * 7);
-        },
-
         render: function() {
             this.$('.stats').html(this.statsTemplate({
                 total: this.user.routines.length,
                 remaining: this.user.routines.remaining().length
             }));
             
-            this.options.firstViewDay = this.computeInitialViewDay(refDay);
+            this.options.firstViewDay = computeInitialViewDay(refDay, this.user.get("start_day")); // refDay is global
             
             var week1 = new WeekHeaderView({
                 dindex: this.options.firstViewDay
@@ -493,7 +438,6 @@ $(function() {
             week3.render();
             
             $('.routine-header-weeks').empty().append(week1.el, week2.el, week3.el, '<div class="clear"></div>');
-            
             $('.routines').show();
         },
 
@@ -514,27 +458,12 @@ $(function() {
         
         handleEsc: function(e) {
             if (e.keyCode==27) {
-                // console.log(e);
                 $('.addnew-button').show();
                 $('#page-standard .create-routine').hide();
             }
         }
-
-        // Lazily show the tooltip that tells you to press `enter` to save a new day item, after one second.
-        // showTooltip: function(e) {
-        //     var tooltip = this.$(".ui-tooltip-top");
-        //     var val = this.$input.val();
-        //     tooltip.fadeOut();
-        //     if (this.tooltipTimeout) clearTimeout(this.tooltipTimeout);
-        //     if (val == '' || val == this.$input.attr('placeholder')) return;
-        //     var show = function() {
-        //         tooltip.show().fadeIn();
-        //     };
-        //     this.tooltipTimeout = _.delay(show, 1000);
-        // }
     });
 
-    window.Today = new Date().getD();
     window.App = new AppView;
     _.each(pendingTasks, function(task) {
         task();
@@ -552,24 +481,20 @@ function addAnglelsAction() {
 function processLoginEvent(response) {
     switchStage(2);
     
-    // logged in and connected user, someone you know
-    // console.log('fb user logged', response);
-
     FB.api('/me', function(response) {
+        
+        // show avatar
         var $avatar = $('.fb-avatar');
-        // console.log('user data', response);
         var template = _.template($('#avatar-template').html());
         $avatar.html(template({
             name: response.first_name,
             image: 'https://graph.facebook.com/' + response.id + '/picture'
         }));
-
         $avatar.show();
 
         ensureAppInit(function() {
-            console.log('ensureAppInit');
             App.user.id = "fb-"+response.id;
-            App.user.routines.url = "/users|"+App.user.id+"|routines"; // cannot use slashes because of backbone-couchdb shortcomings
+            App.user.routines.url = "/users|"+App.user.id+"|routines"; // cannot use slashes because of backbone-couchdb's asumptions
             App.user.fetch({
                 success: function(model, res) {
                     App.user.routines.fetch();
@@ -592,9 +517,16 @@ function processLoginEvent(response) {
     });
 }
 
+
+// initilization depends on facebook login state
+// if we have no session => switch to stage 0
+// if we have real session => switch to state 2
+
+// stage 0 is landing screen which goes through stage 1 (connect button) to stage 2
+
 window.fbAsyncInit = function() {
     FB.Event.subscribe('auth.sessionChange', function(response) {
-        // console.log('auth.sessionChange', arguments);
+        // ***
         processLoginEvent(response);
     });
     FB.Event.subscribe('fb.log', function(response) {
@@ -607,18 +539,18 @@ window.fbAsyncInit = function() {
         xfbml: true
     });
 
-    // FB.getLoginStatus(function(response) {
-    //     if (response.session) {
-    //         processLoginEvent(response.session);
-    //     } else {
-    //         switchStage(0);
-    //     }
-    // });
+    FB.getLoginStatus(function(response) {
+        if (response.session) {
+            // processLoginEvent(response.session);
+            // see ***
+        } else {
+            switchStage(0);
+        }
+    });
 };
 (function() {
     var e = document.createElement('script');
     e.async = true;
-    e.src = document.location.protocol + '//static.ak.fbcdn.net/connect/en_US/core.debug.js';
-    //         '//connect.facebook.net/en_US/all.js';
+    e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
     document.getElementById('fb-root').appendChild(e);
 } ());

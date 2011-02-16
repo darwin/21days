@@ -341,19 +341,6 @@ body.selected-stage-2 #dayapp {
     line-height: 29px;
 }
 
-.badges-row {
-    position: relative;
-    top: -20px;
-    left: 350px;
-}
-
-.badges-potemking {
-    background: #fff url('/images/badges.png') top left;
-    width: 127px;
-    height: 68px;
-}
-
-
 .routine-separator {
     background: #fff url('/images/separator.png') top left;
     height: 8px;
@@ -461,6 +448,10 @@ body.selected-stage-2 #dayapp {
 
 .day.today {
     border-color: #000;
+}
+
+.day.disabled {
+    background: #ccc;
 }
 
 .day-header {
@@ -780,6 +771,7 @@ body.selected-stage-2 #dayapp {
 }
 
 .angels-area {
+    display: none; /* not finished */
     position: absolute;
     top: 0;
     left: 300px;
