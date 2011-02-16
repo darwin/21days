@@ -325,6 +325,7 @@ $(function() {
         template: _.template($('#routine-template').html()),
         events: {
             "dblclick div.routine-name": "edit",
+            "click .remove-routine-button": "deleteMe",
             "keypress .routine-input": "updateOnEnter"
         },
 
@@ -382,6 +383,12 @@ $(function() {
             if (e.keyCode == 13) {
                 this.close();
             }
+        },
+
+        deleteMe: function(e) {
+            var res = confirm("Really want to give up "+this.model.get("name")+"?");
+            if (!res) return;
+            this.model.clear();
         },
 
         remove: function() {

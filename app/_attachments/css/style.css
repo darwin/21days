@@ -638,6 +638,25 @@ body.selected-stage-2 #dayapp {
     border: 1px solid #fff;
 }
 
+.remove-routine-button {
+    display: none;
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    top: 10px;
+    left: -24px;
+    cursor: pointer;
+    background: #fff url('/images/remove-button.png');
+}
+
+.remove-routine-button:hover {
+    display: block;
+}
+
+.routine-list li:hover .remove-routine-button {
+    display: block;
+}
+
 .routine-input-wrapper {
     float: left;
 }
