@@ -17,7 +17,7 @@
 * configure nginx and dev.21dayshabit.com as vhost acording to [http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html](http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html)
 * go to dev.21dayshabit.com (21dayshabit.com domain is important for facebook js library)
 
-#### Sample nginx local config
+#### My nginx local config
 
         worker_processes  1;
 
@@ -45,7 +45,7 @@
                 }
         
                 location / {
-                       proxy_pass http://localhost:5984//daysdb/_design/21days/;
+                       proxy_pass http://localhost:5984/daysdb/_design/21days/;
                        proxy_redirect off;
                        proxy_set_header Host $host;
                        proxy_set_header X-Real-IP $remote_addr;
@@ -58,16 +58,23 @@
 
 ## Deployment
 
-* couchdb app
-* nginx as reverse proxy (or use anything you want)
-
-[http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html](http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html)
-
----
+[cloudant.com](cloudant.com) is cool! is all you need to do is:
 
     cd app
-    couchapp push live
+    couchapp push cloudant
+
+see also
+   
+   * .couchapprc
+   * rewrites.json
+   
+## Admin
+
+tomikk.cloudant.com
+
+user:tomikk
+pass:antonin
 
 ## Live version
 
-[21dayshabit.com](http://21dayshabit.com)
+[www.21dayshabit.com](http://www.21dayshabit.com)

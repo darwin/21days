@@ -175,6 +175,7 @@ Backbone.couchConnector = {
 					// Iterate over the changed docs and validate them.
 					for (var i=0; i < changes.results.length; i++) {
 						doc = changes.results[i].doc;
+						if (!doc) continue; // bug?
 						if(doc.collection){
 							coll = connector._watchList[doc.collection];
 							if(coll){

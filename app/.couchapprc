@@ -1,7 +1,7 @@
 {
   "env" : {
-    "live" : {
-      "db" : "http://tomik:kamik@21dayshabit.com:5984/daysdb"
+    "cloudant" : {
+      "db" : "http://tomikk:antonin@tomikk.cloudant.com/daysdb"
     },
     "default" : {
       "db" : "http://localhost:5984/daysdb"
