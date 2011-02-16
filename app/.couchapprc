@@ -1,0 +1,10 @@
+{
+  "env" : {
+    "live" : {
+      "db" : "http://tomik:kamik@21dayshabit.com:5984/daysdb"
+    },
+    "default" : {
+      "db" : "http://localhost:5984/daysdb"
+    }
+  }
+}
