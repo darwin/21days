@@ -17,12 +17,56 @@
 * configure nginx and dev.21dayshabit.com as vhost acording to [http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html](http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html)
 * go to dev.21dayshabit.com (21dayshabit.com domain is important for facebook js library)
 
+#### Sample nginx local config
+
+        worker_processes  1;
+
+        events {
+            worker_connections  1024;
+        }
+
+        http {
+            include       mime.types;
+            default_type  application/octet-stream;
+            sendfile        on;
+            keepalive_timeout  65;
+
+            server { 
+                access_log off;
+                listen 80;
+                server_name dev.21dayshabit.com;
+
+                location /daysdb {
+                       proxy_pass http://localhost:5984;
+                       proxy_redirect off;
+                       proxy_set_header Host $host;
+                       proxy_set_header X-Real-IP $remote_addr;
+                       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                }
+        
+                location / {
+                       proxy_pass http://localhost:5984//daysdb/_design/21days/;
+                       proxy_redirect off;
+                       proxy_set_header Host $host;
+                       proxy_set_header X-Real-IP $remote_addr;
+                       proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                }
+
+            }
+        }
+
+
 ## Deployment
 
 * couchdb app
 * nginx as reverse proxy (or use anything you want)
 
 [http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html](http://code.btbytes.com/2011/02/03/configuring_couchapp_with_nginx.html)
+
+---
+
+    cd app
+    couchapp push live
 
 ## Live version
 
