@@ -395,7 +395,6 @@ $(function() {
 
     window.AppView = Backbone.View.extend({
         el: $("#dayapp"),
-        statsTemplate: _.template($('#stats-template').html()),
         events: {
             "keypress .new-routine": "createOnEnter",
             "keydown .new-routine": "handleEsc",
@@ -416,11 +415,6 @@ $(function() {
         },
         
         render: function() {
-            this.$('.stats').html(this.statsTemplate({
-                total: this.user.routines.length,
-                remaining: this.user.routines.remaining().length
-            }));
-            
             this.options.firstViewDay = computeInitialViewDay(refDay, this.user.get("start_day")); // refDay is global
             
             var week1 = new WeekHeaderView({

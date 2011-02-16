@@ -193,15 +193,6 @@
         <div class="day-header-day"><%= day %></div>
     </script>
 
-    <script type="text/template" id="stats-template">
-        <% if (total) { %>
-            <span class="day-count">
-                <span class="number"><%= remaining %></span>
-                <span class="word"><%= remaining == 1 ? 'routine' : 'routines' %></span>.
-            </span>
-        <% } %>
-    </script>
-
     <script type="text/template" id="avatar-template">
         <div class="avatar">
             <img src="<%= image %>"></img>
@@ -215,9 +206,7 @@
     <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.3.js"%3E%3C/script%3E'))</script>
   
     <!-- scripts concatenated and minified via ant build script-->
-    <!--<script type="text/javascript" src="vendor/couchapp/loader.js"></script>-->
     <script src="js/jquery.couch.js"></script>
-    <!-- <script src="js/json2.js"></script> -->
     <script src="js/plugins.js"></script>
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
