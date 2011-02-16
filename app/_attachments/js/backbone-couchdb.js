@@ -14,7 +14,7 @@ Backbone.couchConnector = {
 	// Name of the view.
 	viewName : "byCollection",
 	// Enable updates via the couchdb _changes feed
-	enableChanges : false,
+	enableChanges : true,
 	// If `baseUrl` is set, the default uri of jquery.couch.js will be overridden.
 	// This is useful if you want to access a couch on another server e.g. `http://127.0.0.1:5984`
 	// Important: Be aware of the Cross-Origin Policy. 
