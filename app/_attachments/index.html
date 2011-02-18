@@ -1,239 +1,37 @@
-<!doctype html>  
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ --> 
-<!--[if lt IE 7 ]> <html class="no-js ie6"> <![endif]-->
-<!--[if IE 7 ]>    <html class="no-js ie7"> <![endif]-->
-<!--[if IE 8 ]>    <html class="no-js ie8"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--> <html class="no-js"> <!--<![endif]-->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
+  <meta charset="utf-8">
+	<link rel="stylesheet" href="css/minimal.css">
 
-    <!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame - Remove this if you use the .htaccess -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>21 Days</title>
 
-    <title>21 days</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <!--  Mobile viewport optimized: j.mp/bplateviewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-
-
-    <!-- CSS : implied media="all" -->
-    <!-- <link rel="stylesheet" href="css/golden.css"> -->
-    <link rel="stylesheet" href="css/style.css?v=2">
-
-    <!-- Uncomment if you are specifically targeting less enabled mobile browsers
-    <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
-
-    <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-    <script src="js/libs/modernizr-1.6.min.js"></script>
-
-    <link href='http://fonts.googleapis.com/css?family=Cabin:600' rel='stylesheet' type='text/css'>
+  <script src="js/libs/modernizr-1.6.min.js"></script>
 </head>
+<body>
+	<div class="content">
+		<div class="logo"><img src="images/21days.png" alt="21 Days"/></div>
 
-<body lang="en" >
-    <div id="fb-root"></div>
-    <div class="mock3"></div>
-    <div id="dayapp">
-        <div class="header">
-            <a href="/"><div class="logo"></div></a>
-            <div class="reset-session" onclick="resetSession()">
-                *
-            </div>
-            <div class="fb-login-button" style="display:none">
-                <fb:login-button perms="email">
-                   Login with Facebook
-                </fb:login-button>
-            </div>
-            <div class="fb-avatar" style="display:none">
-            </div>
-            <div class="claim">
-                <h2>better every day!</h2>
-            </div>
-        </div>
+			<p class="bold">Hello</p>
 
-        <div id="page-landing" class="stage stage-0" style="display:none">
-            <div class="title">
-                <h1>Form better habits 21 days</h1>
-            </div>
-            
-            <div class="story">
-                <strong>Want to quit smoking?</strong> <strong>Eat better?</strong> <strong>Loose weight</strong><br>
-                Setting up a new habit is hard. Some says it takes<br>
-                21 days for our brains and bodies to get used to.
-            </div>
-            <div class="bottom">
-                <div class="create-routine">
-                    <div class="routine-fore">
-                        I will
-                    </div>
-                    <div class="routine-picker-wrapper">
-                        <select class="new-routine-picker">
-                            <option value="go for 30min run">go for 30min run</option>
-                            <option value="eat healthier">eat healthier</option>
-                            <option value="be happy">be happy</option>
-                        </select>
-                    </div>
-                    <div class="routine-frequency-wrapper">
-                        <select class="new-routine-frequency">
-                            <option value="every day">every day</option>
-                            <option value="once in 3 days">once in 3 days</option>
-                            <option value="once a week">once a week</option>
-                        </select>
-                    </div>
-                    <div class="routine-start">
-                        from Monday
-                    </div>
-                    <div class="routine-alternate-start">
-                        Can't wait. I want to start today.
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </div>
+			<p>The 21 Days is weak’s will remedy. It is web and mobile application which will help you to set up new daily routines and stick with them at least for 21 days to form desired behavioural change (<a href="http://www.slideshare.net/captology/3-steps-to-new-habits">Read more</a>).
+			</p>
 
-        <div id="page-connect" class="stage stage-1" style="display:none">
-            <div class="connect-bg">
-                <div class="potemkin-routine-name routine-name">
-                </div>
-                <div class="fake-connect-button">
-                </div>
-            </div>
-        </div>
+			<p>This project was born in Prague at <a href="http://ipo48.org/startup/21days">IPO48</a> as a 48-hour experiment. We have decided not to leave it behind because many people are telling us they would like to use it for themselves.</p>
 
-        <div id="page-standard" class="stage stage-2" style="display:none">
-            <div class="content">
-                <div class="tasks-label">
-                    TASKS
-                </div>
-                <div>
-                    <div class="cal-left-arrow">
-                    </div>
-                    <div class="cal-right-arrow">
-                    </div>
-                </div>
-                <div class="angels-area">
-                    <div class="angels-list">
-                        <img src="/images/angels-mock.png">
-                    </div>
-                    <div class="fb-add-angels">
-                        <div class="add-angels">Add angels</div>
-                    </div>
-                </div>
-                <div class="routines" style="display:none">
-                    <div class="vseparator s1"></div>
-                    <div class="vseparator s2"></div>
-                    <div class="routine-header">
-                        <div class="routine-header-name col1"></div>
-                        <div class="routine-header-weeks col2"></div>
-                    </div>
-                    <ul class="routine-list"></ul>
-                    <br class="clear">
-                </div>
-                <div id="stats" style="display:none"></div>
-                <div class="note-row">
-                    <div class="addnew-button">
-                    </div>
-                </div>
-                <div class="create-routine" style="display:none">
-                    <div class="routine-input-wrapper">
-                        <input class="new-routine" placeholder="I will do more..." type="text" />
-                        <span class="ui-tooltip-top" style="display:none;">Press Enter to save this routine</span>
-                    </div>
-                    <div class="routine-frequency-wrapper">
-                        <select class="new-routine-frequency">
-                            <option value="f1">every day</option>
-                            <option value="f3">once in 3 days</option>
-                            <option value="f7">once a week</option>
-                        </select>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-                <br clear="both">
-            </div>
-        </div>
- 
-    </div>
-    <div class="comments-footer">
-        <!-- <div class="comments-inner">
-            
-        </div> -->
-    </div>
- 
-    <!-- Templates --> 
- 
-    <script type="text/template" id="routine-template">
-        <div class="routine">
-            <div class="routine-separator">
-            </div>
-            <div class="display">
-                <div class="remove-routine-button"></div>
-                <div class="routine-fixed col1">
-                    <div class="routine-name"></div>
-                </div>
-                <div class="routine-weeks col2">
-                </div>
-            </div>
-            <div class="edit">
-                <input class="routine-input" type="text" value="" />
-            </div>
-        </div>
-        <div class="props" style="display:none">
-        </div>
-    </script>
+			<p>To make a brilliant product from it we need your help! We are looking for: <br />
+			★ Artist / Designer<br />
+			★ Javascript Developer (node.js, backbone.js)<br />
+			</p>
 
-    <script type="text/template" id="week-template">
-    </script>
- 
-    <script type="text/template" id="day-header-template">
-        <div class="day-header-short"><%= shortDate %></div>
-        <div class="day-header-day"><%= day %></div>
-    </script>
+			<p>
+			Even if you have just some spare to help us with logo or a few lines of code or just testing or just want to say “Hi”, <a href="mailto:tomas@21dayshabit.com"> drop us a note</a>. 
+			<p>
+			Follow us at <a href="http://twitter.com/21dayshabit">@21dayshabit</a> or <a href="http://blog.21dayshabit.com/">Posterous</a>.
+			</p>
 
-    <script type="text/template" id="avatar-template">
-        <div class="avatar">
-            <img src="<%= image %>"></img>
-        </div>
-    </script>
+			<p><a href="index2.html">Peek inside</a> →</p>
+		</div>
 
-    <!-- JavaScript at the bottom for fast page loading -->
-
-    <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.js"></script>
-    <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.3.js"%3E%3C/script%3E'))</script>
-  
-    <!-- scripts concatenated and minified via ant build script-->
-    <script src="js/jquery.couch.js"></script>
-    <script src="js/plugins.js"></script>
-    <script src="js/underscore.js"></script>
-    <script src="js/backbone.js"></script>
-    <script src="js/backbone-couchdb.js"></script>
-    <script src="js/app.js"></script>
-    <!-- end concatenated and minified scripts-->
-  
-  
-    <!--[if lt IE 7 ]>
-        <script src="js/libs/dd_belatedpng.js"></script>
-        <script>DD_belatedPNG.fix('img, .png_bg'); // Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb </script>
-    <![endif]-->
-
-
-    <script type="text/javascript">
-
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-21378137-1']);
-      _gaq.push(['_trackPageview']);
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-    </script>
 </body>
 </html>
