@@ -1,0 +1,28 @@
+
+body {
+font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.4em;
+color: #333333;
+background: #F2F2F3;
+}
+
+.logo {
+/*position:absolute;
+left:25%;
+top:10%;*/
+}
+
+.bold {
+font-weight: bold;	
+}
+
+.content {
+position: absolute; 
+left:25%;
+top:20%;
+width:50%;
+padding:10px;
+/*border:1px solid gray;*/
+margin:0px;
+}
